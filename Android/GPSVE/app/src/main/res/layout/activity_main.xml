@@ -5,40 +5,49 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:text="Circle"
+    <TextView
+        android:text="WeLCoMe!"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/button_circle"
-        android:layout_marginLeft="78dp"
-        android:layout_marginStart="78dp"
-        android:layout_alignBaseline="@+id/button_square"
-        android:layout_alignBottom="@+id/button_square"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:onClick="startCircle" />
+        android:id="@+id/textView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="Demo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="71dp"
+        android:id="@+id/button_demo"
+        android:layout_below="@+id/button_circle"
+        android:layout_centerHorizontal="true"
+        android:onClick="startDemo" />
 
     <Button
         android:text="Square"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/button_square"
-        android:layout_centerVertical="true"
+        android:onClick="startSquare"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:layout_alignBaseline="@+id/button_circle"
+        android:layout_alignBottom="@+id/button_circle"
         android:layout_toRightOf="@+id/button_circle"
-        android:layout_toEndOf="@+id/button_circle"
-        android:layout_marginLeft="31dp"
-        android:layout_marginStart="31dp"
-        android:onClick="startSquare" />
+        android:layout_toEndOf="@+id/button_circle" />
 
-    <TextView
-        android:text="WeLCoMe!"
+    <Button
+        android:text="Circle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="43dp"
-        android:id="@+id/textView"
-        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+        android:id="@+id/button_circle"
+        android:onClick="startCircle"
+        android:layout_marginTop="48dp"
+        android:layout_below="@+id/textView"
+        android:layout_alignRight="@+id/button_demo"
+        android:layout_alignEnd="@+id/button_demo"
+        android:layout_marginRight="58dp"
+        android:layout_marginEnd="58dp" />
 
 
 </RelativeLayout>
