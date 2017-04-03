@@ -46,14 +46,7 @@ public class PatternActivity extends AppCompatActivity {
     private void initMediaPlayer()
     {
 
-        MediaPlayer player = MediaPlayer.create(this, R.raw.disco);
-        player.setLooping(true);
-        player.start();
 
-        Log.v("HEJ",""+(player.getAudioSessionId()));
-
-
-        demo.link(player);
 
         // Start with just line renderer
 
