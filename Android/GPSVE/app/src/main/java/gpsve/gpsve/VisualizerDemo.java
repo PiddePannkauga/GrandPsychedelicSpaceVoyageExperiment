@@ -13,8 +13,12 @@ import android.util.Log;
 public class VisualizerDemo extends PApplet {
 
     private byte[] soundBytes;
-    private int i=0;
-    private int integer;
+    private SoundConverter sC;
+
+    public VisualizerDemo(SoundConverter sC){
+        soundBytes = new byte[1024];
+        this.sC = sC;
+    }
 
     public static void main(String[] args) {
         PApplet.main(new String[]{"VisualizerDemo"});
@@ -25,23 +29,24 @@ public class VisualizerDemo extends PApplet {
     }
 
     public void setup() {
-        soundBytes = new byte[1024];
+
+        soundBytes = sC.getSoundBytes();
     }
 
 
-
-
     public void draw() {
-        //       mFFTBytes = new byte[1024];
+        soundBytes = sC.getSoundBytes();
         stroke(255);
         background(0);
 
-        ellipse(width / 2, height / 2, soundBytes[i] * 128, soundBytes[i] * 128);
+        if(soundBytes!=null) {
+            for (int i = 0; i < 1024; i++) {
+                ellipse(width / 2, height / 2, soundBytes[i] * 10, soundBytes[i] * 10);
 
-        Log.i("VAD FINNS I DENA", ""+soundBytes[i]);
-        i++;
-        if(i==1023){
-            i=0;
+                Log.i("VAD FINNS I DENA", "" + soundBytes[i]);
+
+
+            }
         }
 //
 //

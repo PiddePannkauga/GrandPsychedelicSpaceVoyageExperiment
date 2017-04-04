@@ -1,28 +1,36 @@
 package gpsve.gpsve;
 
+import android.app.Activity;
 import android.media.MediaPlayer;
 import android.media.audiofx.Visualizer;
-import android.support.v7.app.AppCompatActivity;
+
 import android.util.Log;
+
 
 /**
  * Created by Petter on 2017-04-03.
  */
 
-public class SoundConverter extends AppCompatActivity{
+public class SoundConverter{
 
     private Visualizer vis;
-    private MediaPlayer player;
     private byte[] mFFTBytes;
     private byte[] mBytes;
+    private Activity activity;
 
-
+    public SoundConverter(Activity activity){
+        this.activity = activity;
+        mFFTBytes = new byte[1024];
+    }
     public void updateVisualizerFFT(byte[] bytes) {
+
         for(int i = 0; i<bytes.length;i++) {
             if (bytes[i]>=1){
                 mFFTBytes = bytes;
+                Log.d("WTF", mFFTBytes[i]+"");
             }
         }
+
     }
 
     public void updateVisualizer(byte[] bytes) {
@@ -32,6 +40,7 @@ public class SoundConverter extends AppCompatActivity{
 
     public void link(MediaPlayer player)
     {
+
         if(player == null)
         {
             throw new NullPointerException("Cannot link to null MediaPlayer");
@@ -39,7 +48,8 @@ public class SoundConverter extends AppCompatActivity{
 
         // Create the Visualizer object and attach it to our media player.
 
-        vis = new Visualizer(player.getAudioSessionId());
+        vis = new Visualizer(0);
+        System.out.println(vis.toString());
         vis.setCaptureSize(Visualizer.getCaptureSizeRange()[1]);
 
         // Pass through Visualizer data to VisualizerView
@@ -75,13 +85,18 @@ public class SoundConverter extends AppCompatActivity{
         });
     }
 
+
+
+
     public void chooseSong() {
-
-        player = MediaPlayer.create(this, R.raw.disco);
-        player.setLooping(true);
-        player.start();
-
-
+        MediaPlayer player = MediaPlayer.create(activity, R.raw.disco);
+        //player.setLooping(true);
+        //player.start();
         link(player);
+    }
+
+    public byte[] getSoundBytes(){
+
+        return mFFTBytes;
     }
 }

@@ -17,12 +17,14 @@ public class PatternActivity extends AppCompatActivity {
     private String pattern;
     private PApplet pApplet;
     private int integer;
-    VisualizerDemo demo = new VisualizerDemo();
+    private SoundConverter sC;
+    private VisualizerDemo demo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pattern);
+        sC = new SoundConverter(this);
         FragmentManager fragmentManager = getSupportFragmentManager();
         intent = getIntent();
         pattern = intent.getStringExtra("pattern");
@@ -31,7 +33,7 @@ public class PatternActivity extends AppCompatActivity {
                 break;
             case "square": pApplet = new Square();
                 break;
-            case "demo": pApplet = demo;
+            case "demo": pApplet = demo = new VisualizerDemo(sC);
                 initMediaPlayer();
                 break;
         }
@@ -45,8 +47,7 @@ public class PatternActivity extends AppCompatActivity {
 
     private void initMediaPlayer()
     {
-
-
+        sC.chooseSong();
 
         // Start with just line renderer
 
