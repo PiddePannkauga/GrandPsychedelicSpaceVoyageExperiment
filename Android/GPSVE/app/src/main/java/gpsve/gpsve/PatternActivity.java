@@ -24,7 +24,7 @@ public class PatternActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pattern);
-        sC = new SoundConverter(this);
+        sC = new SoundConverter();
         FragmentManager fragmentManager = getSupportFragmentManager();
         intent = getIntent();
         pattern = intent.getStringExtra("pattern");
@@ -47,7 +47,7 @@ public class PatternActivity extends AppCompatActivity {
 
     private void initMediaPlayer()
     {
-        sC.chooseSong();
+        sC.link();
 
         // Start with just line renderer
 

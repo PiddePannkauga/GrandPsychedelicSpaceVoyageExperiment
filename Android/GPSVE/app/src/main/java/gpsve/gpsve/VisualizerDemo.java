@@ -36,20 +36,19 @@ public class VisualizerDemo extends PApplet {
 
     public void draw() {
         soundBytes = sC.getSoundBytes();
-        stroke(255);
+//        stroke(255);
         background(0);
 
         if(soundBytes!=null) {
             for (int i = 0; i < 1024; i++) {
+                fill(soundBytes[i]*3,soundBytes[i],soundBytes[i]*2);
                 ellipse(width / 2, height / 2, soundBytes[i] * 10, soundBytes[i] * 10);
 
-                Log.i("VAD FINNS I DENA", "" + soundBytes[i]);
+
 
 
             }
         }
-//
-//
     }
 
 
