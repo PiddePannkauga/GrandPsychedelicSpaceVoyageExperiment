@@ -1,0 +1,7 @@
+#Fri Mar 24 13:16:57 CET 2017
+base.0=C\:\\Users\\bajs\\AndroidStudioProjects\\SoundDemo\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_3d400bf7832083ed516a62a47873fc90e1d5b281
+renamed.1=classes.dex
+renamed.0=classes2.dex
+file.1=C\:\\Users\\bajs\\AndroidStudioProjects\\SoundDemo\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_ffe024f877b60a1df92e3a7465976a97476b9542\\classes.dex
+base.1=C\:\\Users\\bajs\\AndroidStudioProjects\\SoundDemo\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_ffe024f877b60a1df92e3a7465976a97476b9542
+file.0=C\:\\Users\\bajs\\AndroidStudioProjects\\SoundDemo\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_3d400bf7832083ed516a62a47873fc90e1d5b281\\classes.dex

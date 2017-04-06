@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "C:\\Users\\bajs\\AndroidStudioProjects\\SoundDemo\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi\\ic_launcher.png",
+        "source": "C:\\Users\\bajs\\AndroidStudioProjects\\SoundDemo\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\bajs\\AndroidStudioProjects\\SoundDemo\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi\\ic_launcher_round.png",
+        "source": "C:\\Users\\bajs\\AndroidStudioProjects\\SoundDemo\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_round.png"
+    }
+]
