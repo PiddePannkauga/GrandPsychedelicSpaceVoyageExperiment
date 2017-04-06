@@ -32,7 +32,7 @@ public class SoundConverter{
                 bytes[i]=(byte)k;            }
             if (bytes[i]>=1){
                 mFFTBytes[i] = bytes[i];
-                Log.d("WTF", mFFTBytes[i]+"");
+
             }
         }
 
@@ -46,7 +46,7 @@ public class SoundConverter{
                 bytes[i]=(byte)k;            }
             if (bytes[i]>=1){
                 mBytes[i] = bytes[i];
-//                Log.d("WTF", mBytes[i]+"");
+
             }
         }
 
@@ -80,7 +80,7 @@ public class SoundConverter{
 
         vis.setDataCaptureListener(captureListener,
                 Visualizer.getMaxCaptureRate(), true, true);
-
+        Log.i("WTF", Visualizer.getMaxCaptureRate()+"");
         // Enabled Visualizer and disable when we're done with the stream
         vis.setEnabled(true);
 

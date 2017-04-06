@@ -21,11 +21,26 @@ public class PiddePattern {
     }
 
     public void drawShape(){
-
+        int line1=0,line2=0,line3=0,line4=0;
         for(int i = 0; i<soundBytes.length; i++) {
-            parent.fill(soundBytes[i]*2);
-            parent.ellipse(parent.width / 2, parent.height / 2, soundBytes[i], soundBytes[i]);
+            parent.strokeWeight(50);
+            if(soundBytes[i]>32){
+            line1+=soundBytes[i];
+            parent.line(50,parent.height-line1,50,parent.height);
+            }
+            if(soundBytes[i]>=32 && soundBytes[i]<64){
+                line2+=soundBytes[i];
+                parent.line(parent.width/4+50,parent.height-line2,parent.width/4+50,parent.height);
+
+            }
+            if(soundBytes[i]>=64 && soundBytes[i]<96){
+                line3+=soundBytes[i];
+                parent.line(parent.width/2+50,parent.height-line3,parent.width/2+50,parent.height);
+            }
+            if(soundBytes[i]>=96) {
+                line4+=soundBytes[i];
+                parent.line(parent.width-50,parent.height-line4, parent.width-50, parent.height);
+            }
         }
     }
-
 }
