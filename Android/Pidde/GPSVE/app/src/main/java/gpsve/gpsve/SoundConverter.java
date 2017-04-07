@@ -25,16 +25,18 @@ public class SoundConverter{
     }
     public void updateVisualizerFFT(byte[] bytes) {
 
-        for(int i = 0; i<bytes.length;i++) {
-            if(bytes[i]<0){
-                int k=bytes[i];
-                k = -k;
-                bytes[i]=(byte)k;            }
-            if (bytes[i]>=1){
-                mFFTBytes[i] = bytes[i];
-
-            }
-        }
+//        for(int i = 0; i<bytes.length;i++) {
+//            if(bytes[i]<0){
+//                int k=bytes[i];
+//                k = -k;
+//                bytes[i]=(byte)k;            }
+//            if (bytes[i]>=1){
+//                mFFTBytes[i] = bytes[i];
+//
+//            }
+//
+//        }
+        mFFTBytes = bytes;
 
     }
 
@@ -80,7 +82,6 @@ public class SoundConverter{
 
         vis.setDataCaptureListener(captureListener,
                 Visualizer.getMaxCaptureRate(), true, true);
-        Log.i("WTF", Visualizer.getMaxCaptureRate()+"");
         // Enabled Visualizer and disable when we're done with the stream
         vis.setEnabled(true);
 

@@ -40,7 +40,7 @@ public class VisualizerDemo extends PApplet {
     public void draw() {
 
         stroke(255);
-        background(0);
+        background(0,0,150);
         pidde.setSoundBytes(sC.getSoundBytes());
         if(soundBytes!=null) {
 
