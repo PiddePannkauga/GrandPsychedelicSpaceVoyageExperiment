@@ -34,7 +34,6 @@ public class PatternActivity extends AppCompatActivity {
             case "square": pApplet = new Square();
                 break;
             case "demo": pApplet = demo = new VisualizerDemo(sC);
-                initMediaPlayer();
                 break;
         }
 
@@ -43,13 +42,5 @@ public class PatternActivity extends AppCompatActivity {
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
                 .commit();
-    }
-
-    private void initMediaPlayer()
-    {
-        sC.link();
-
-        // Start with just line renderer
-
     }
 }

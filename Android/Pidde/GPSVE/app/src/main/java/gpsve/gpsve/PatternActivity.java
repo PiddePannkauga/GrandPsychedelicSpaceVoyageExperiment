@@ -34,7 +34,6 @@ public class PatternActivity extends AppCompatActivity {
             case "square": pApplet = new Square();
                 break;
             case "demo": pApplet = demo = new VisualizerDemo(sC);
-
                 break;
         }
 
@@ -44,6 +43,4 @@ public class PatternActivity extends AppCompatActivity {
                 .replace(R.id.container, fragment)
                 .commit();
     }
-
-
 }
