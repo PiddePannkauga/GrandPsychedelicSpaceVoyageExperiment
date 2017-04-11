@@ -19,8 +19,8 @@ public class SoundConverter{
     
 
     public SoundConverter(){
-        mFFTBytes = new byte[1024];
-        mBytes = new byte[1024];
+        mFFTBytes = new byte[256];
+        mBytes = new byte[256];
         link();
     }
     public void updateVisualizerFFT(byte[] bytes) {
@@ -60,7 +60,7 @@ public class SoundConverter{
         // Create the Visualizer object and attach it to our media player.
 
         vis = new Visualizer(0);
-        vis.setCaptureSize(Visualizer.getCaptureSizeRange()[1]);
+        vis.setCaptureSize(Visualizer.getCaptureSizeRange()[0]);
 
         // Pass through Visualizer data to VisualizerView
         Visualizer.OnDataCaptureListener captureListener = new Visualizer.OnDataCaptureListener()

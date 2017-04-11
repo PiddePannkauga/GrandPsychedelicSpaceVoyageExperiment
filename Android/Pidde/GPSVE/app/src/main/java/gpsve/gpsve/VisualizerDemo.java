@@ -14,7 +14,7 @@ public class VisualizerDemo extends PApplet {
 
     private byte[] soundBytes;
     private SoundConverter sC;
-    private int k=0;
+
     private PiddePattern pidde;
     public VisualizerDemo(SoundConverter sC){
         soundBytes = new byte[256];
@@ -41,10 +41,13 @@ public class VisualizerDemo extends PApplet {
 
         stroke(255);
         background(0,0,150);
-        pidde.setSoundBytes(sC.getSoundBytes());
-        if(soundBytes!=null) {
 
-            pidde.drawShape();
+
+        if(soundBytes!=null) {
+            if(pidde.getOK()) {
+                pidde.setSoundBytes(sC.getSoundBytes());
+                pidde.drawShape();
+            }
 
         }
 
