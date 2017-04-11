@@ -1,10 +1,6 @@
 package gpsve.gpsve;
 
-import android.app.Activity;
-import android.media.MediaPlayer;
 import android.media.audiofx.Visualizer;
-
-import android.util.Log;
 
 
 /**
@@ -14,40 +10,38 @@ import android.util.Log;
 public class SoundConverter{
 
     private Visualizer vis;
-    private byte[] mFFTBytes;
-    private byte[] mBytes;
+    private byte[] fftBytes;
+    private byte[] waveBytes;
     
 
     public SoundConverter(){
-        mFFTBytes = new byte[1024];
+        fftBytes = new byte[256];
+        waveBytes = new byte[256];
+        link();
     }
-    public void updateVisualizerFFT(byte[] bytes) {
 
+    public void updateVisualizerFFT(byte[] bytes) {
+        fftBytes = bytes;
+    }
+
+    public void updateVisualizerWave(byte[] bytes) {
         for(int i = 0; i<bytes.length;i++) {
             if(bytes[i]<0){
                 int k=bytes[i];
                 k = -k;
                 bytes[i]=(byte)k;            }
-            if (bytes[i]>=1){
-                mFFTBytes = bytes;
-                Log.d("WTF", mFFTBytes[i]+"");
+            if (bytes[i]>=0){
+                waveBytes[i] = bytes[i];
             }
         }
-
     }
 
-    public void updateVisualizer(byte[] bytes) {
-
-        mBytes = bytes;
-    }
-
-    public void link()
-    {
+    public void link(){
 
         // Create the Visualizer object and attach it to our media player.
 
         vis = new Visualizer(0);
-        vis.setCaptureSize(Visualizer.getCaptureSizeRange()[1]);
+        vis.setCaptureSize(Visualizer.getCaptureSizeRange()[0]);
 
         // Pass through Visualizer data to VisualizerView
         Visualizer.OnDataCaptureListener captureListener = new Visualizer.OnDataCaptureListener()
@@ -56,7 +50,7 @@ public class SoundConverter{
             public void onWaveFormDataCapture(Visualizer visualizer, byte[] bytes,
                                               int samplingRate)
             {
-                updateVisualizer(bytes);
+                updateVisualizerWave(bytes);
             }
 
             @Override
@@ -69,14 +63,16 @@ public class SoundConverter{
 
         vis.setDataCaptureListener(captureListener,
                 Visualizer.getMaxCaptureRate(), true, true);
-
         // Enabled Visualizer and disable when we're done with the stream
         vis.setEnabled(true);
 
     }
 
-    public byte[] getSoundBytes(){
+    public byte[] getFftBytes(){
+        return fftBytes;
+    }
 
-        return mFFTBytes;
+    public byte[] getWaveBytes(){
+        return waveBytes;
     }
 }

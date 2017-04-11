@@ -1,10 +1,6 @@
 package gpsve.gpsve;
 
-import android.app.Activity;
-import android.media.MediaPlayer;
 import android.media.audiofx.Visualizer;
-
-import android.util.Log;
 
 
 /**
@@ -14,34 +10,30 @@ import android.util.Log;
 public class SoundConverter{
 
     private Visualizer vis;
-    private byte[] mFFTBytes;
-    private byte[] mBytes;
+    private byte[] fftBytes;
+    private byte[] waveBytes;
     
 
     public SoundConverter(){
-        mFFTBytes = new byte[256];
-        mBytes = new byte[256];
+        fftBytes = new byte[256];
+        waveBytes = new byte[256];
         link();
     }
+
     public void updateVisualizerFFT(byte[] bytes) {
-
-        mFFTBytes = bytes;
-
+        fftBytes = bytes;
     }
 
-    public void updateVisualizer(byte[] bytes) {
+    public void updateVisualizerWave(byte[] bytes) {
         for(int i = 0; i<bytes.length;i++) {
             if(bytes[i]<0){
                 int k=bytes[i];
                 k = -k;
                 bytes[i]=(byte)k;            }
-            if (bytes[i]>=1){
-                mBytes[i] = bytes[i];
-
+            if (bytes[i]>=0){
+                waveBytes[i] = bytes[i];
             }
         }
-
-
     }
 
     public void link(){
@@ -58,7 +50,7 @@ public class SoundConverter{
             public void onWaveFormDataCapture(Visualizer visualizer, byte[] bytes,
                                               int samplingRate)
             {
-                updateVisualizer(bytes);
+                updateVisualizerWave(bytes);
             }
 
             @Override
@@ -76,7 +68,11 @@ public class SoundConverter{
 
     }
 
-    public byte[] getSoundBytes(){
-        return mFFTBytes;
+    public byte[] getFftBytes(){
+        return fftBytes;
+    }
+
+    public byte[] getWaveBytes(){
+        return waveBytes;
     }
 }

@@ -2,22 +2,21 @@ package gpsve.gpsve;
 
 import processing.core.PApplet;
 
-import android.media.MediaPlayer;
-import android.media.audiofx.Visualizer;
-import android.util.Log;
-
 /**
  * Created by bajs on 2017-03-22.
  */
 
 public class VisualizerDemo extends PApplet {
 
-    private byte[] soundBytes;
+    private byte[] fftBytes;
     private SoundConverter sC;
+    private PatternPidde pidde;
 
     public VisualizerDemo(SoundConverter sC){
-        soundBytes = new byte[1024];
+        fftBytes = new byte[256];
         this.sC = sC;
+        pidde = new PatternPidde(this);
+
     }
 
     public static void main(String[] args) {
@@ -30,27 +29,21 @@ public class VisualizerDemo extends PApplet {
 
     public void setup() {
 
-        soundBytes = sC.getSoundBytes();
+        pidde.setSoundBytes(sC.getFftBytes());
     }
 
 
     public void draw() {
-        soundBytes = sC.getSoundBytes();
-//        stroke(255);
-        background(0);
 
-        if(soundBytes!=null) {
-            for (int i = 0; i < 1024; i++) {
-                fill(soundBytes[i]*3,soundBytes[i],soundBytes[i]*2);
-                ellipse(width / 2, height / 2, soundBytes[i] * 10, soundBytes[i] * 10);
+        stroke(255);
+        background(0,0,150);
 
-
-
-
+        if(fftBytes !=null) {
+            if(pidde.getOK()) {
+                pidde.setSoundBytes(sC.getFftBytes());
+                pidde.drawShape();
             }
         }
     }
-
-
 }
 
