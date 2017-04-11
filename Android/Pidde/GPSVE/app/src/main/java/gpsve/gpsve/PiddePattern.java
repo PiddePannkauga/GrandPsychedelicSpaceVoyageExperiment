@@ -12,8 +12,7 @@ import processing.core.PApplet;
 public class PiddePattern {
     private PApplet parent;
     private byte[] soundBytes;
-    private int currentLine1=0,currentLine2=0,currentLine3=0,currentLine4=0;
-    private int line1=0,line2=0,line3=0,line4=0;
+    private int line1,line2,line3,line4;
     private boolean ok = true;
 
 
@@ -23,11 +22,45 @@ public class PiddePattern {
 
     }
 
+    public void setLine1(int line1) {
+        this.line1 += line1;
+    }
+
+    public int getLine1() {
+        return line1;
+    }
+
+    public int getLine2() {
+        return line2;
+    }
+
+    public void setLine2(int line2) {
+        this.line2 += line2;
+    }
+
+    public int getLine3() {
+        return line3;
+    }
+
+    public void setLine3(int line3) {
+        this.line3 += line3;
+    }
+
+    public int getLine4() {
+        return line4;
+    }
+
+    public void setLine4(int line4) {
+        this.line4 += line4;
+    }
+
     public void setSoundBytes(byte[] bytes){
-        line1=0;
-        line2=0;
-        line3=0;
-        line4=0;
+
+        setLine1(0);
+        setLine2(0);
+        setLine3(0);
+        setLine4(0);
+
         for(int i = 0; i<bytes.length;i++) {
             if (bytes[i] < 0) {
                 int k = bytes[i];
@@ -36,26 +69,24 @@ public class PiddePattern {
             }
             soundBytes[i]=bytes[i];
             if(soundBytes[i]>=0 && soundBytes[i]<32){
-                line1+=soundBytes[i];
-                if(currentLine1 >= line1){
-                    line1 = currentLine1;
-                }
+                setLine1(soundBytes[i]);
             }
             if(soundBytes[i]>=32 && soundBytes[i]<64){
-                line2+=soundBytes[i];
+                setLine2(soundBytes[i]);
             }
             if(soundBytes[i]>=64 && soundBytes[i]<96){
-                line3+=soundBytes[i];
+                setLine3(soundBytes[i]);
             }
             if(soundBytes[i]>=96) {
-                line4+=soundBytes[i];
-
+                setLine4(soundBytes[i]);
             }
 
         }
-//       / currentLine1 = line1;
+
 
     }
+
+
 
     public void setOK(boolean ok){
         this.ok = ok;

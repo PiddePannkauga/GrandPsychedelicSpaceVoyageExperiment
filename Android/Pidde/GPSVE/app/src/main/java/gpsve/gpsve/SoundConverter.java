@@ -25,17 +25,6 @@ public class SoundConverter{
     }
     public void updateVisualizerFFT(byte[] bytes) {
 
-//        for(int i = 0; i<bytes.length;i++) {
-//            if(bytes[i]<0){
-//                int k=bytes[i];
-//                k = -k;
-//                bytes[i]=(byte)k;            }
-//            if (bytes[i]>=1){
-//                mFFTBytes[i] = bytes[i];
-//
-//            }
-//
-//        }
         mFFTBytes = bytes;
 
     }
