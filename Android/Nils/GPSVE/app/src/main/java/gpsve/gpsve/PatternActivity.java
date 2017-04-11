@@ -1,13 +1,11 @@
 package gpsve.gpsve;
 
-import android.Manifest;
+
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 
 import processing.android.PFragment;
 import processing.core.PApplet;
@@ -16,15 +14,18 @@ public class PatternActivity extends AppCompatActivity {
     private Intent intent;
     private String pattern;
     private PApplet pApplet;
-    private int integer;
     private SoundConverter sC;
-    private VisualizerDemo demo;
+    //private VisualizerDemo demo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pattern);
-        sC = new SoundConverter(this);
+        if (sC == null) {
+            sC = new SoundConverter();
+        }
+        sC.release();
+        sC.init();
         FragmentManager fragmentManager = getSupportFragmentManager();
         intent = getIntent();
         pattern = intent.getStringExtra("pattern");
@@ -33,8 +34,7 @@ public class PatternActivity extends AppCompatActivity {
                 break;
             case "square": pApplet = new Square();
                 break;
-            case "demo": pApplet = demo = new VisualizerDemo(sC);
-                initMediaPlayer();
+            case "demo": pApplet = new VisualizerDemo(sC);
                 break;
         }
 
@@ -43,13 +43,5 @@ public class PatternActivity extends AppCompatActivity {
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
                 .commit();
-    }
-
-    private void initMediaPlayer()
-    {
-        sC.chooseSong();
-
-        // Start with just line renderer
-
     }
 }
