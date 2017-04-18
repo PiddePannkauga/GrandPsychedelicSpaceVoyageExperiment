@@ -1,5 +1,7 @@
 package gpsve.gpsve;
 
+import android.graphics.Color;
+
 import processing.core.PApplet;
 
 /**
@@ -8,6 +10,8 @@ import processing.core.PApplet;
 
 public class PatternCircle implements PatternInterface {
     private PApplet parent;
+    private Color color;
+    private boolean ok = true;
 
 
     public PatternCircle(PApplet parent){
@@ -15,17 +19,27 @@ public class PatternCircle implements PatternInterface {
 
     }
 
+    public void setOk(boolean ok){
+        this.ok=ok;
+    }
 
+    public boolean okToDraw(){
+        return ok;
+    }
     @Override
     public void updatePattern(byte[] bytes) {
-        for(byte s : bytes){
-            drawCircle(s);
+        setOk(false);
+        for(int i = 0; i<bytes.length; i++) {
+            drawCircle(bytes[i]);
         }
+
+        setOk(true);
     }
 
     public void drawCircle(float ellipseSize){
-        parent.fill(255);
-        parent.ellipse(parent.height/2, parent.width/2, ellipseSize*2,ellipseSize*2);
+        parent.noStroke();
+        parent.fill(parent.color(ellipseSize));
+        parent.ellipse(parent.width/2,parent.height/2,ellipseSize*4,ellipseSize*4);
 
     }
 }

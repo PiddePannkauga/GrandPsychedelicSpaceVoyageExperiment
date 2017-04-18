@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,28 +22,30 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startCircle(View view) {
-        Intent intent = new Intent(this, PatternActivity.class);
+        intent = new Intent(this, PatternActivity.class);
         String circle = "circle";
         intent.putExtra("pattern", circle);
         startActivity(intent);
     }
 
     public void startSquare(View view) {
-        Intent intent = new Intent(this, PatternActivity.class);
+        intent = new Intent(this, PatternActivity.class);
         String square = "square";
         intent.putExtra("pattern", square);
         startActivity(intent);
     }
 
     public void startDemo(View view) {
-        Intent intent = new Intent(this, PatternActivity.class);
-        String demo = "demo";
-        intent.putExtra("pattern", demo);
-        startActivity(intent);
+            intent = new Intent(this, PatternActivity.class);
+            String demo = "demo";
+            intent.putExtra("pattern", demo);
+            startActivity(intent);
+
+
     }
 
     public void startDemo2(View view) {
-        Intent intent = new Intent(this, PatternActivity.class);
+        intent = new Intent(this, PatternActivity.class);
         String demo = "demo2";
         intent.putExtra("pattern", demo);
         startActivity(intent);

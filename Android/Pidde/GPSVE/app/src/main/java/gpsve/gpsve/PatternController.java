@@ -42,7 +42,9 @@ public class PatternController extends PApplet {
             pidde.drawShape();
         }
         }else if(chosenPattern == "Circle"){
-        circle.updatePattern(soundConverter.getFftBytes());
+            if(circle.okToDraw()) {
+                circle.updatePattern(soundConverter.getFftBytes());
+            }
     }
     }
 }

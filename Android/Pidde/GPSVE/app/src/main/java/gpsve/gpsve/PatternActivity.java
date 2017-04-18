@@ -19,29 +19,31 @@ public class PatternActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pattern);
         soundConverter = new SoundConverter();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        intent = getIntent();
-        pattern = intent.getStringExtra("pattern");
-        switch (pattern) {
-            case "circle": pApplet = new Circle();
-                break;
-            case "square": pApplet = new Square();
-                break;
-            case "demo": pApplet = new PatternController(soundConverter,"Pidde");
-                break;
-            case "demo2": pApplet = new PatternController(soundConverter,"Circle");
-                break;
-        }
-
-        PFragment fragment = new PFragment();
-        fragment.setSketch(pApplet);
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, fragment)
-                .commit();
     }
 
     @Override
     protected void onResume(){
+        super.onResume();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            intent = getIntent();
+            pattern = intent.getStringExtra("pattern");
+            switch (pattern) {
+                case "circle": pApplet = new Circle();
+                    break;
+                case "square": pApplet = new Square();
+                    break;
+                case "demo": pApplet = new PatternController(soundConverter,"Pidde");
+                    break;
+                case "demo2": pApplet = new PatternController(soundConverter,"Circle");
+                    break;
+            }
+
+            PFragment fragment = new PFragment();
+            fragment.setSketch(pApplet);
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, fragment)
+                    .commit();
+        }
 
     }
-}
+
