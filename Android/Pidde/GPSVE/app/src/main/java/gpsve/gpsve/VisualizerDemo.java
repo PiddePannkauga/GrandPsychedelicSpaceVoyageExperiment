@@ -11,11 +11,13 @@ public class VisualizerDemo extends PApplet {
     private byte[] fftBytes;
     private SoundConverter sC;
     private PatternPidde pidde;
+    private PatternCircle circle;
 
     public VisualizerDemo(SoundConverter sC){
-        fftBytes = new byte[256];
+        fftBytes = new byte[512];
         this.sC = sC;
         pidde = new PatternPidde(this);
+        circle = new PatternCircle(this);
 
     }
 
@@ -29,7 +31,7 @@ public class VisualizerDemo extends PApplet {
 
     public void setup() {
 
-        pidde.setSoundBytes(sC.getFftBytes());
+        pidde.updatePattern(sC.getFftBytes());
     }
 
 
@@ -39,10 +41,13 @@ public class VisualizerDemo extends PApplet {
         background(0,0,150);
 
         if(fftBytes !=null) {
-            if(pidde.getOK()) {
-                pidde.setSoundBytes(sC.getFftBytes());
+            if(pidde.okToDraw()) {
+                pidde.updatePattern(sC.getFftBytes());
                 pidde.drawShape();
+            }else{
+                circle.updatePattern(sC.getFftBytes());
             }
+
         }
     }
 }

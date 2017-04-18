@@ -8,14 +8,13 @@ import processing.core.PApplet;
 
 public class PatternPidde {
     private PApplet parent;
-    private byte[] soundBytes;
-    private int line1,line2,line3,line4;
-    private boolean ok = true;
+    private int line1, line2, line3, line4;
+    private boolean okToDraw = true;
 
     public PatternPidde(PApplet parent) {
         this.parent = parent;
-        soundBytes = new byte[256];
     }
+
     public int getLine1() {
         return line1;
     }
@@ -48,19 +47,18 @@ public class PatternPidde {
         this.line4 = line4;
     }
 
-    public void setSoundBytes(byte[] bytes){
+    public void updatePattern(byte[] soundBytes){
         setLine1(0);
         setLine2(0);
         setLine3(0);
         setLine4(0);
 
-        for(int i = 0; i<bytes.length;i++) {
-            if (bytes[i] < 0) {
-                int k = bytes[i];
+        for(int i = 0; i<soundBytes.length;i++) {
+            if (soundBytes[i] < 0) {
+                int k = soundBytes[i];
                 k *= -1;
-                bytes[i] = (byte) k;
+                soundBytes[i] = (byte) k;
             }
-            soundBytes[i]=bytes[i];
             if(soundBytes[i]>=0 && soundBytes[i]<32){
                 setLine1(getLine1()+soundBytes[i]);
             }
@@ -76,16 +74,16 @@ public class PatternPidde {
         }
     }
 
-    public void setOK(boolean ok){
-        this.ok = ok;
+    public void setOk(boolean okToDraw){
+        this.okToDraw = okToDraw;
     }
 
-    public boolean getOK(){
-        return this.ok;
+    public boolean okToDraw(){
+        return this.okToDraw;
     }
 
     public void drawShape(){
-        setOK(false);
+        setOk(false);
         parent.strokeWeight(100);
         parent.stroke(250,200,0);
 
@@ -100,6 +98,6 @@ public class PatternPidde {
 
         parent.line(parent.width * (float) 0.2, parent.height - getLine1(), parent.width * (float) 0.2, parent.height);
         parent.line(parent.width * (float) 0.8, 0 + getLine1(), parent.width * (float) 0.8, 0);
-        setOK(true);
+        setOk(true);
     }
 }
