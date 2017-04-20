@@ -6,7 +6,7 @@ import processing.core.PApplet;
  * Created by Petter on 2017-04-06.
  */
 
-public class PatternPidde {
+public class PatternPidde implements PatternInterface {
     private PApplet parent;
     private int line1, line2, line3, line4;
     private boolean okToDraw = true;
@@ -46,7 +46,8 @@ public class PatternPidde {
     public void setLine4(int line4) {
         this.line4 = line4;
     }
-
+    
+    @Override
     public void updatePattern(byte[] soundBytes){
         setLine1(0);
         setLine2(0);
@@ -74,16 +75,10 @@ public class PatternPidde {
         }
     }
 
-    public void setOk(boolean okToDraw){
-        this.okToDraw = okToDraw;
-    }
+    @Override
+    public void drawPattern() {
 
-    public boolean okToDraw(){
-        return this.okToDraw;
-    }
-
-    public void drawShape(){
-        setOk(false);
+        setOkToDraw(false);
         parent.strokeWeight(100);
         parent.stroke(250,200,0);
 
@@ -98,6 +93,20 @@ public class PatternPidde {
 
         parent.line(parent.width * (float) 0.2, parent.height - getLine1(), parent.width * (float) 0.2, parent.height);
         parent.line(parent.width * (float) 0.8, 0 + getLine1(), parent.width * (float) 0.8, 0);
-        setOk(true);
+        setOkToDraw(true);
+
     }
+
+    @Override
+    public void setOkToDraw(boolean okToDraw) {
+        this.okToDraw = okToDraw;
+    }
+
+    @Override
+    public boolean getOkToDraw() {
+        return okToDraw;
+    }
+
+
+
 }
