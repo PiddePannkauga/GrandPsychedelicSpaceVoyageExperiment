@@ -1,5 +1,8 @@
 package gpsve.gpsve;
 
+import android.app.Activity;
+import android.util.DisplayMetrics;
+
 import processing.core.PApplet;
 
 /**
@@ -11,12 +14,19 @@ public class PatternController extends PApplet {
     private PatternPidde pidde;
     private PatternCircle circle;
     private String chosenPattern;
+    private Activity activity;
+    private Buffer buffer;
 
-    public PatternController(SoundConverter soundConverter,String chosenPattern){
+
+
+
+    public PatternController(SoundConverter soundConverter,Activity activity,String chosenPattern){
         this.soundConverter = soundConverter;
         this.chosenPattern = chosenPattern;
         pidde = new PatternPidde(this);
         circle = new PatternCircle(this);
+        this.activity = activity;
+        buffer = new Buffer();
 
     }
 
@@ -25,27 +35,42 @@ public class PatternController extends PApplet {
     }
 
     public void settings() {
-        size(1080,1920);
+
     }
 
     public void setup() {
-        pidde.updatePattern(soundConverter.getFftBytes());
-    }
-
-    public void draw() {
+        DisplayMetrics dm = new DisplayMetrics();
+        activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
+        int width = dm.widthPixels;
+        int height = dm.heightPixels;
+        size(width,height);
         stroke(255);
         background(0,0,150);
 
-        if(chosenPattern=="Pidde"){
-        if(pidde.okToDraw()) {
-            pidde.updatePattern(soundConverter.getFftBytes());
-            pidde.drawShape();
-        }
-        }else if(chosenPattern == "Circle"){
-            if(circle.okToDraw()) {
-                circle.updatePattern(soundConverter.getFftBytes());
-            }
+
     }
+
+    public void drawPattern(){
+
+        redraw();
+    }
+
+    public void draw() {
+
+        stroke(255);
+        background(0,0,150);
+        buffer.put(soundConverter.getFftBytes());
+        System.out.println(buffer.size());
+        if(pidde.getOkToDraw()) {
+            try {
+                pidde.updatePattern(buffer.get());
+                pidde.drawPattern();
+            } catch (InterruptedException e) {
+            }
+        }
+        System.out.println(buffer.size());
+
+
     }
 }
 

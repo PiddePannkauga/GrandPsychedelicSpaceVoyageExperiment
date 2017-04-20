@@ -46,7 +46,7 @@ public class PatternPidde implements PatternInterface {
     public void setLine4(int line4) {
         this.line4 = line4;
     }
-    
+
     @Override
     public void updatePattern(byte[] soundBytes){
         setLine1(0);

@@ -28,9 +28,9 @@ public class PatternActivity extends AppCompatActivity {
             intent = getIntent();
             pattern = intent.getStringExtra("pattern");
             switch (pattern) {
-                case "demo": pApplet = new PatternController(soundConverter,"Pidde");
+                case "demo": pApplet = new PatternController(soundConverter,this,"Pidde");
                     break;
-                case "demo2": pApplet = new PatternController(soundConverter,"Circle");
+                case "demo2": pApplet = new PatternController(soundConverter,this,"Circle");
                     break;
             }
 
