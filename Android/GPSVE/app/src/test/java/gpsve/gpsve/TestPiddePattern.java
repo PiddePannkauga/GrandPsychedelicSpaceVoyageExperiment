@@ -22,7 +22,7 @@ public class TestPiddePattern {
     public void soundByteArrayTest(){
 
         byte[] bytes = new byte[]{-1,0,1,-32,32,-64,64,-96,96};
-        testPidde.updatePattern(bytes);
+        testPidde.setSoundBytes(bytes);
         assertTrue(testPidde.getLine1()!=0 && testPidde.getLine1()== 2);
         assertTrue(testPidde.getLine2()!=0 && testPidde.getLine2() == 64);
         assertTrue(testPidde.getLine3()!=0 && testPidde.getLine3() == 128);

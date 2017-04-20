@@ -18,11 +18,11 @@
         android:text="Demo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="71dp"
         android:id="@+id/button_demo"
-        android:layout_below="@+id/button_circle"
-        android:layout_centerHorizontal="true"
-        android:onClick="startDemo" />
+        android:onClick="startDemo"
+        android:layout_marginTop="49dp"
+        android:layout_below="@+id/button_square"
+        android:layout_alignStart="@+id/button_square" />
 
     <Button
         android:text="Square"
@@ -33,8 +33,8 @@
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:layout_alignBaseline="@+id/button_circle"
         android:layout_alignBottom="@+id/button_circle"
-        android:layout_toRightOf="@+id/button_circle"
-        android:layout_toEndOf="@+id/button_circle" />
+        android:layout_toEndOf="@+id/button_circle"
+        android:layout_marginStart="56dp" />
 
     <Button
         android:text="Circle"
@@ -43,11 +43,21 @@
         android:id="@+id/button_circle"
         android:onClick="startCircle"
         android:layout_marginTop="48dp"
-        android:layout_below="@+id/textView"
-        android:layout_alignRight="@+id/button_demo"
-        android:layout_alignEnd="@+id/button_demo"
         android:layout_marginRight="58dp"
-        android:layout_marginEnd="58dp" />
+        android:layout_marginStart="47dp"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Circle"
+        android:layout_alignBaseline="@+id/button_demo"
+        android:layout_alignBottom="@+id/button_demo"
+        android:layout_toStartOf="@+id/button_demo"
+        android:onClick="startDemo2"
+        android:layout_marginEnd="24dp" />
 
 
 </RelativeLayout>

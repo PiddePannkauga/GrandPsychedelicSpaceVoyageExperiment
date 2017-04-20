@@ -9,10 +9,15 @@ import processing.core.PApplet;
 public class PatternController extends PApplet {
     private SoundConverter soundConverter;
     private PatternPidde pidde;
+    private PatternCircle circle;
+    private String chosenPattern;
 
-    public PatternController(SoundConverter soundConverter){
+    public PatternController(SoundConverter soundConverter,String chosenPattern){
         this.soundConverter = soundConverter;
+        this.chosenPattern = chosenPattern;
         pidde = new PatternPidde(this);
+        circle = new PatternCircle(this);
+
     }
 
     public static void main(String[] args) {
@@ -31,10 +36,16 @@ public class PatternController extends PApplet {
         stroke(255);
         background(0,0,150);
 
+        if(chosenPattern=="Pidde"){
         if(pidde.okToDraw()) {
             pidde.updatePattern(soundConverter.getFftBytes());
             pidde.drawShape();
         }
+        }else if(chosenPattern == "Circle"){
+            if(circle.okToDraw()) {
+                circle.updatePattern(soundConverter.getFftBytes());
+            }
+    }
     }
 }
 

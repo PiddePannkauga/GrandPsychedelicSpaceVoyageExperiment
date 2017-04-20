@@ -12,8 +12,8 @@ public class SoundConverter{
     private byte[] waveBytes;
 
     public SoundConverter(){
-        fftBytes = new byte[256];
-        waveBytes = new byte[256];
+        fftBytes = new byte[512];
+        waveBytes = new byte[512];
         init();
     }
 
