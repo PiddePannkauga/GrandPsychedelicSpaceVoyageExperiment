@@ -1,5 +1,8 @@
 package gpsve.gpsve;
 
+import android.app.Activity;
+import android.util.DisplayMetrics;
+
 import processing.core.PApplet;
 
 /**
@@ -8,16 +11,27 @@ import processing.core.PApplet;
 
 public class PatternController extends PApplet {
     private SoundConverter soundConverter;
-    private PatternPidde pidde;
-    private PatternCircle circle;
-    private String chosenPattern;
+    private PatternInterface pattern;
+    private Activity activity;
+    private Buffer waveBuffer, fftBuffer;
 
-    public PatternController(SoundConverter soundConverter,String chosenPattern){
+    public PatternController(Activity activity, SoundConverter soundConverter){
+        this.activity = activity;
         this.soundConverter = soundConverter;
-        this.chosenPattern = chosenPattern;
-        pidde = new PatternPidde(this);
-        circle = new PatternCircle(this);
+        waveBuffer = new Buffer();
+        fftBuffer = new Buffer();
+        initiateDM();
+    }
 
+    public void setPattern(PatternInterface pattern) {
+        this.pattern = pattern;
+    }
+
+    public void initiateDM() {
+        DisplayMetrics dm = new DisplayMetrics();
+        activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
+        int width = dm.widthPixels;
+        int height = dm.heightPixels;
     }
 
     public static void main(String[] args) {
@@ -25,27 +39,25 @@ public class PatternController extends PApplet {
     }
 
     public void settings() {
-        size(1080,1920);
+        size(width,height);
     }
 
     public void setup() {
-        pidde.updatePattern(soundConverter.getFftBytes());
+
     }
 
     public void draw() {
-        stroke(255);
-        background(0,0,150);
-
-        if(chosenPattern=="Pidde"){
-        if(pidde.okToDraw()) {
-            pidde.updatePattern(soundConverter.getFftBytes());
-            pidde.drawShape();
-        }
-        }else if(chosenPattern == "Circle"){
-            if(circle.okToDraw()) {
-                circle.updatePattern(soundConverter.getFftBytes());
+        fftBuffer.put(soundConverter.getFftBytes());
+        waveBuffer.put(soundConverter.getWaveBytes());
+        System.out.println(fftBuffer.size());
+        if(pattern.okToDraw()) {
+            try {
+                pattern.updatePattern(fftBuffer.get(), waveBuffer.get());
+                pattern.drawPattern();
+            } catch (InterruptedException e) {
             }
-    }
+            System.out.println(fftBuffer.size());
+        }
     }
 }
 

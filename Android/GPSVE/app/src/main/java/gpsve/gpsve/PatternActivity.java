@@ -11,7 +11,7 @@ import processing.core.PApplet;
 public class PatternActivity extends AppCompatActivity {
     private Intent intent;
     private String pattern;
-    private PApplet pApplet;
+    private PatternController pApplet;
     private SoundConverter soundConverter;
 
     @Override
@@ -19,6 +19,7 @@ public class PatternActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pattern);
         soundConverter = new SoundConverter();
+        pApplet = new PatternController(this, soundConverter);
     }
 
     @Override
@@ -28,9 +29,9 @@ public class PatternActivity extends AppCompatActivity {
             intent = getIntent();
             pattern = intent.getStringExtra("pattern");
             switch (pattern) {
-                case "demo": pApplet = new PatternController(soundConverter,"Pidde");
+                case "demo": pApplet.setPattern(new PatternPidde(pApplet));
                     break;
-                case "demo2": pApplet = new PatternController(soundConverter,"Circle");
+                case "demo2": pApplet.setPattern(new PatternCircle(pApplet));
                     break;
             }
 
@@ -40,6 +41,5 @@ public class PatternActivity extends AppCompatActivity {
                     .replace(R.id.container, fragment)
                     .commit();
         }
-
     }
 

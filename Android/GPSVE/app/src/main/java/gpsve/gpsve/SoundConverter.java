@@ -14,11 +14,11 @@ public class SoundConverter{
     public SoundConverter(){
         fftBytes = new byte[512];
         waveBytes = new byte[512];
-        init();
+        initiateVisualizer();
     }
 
-    public void init(){
-        // Create the Visualizer object and attach it to our media player.
+    public void initiateVisualizer(){
+        // Create the Visualizer object and set audio session to 0 (listen to system audio)
         vis = new Visualizer(0);
         vis.setCaptureSize(Visualizer.getCaptureSizeRange()[0]);
 

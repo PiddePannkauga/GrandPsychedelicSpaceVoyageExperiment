@@ -36,12 +36,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startDemo(View view) {
-            intent = new Intent(this, PatternActivity.class);
-            String demo = "demo";
-            intent.putExtra("pattern", demo);
-            startActivity(intent);
-
-
+        intent = new Intent(this, PatternActivity.class);
+        String demo = "demo";
+        intent.putExtra("pattern", demo);
+        startActivity(intent);
     }
 
     public void startDemo2(View view) {
