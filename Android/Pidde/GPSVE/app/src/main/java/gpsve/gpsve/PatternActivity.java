@@ -28,10 +28,6 @@ public class PatternActivity extends AppCompatActivity {
             intent = getIntent();
             pattern = intent.getStringExtra("pattern");
             switch (pattern) {
-                case "circle": pApplet = new Circle();
-                    break;
-                case "square": pApplet = new Square();
-                    break;
                 case "demo": pApplet = new PatternController(soundConverter,"Pidde");
                     break;
                 case "demo2": pApplet = new PatternController(soundConverter,"Circle");

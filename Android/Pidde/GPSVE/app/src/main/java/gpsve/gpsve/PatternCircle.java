@@ -36,6 +36,21 @@ public class PatternCircle implements PatternInterface {
         setOk(true);
     }
 
+    @Override
+    public void drawPattern() {
+
+    }
+
+    @Override
+    public void setOkToDraw(boolean okToDraw) {
+
+    }
+
+    @Override
+    public boolean getOkToDraw() {
+        return false;
+    }
+
     public void drawCircle(float ellipseSize){
         parent.noStroke();
         parent.fill(parent.color(ellipseSize));
