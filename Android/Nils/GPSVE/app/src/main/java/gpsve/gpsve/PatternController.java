@@ -20,19 +20,20 @@ public class PatternController extends PApplet {
         this.soundConverter = soundConverter;
         waveBuffer = new Buffer();
         fftBuffer = new Buffer();
-        initiateDM();
+        pattern = new PatternChoose(this);
+//        initiateDM();
     }
 
     public void setPattern(PatternInterface pattern) {
         this.pattern = pattern;
     }
 
-    public void initiateDM() {
-        DisplayMetrics dm = new DisplayMetrics();
-        activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
-        int width = dm.widthPixels;
-        int height = dm.heightPixels;
-    }
+//    public void initiateDM() {
+//        DisplayMetrics dm = new DisplayMetrics();
+//        activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
+//        int width = dm.widthPixels;
+//        int height = dm.heightPixels;
+//    }
 
     public static void main(String[] args) {
         PApplet.main(new String[]{"PatternController"});
@@ -58,6 +59,13 @@ public class PatternController extends PApplet {
             }
 //            System.out.println(fftBuffer.size());
         }
+    }
+
+    public void reset() {
+        background(0);
+        noStroke();
+        noFill();
+        redraw();
     }
 }
 
