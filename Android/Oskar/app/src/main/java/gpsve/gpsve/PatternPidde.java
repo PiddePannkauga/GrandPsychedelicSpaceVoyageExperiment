@@ -48,37 +48,40 @@ public class PatternPidde implements PatternInterface {
     }
     
     @Override
-    public void updatePattern(byte[] soundBytes){
+    public void updatePattern(byte[] fft, byte[] wave){
+
         setLine1(0);
         setLine2(0);
         setLine3(0);
         setLine4(0);
 
-        for(int i = 0; i<soundBytes.length;i++) {
-            if (soundBytes[i] < 0) {
-                int k = soundBytes[i];
+        for(int i = 0; i<fft.length;i++) {
+            if (fft[i] < 0) {
+                int k = fft[i];
                 k *= -1;
-                soundBytes[i] = (byte) k;
+                fft[i] = (byte) k;
             }
-            if(soundBytes[i]>=0 && soundBytes[i]<32){
-                setLine1(getLine1()+soundBytes[i]);
+            if(fft[i]>=0 && fft[i]<32){
+                setLine1(getLine1()+fft[i]);
             }
-            if(soundBytes[i]>=32 && soundBytes[i]<64){
-                setLine2(getLine2()+soundBytes[i]);
+            if(fft[i]>=32 && fft[i]<64){
+                setLine2(getLine2()+fft[i]);
             }
-            if(soundBytes[i]>=64 && soundBytes[i]<96){
-                setLine3(getLine3()+soundBytes[i]);
+            if(fft[i]>=64 && fft[i]<96){
+                setLine3(getLine3()+fft[i]);
             }
-            if(soundBytes[i]>=96) {
-                setLine4(getLine4()+soundBytes[i]);
+            if(fft[i]>=96) {
+                setLine4(getLine4()+fft[i]);
             }
         }
     }
 
     @Override
     public void drawPattern() {
+        okToDraw = false;
 
-        setOkToDraw(false);
+        parent.background(0,0,150);
+
         parent.strokeWeight(100);
         parent.stroke(250,200,0);
 
@@ -93,20 +96,12 @@ public class PatternPidde implements PatternInterface {
 
         parent.line(parent.width * (float) 0.2, parent.height - getLine1(), parent.width * (float) 0.2, parent.height);
         parent.line(parent.width * (float) 0.8, 0 + getLine1(), parent.width * (float) 0.8, 0);
-        setOkToDraw(true);
 
+        okToDraw = true;
     }
 
     @Override
-    public void setOkToDraw(boolean okToDraw) {
-        this.okToDraw = okToDraw;
-    }
-
-    @Override
-    public boolean getOkToDraw() {
+    public boolean okToDraw() {
         return okToDraw;
     }
-
-
-
 }

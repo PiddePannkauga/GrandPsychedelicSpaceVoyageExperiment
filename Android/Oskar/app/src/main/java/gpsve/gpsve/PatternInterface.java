@@ -6,9 +6,7 @@ package gpsve.gpsve;
 
 public interface PatternInterface {
 
-    public void updatePattern(byte[] bytes);
+    public void updatePattern(byte[] fft, byte[] wave);
     public void drawPattern();
-    public void setOkToDraw(boolean okToDraw);
-    public boolean getOkToDraw();
-
+    public boolean okToDraw();
 }
