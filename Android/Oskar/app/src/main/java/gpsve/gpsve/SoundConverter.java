@@ -12,13 +12,13 @@ public class SoundConverter{
     private byte[] waveBytes;
 
     public SoundConverter(){
-        fftBytes = new byte[512];
-        waveBytes = new byte[512];
-        init();
+        fftBytes = new byte[128];
+        waveBytes = new byte[128];
+        initiateVisualizer();
     }
 
-    public void init(){
-        // Create the Visualizer object and attach it to our media player.
+    public void initiateVisualizer(){
+        // Create the Visualizer object and set audio session to 0 (listen to system audio)
         vis = new Visualizer(0);
         vis.setCaptureSize(Visualizer.getCaptureSizeRange()[0]);
 
@@ -46,5 +46,9 @@ public class SoundConverter{
 
     public byte[] getWaveBytes(){
         return waveBytes;
+    }
+
+    public void disableVisualizer() {
+        vis.release();
     }
 }

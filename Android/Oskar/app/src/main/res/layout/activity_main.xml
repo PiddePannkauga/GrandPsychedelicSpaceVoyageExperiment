@@ -2,32 +2,61 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
 
     <TextView
-        android:text="WeLCoMe!"
+        android:text="Choose a pattern"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView"
-        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:layout_marginTop="28dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textSize="18sp" />
 
     <Button
-        android:text="Demo"
+        android:text="Pattern 2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/button_demo"
-        android:onClick="startDemo"
-        android:layout_marginTop="49dp"
-         />
+        android:id="@+id/button_pattern2"
+        android:onClick="startPattern2"
+        android:layout_marginStart="19dp"
+        android:layout_alignBaseline="@+id/button_pattern1"
+        android:layout_alignBottom="@+id/button_pattern1"
+        android:layout_toEndOf="@+id/button_pattern3" />
 
+    <Button
+        android:id="@+id/button_pattern3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pattern 3"
+        android:onClick="startPattern3"
+        android:layout_alignBaseline="@+id/button_pattern4"
+        android:layout_alignBottom="@+id/button_pattern4"
+        android:layout_alignStart="@+id/button_pattern1" />
 
+    <Button
+        android:text="Pattern 4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_pattern4"
+        android:onClick="startPattern4"
+        android:layout_marginTop="25dp"
+        android:layout_below="@+id/button_pattern2"
+        android:layout_alignStart="@+id/button_pattern2" />
 
-
-
-
+    <Button
+        android:text="Pattern 1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_pattern1"
+        android:onClick="startPattern1"
+        android:layout_marginRight="58dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginStart="68dp"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>

@@ -17,22 +17,34 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ActivityCompat.requestPermissions(this,
-                new String[]{Manifest.permission.RECORD_AUDIO,Manifest.permission.MODIFY_AUDIO_SETTINGS},
-                0);
+                new String[]{Manifest.permission.RECORD_AUDIO,Manifest.permission.MODIFY_AUDIO_SETTINGS}, 0);
     }
 
-
-
-
-
-    public void startDemo(View view) {
-            intent = new Intent(this, PatternActivity.class);
-            String demo = "demo";
-            intent.putExtra("pattern", demo);
-            startActivity(intent);
-
-
+    public void startPattern1(View view) {
+        intent = new Intent(this, PatternActivity.class);
+        String pattern = "pattern1";
+        intent.putExtra("pattern", pattern);
+        startActivity(intent);
     }
 
+    public void startPattern2(View view) {
+        intent = new Intent(this, PatternActivity.class);
+        String pattern = "pattern2";
+        intent.putExtra("pattern", pattern);
+        startActivity(intent);
+    }
 
+    public void startPattern3(View view) {
+        intent = new Intent(this, PatternActivity.class);
+        String pattern = "pattern3";
+        intent.putExtra("pattern", pattern);
+        startActivity(intent);
+    }
+
+    public void startPattern4(View view) {
+        intent = new Intent(this, PatternActivity.class);
+        String pattern = "pattern4";
+        intent.putExtra("pattern", pattern);
+        startActivity(intent);
+    }
 }
