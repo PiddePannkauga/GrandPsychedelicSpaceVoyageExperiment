@@ -12,8 +12,8 @@ public class SoundConverter{
     private byte[] waveBytes;
 
     public SoundConverter(){
-        fftBytes = new byte[512];
-        waveBytes = new byte[512];
+        fftBytes = new byte[128];
+        waveBytes = new byte[128];
         initiateVisualizer();
     }
 
@@ -46,5 +46,9 @@ public class SoundConverter{
 
     public byte[] getWaveBytes(){
         return waveBytes;
+    }
+
+    public void disableVisualizer() {
+        vis.release();
     }
 }

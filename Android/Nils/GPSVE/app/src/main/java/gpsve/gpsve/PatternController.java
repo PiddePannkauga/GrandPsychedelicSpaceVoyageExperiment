@@ -49,14 +49,14 @@ public class PatternController extends PApplet {
     public void draw() {
         fftBuffer.put(soundConverter.getFftBytes());
         waveBuffer.put(soundConverter.getWaveBytes());
-        System.out.println(fftBuffer.size());
+//        System.out.println(fftBuffer.size());
         if(pattern.okToDraw()) {
             try {
                 pattern.updatePattern(fftBuffer.get(), waveBuffer.get());
                 pattern.drawPattern();
             } catch (InterruptedException e) {
             }
-            System.out.println(fftBuffer.size());
+//            System.out.println(fftBuffer.size());
         }
     }
 }

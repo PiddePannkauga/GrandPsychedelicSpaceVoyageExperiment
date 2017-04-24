@@ -17,35 +17,34 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ActivityCompat.requestPermissions(this,
-                new String[]{Manifest.permission.RECORD_AUDIO,Manifest.permission.MODIFY_AUDIO_SETTINGS},
-                0);
+                new String[]{Manifest.permission.RECORD_AUDIO,Manifest.permission.MODIFY_AUDIO_SETTINGS}, 0);
     }
 
-    public void startCircle(View view) {
+    public void startPattern1(View view) {
         intent = new Intent(this, PatternActivity.class);
-        String circle = "circle";
-        intent.putExtra("pattern", circle);
+        String pattern = "pattern1";
+        intent.putExtra("pattern", pattern);
         startActivity(intent);
     }
 
-    public void startSquare(View view) {
+    public void startPattern2(View view) {
         intent = new Intent(this, PatternActivity.class);
-        String square = "square";
-        intent.putExtra("pattern", square);
+        String pattern = "pattern2";
+        intent.putExtra("pattern", pattern);
         startActivity(intent);
     }
 
-    public void startDemo(View view) {
+    public void startPattern3(View view) {
         intent = new Intent(this, PatternActivity.class);
-        String demo = "demo";
-        intent.putExtra("pattern", demo);
+        String pattern = "pattern3";
+        intent.putExtra("pattern", pattern);
         startActivity(intent);
     }
 
-    public void startDemo2(View view) {
+    public void startPattern4(View view) {
         intent = new Intent(this, PatternActivity.class);
-        String demo = "demo2";
-        intent.putExtra("pattern", demo);
+        String pattern = "pattern4";
+        intent.putExtra("pattern", pattern);
         startActivity(intent);
     }
 }

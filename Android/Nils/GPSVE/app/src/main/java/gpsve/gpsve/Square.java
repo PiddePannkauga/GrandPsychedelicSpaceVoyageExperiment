@@ -10,7 +10,7 @@ public class Square extends PApplet {
     private int r, g, b, factor;
 
     public static void main(String args) {
-        PApplet.main(new String[]{"gpsve.gpsve.Circle"});
+        PApplet.main(new String[]{"gpsve.gpsve.PatternNisse"});
     }
 
     public void settings() {
