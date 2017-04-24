@@ -8,7 +8,7 @@ import java.util.LinkedList;
 
 public class Buffer {
 
-    private LinkedList <byte[]> list= new LinkedList<byte[]>();
+    private LinkedList <byte[]> list = new LinkedList<byte[]>();
 
     public synchronized void put(byte[] bytes){
         list.addLast(bytes);

@@ -11,7 +11,8 @@ import processing.core.PApplet;
 public class PatternCircle implements PatternInterface {
     private PApplet parent;
     private Color color;
-    private boolean ok = true;
+    private boolean okToDraw = true;
+    private byte[] wave, fft;
 
 
     public PatternCircle(PApplet parent){
@@ -19,42 +20,28 @@ public class PatternCircle implements PatternInterface {
 
     }
 
-    public void setOk(boolean ok){
-        this.ok=ok;
-    }
-
-    public boolean okToDraw(){
-        return ok;
-    }
     @Override
-    public void updatePattern(byte[] bytes) {
-        setOk(false);
-        for(int i = 0; i<bytes.length; i++) {
-            drawCircle(bytes[i]);
-        }
-
-        setOk(true);
+    public void updatePattern(byte[] fft, byte[] wave) {
+        this.fft = fft;
+        this.wave = wave;
     }
 
     @Override
     public void drawPattern() {
-
+        okToDraw = false;
+        drawCircle(wave[100]);
+        okToDraw = true;
     }
 
     @Override
-    public void setOkToDraw(boolean okToDraw) {
-
-    }
-
-    @Override
-    public boolean getOkToDraw() {
-        return false;
+    public boolean okToDraw() {
+        return okToDraw;
     }
 
     public void drawCircle(float ellipseSize){
+        parent.background(255,35);
         parent.noStroke();
         parent.fill(parent.color(ellipseSize));
         parent.ellipse(parent.width/2,parent.height/2,ellipseSize*4,ellipseSize*4);
-
     }
 }

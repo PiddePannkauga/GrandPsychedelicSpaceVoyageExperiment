@@ -11,23 +11,27 @@ import processing.core.PApplet;
 
 public class PatternController extends PApplet {
     private SoundConverter soundConverter;
-    private PatternPidde pidde;
-    private PatternCircle circle;
-    private String chosenPattern;
+    private PatternInterface pattern;
     private Activity activity;
-    private Buffer buffer;
+    private Buffer waveBuffer, fftBuffer;
 
-
-
-
-    public PatternController(SoundConverter soundConverter,Activity activity,String chosenPattern){
-        this.soundConverter = soundConverter;
-        this.chosenPattern = chosenPattern;
-        pidde = new PatternPidde(this);
-        circle = new PatternCircle(this);
+    public PatternController(Activity activity, SoundConverter soundConverter){
         this.activity = activity;
-        buffer = new Buffer();
+        this.soundConverter = soundConverter;
+        waveBuffer = new Buffer();
+        fftBuffer = new Buffer();
+        initiateDM();
+    }
 
+    public void setPattern(PatternInterface pattern) {
+        this.pattern = pattern;
+    }
+
+    public void initiateDM() {
+        DisplayMetrics dm = new DisplayMetrics();
+        activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
+        int width = dm.widthPixels;
+        int height = dm.heightPixels;
     }
 
     public static void main(String[] args) {
@@ -35,42 +39,25 @@ public class PatternController extends PApplet {
     }
 
     public void settings() {
-
+        size(width,height);
     }
 
     public void setup() {
-        DisplayMetrics dm = new DisplayMetrics();
-        activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
-        int width = dm.widthPixels;
-        int height = dm.heightPixels;
-        size(width,height);
-        stroke(255);
-        background(0,0,150);
 
-
-    }
-
-    public void drawPattern(){
-
-        redraw();
     }
 
     public void draw() {
-
-        stroke(255);
-        background(0,0,150);
-        buffer.put(soundConverter.getFftBytes());
-        System.out.println(buffer.size());
-        if(pidde.getOkToDraw()) {
+        fftBuffer.put(soundConverter.getFftBytes());
+        waveBuffer.put(soundConverter.getWaveBytes());
+//        System.out.println(fftBuffer.size());
+        if(pattern.okToDraw()) {
             try {
-                pidde.updatePattern(buffer.get());
-                pidde.drawPattern();
+                pattern.updatePattern(fftBuffer.get(), waveBuffer.get());
+                pattern.drawPattern();
             } catch (InterruptedException e) {
             }
+//            System.out.println(fftBuffer.size());
         }
-        System.out.println(buffer.size());
-
-
     }
 }
 
