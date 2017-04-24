@@ -1,5 +1,7 @@
 package gpsve.gpsve;
 
+import java.util.Random;
+
 import processing.core.PApplet;
 
 /**
@@ -8,14 +10,16 @@ import processing.core.PApplet;
 
 public class PatternPidde implements PatternInterface {
     private PApplet parent;
+    private int[] currentLine, previousLine, drawLine;
     private int line1, line2, line3, line4;
-    private int previousLine1=0,previousLine2=0,previousLine3=0,previousLine4=0;
-    private int drawLine1, drawLine2, drawLine3,drawLine4;
-    private int lineDecay = 5;
     private boolean okToDraw = true;
+    private Random rand = new Random();
 
     public PatternPidde(PApplet parent) {
         this.parent = parent;
+        currentLine = new int[8];
+        previousLine = new int[8];
+        drawLine = new int[8];
     }
 
     public int getLine1() {
@@ -54,55 +58,51 @@ public class PatternPidde implements PatternInterface {
     public void updatePattern(byte[] fft, byte[] wave) {
         setOkToDraw(false);
 
+        for(int i = 0; i<currentLine.length; i++){
+            currentLine[i] = 0;
+        }
+
         for(int i = 0; i<fft.length;i++) {
             if (fft[i] < 0) {
                 int k = fft[i];
                 k *= -1;
                 fft[i] = (byte) k;
             }
-            if (fft[i] >= 0 && fft[i] < 32) {
-                setLine1(getLine1() + fft[i]);
+            if (fft[i] >= 0 && fft[i] < 16) {
+                currentLine[0] += fft[i];
             }
-            if (fft[i] >= 32 && fft[i] < 64) {
-                setLine2(getLine2() + fft[i]);
+            if (fft[i] >= 16 && fft[i] < 32) {
+                currentLine[1] += fft[i];
             }
-            if (fft[i] >= 64 && fft[i] < 96) {
-                setLine3(getLine3() + fft[i]);
+            if (fft[i] >= 32 && fft[i] < 48) {
+                currentLine[2] += fft[i];
             }
-            if (fft[i] >= 96) {
-                setLine4(getLine4() + fft[i]);
+            if (fft[i] >= 48 && fft[i] < 64 ) {
+                currentLine[3] += fft[i];
+            }
+            if (fft[i] >= 64 && fft[i] < 80 ) {
+                currentLine[4] += fft[i];
+            }
+            if (fft[i] >= 80 && fft[i] < 96 ) {
+                currentLine[5] += fft[i];
+            }
+            if (fft[i] >= 96 && fft[i] < 112 ) {
+                currentLine[6] += fft[i];
+            }
+            if (fft[i] >= 122 ) {
+                currentLine[7] += fft[i];
             }
         }
+        for(int i =0; i<currentLine.length; i++){
+            if(currentLine[i] > previousLine[i]){
+                drawLine[i] = currentLine[i];
+                previousLine[i] = currentLine[i];
+            }else{
+                previousLine[i] = decay(previousLine[i],5);
+                drawLine[i] = previousLine[i];
+            }
 
-        if(line1 > previousLine1){
-            drawLine1 = line1;
-            previousLine1 = line1;
-        }else{
-            previousLine1 = decay(previousLine1);
-            drawLine1 = previousLine1;
         }
-        if(line2 > previousLine2){
-            drawLine2 = line2;
-            previousLine2 = line2;
-        }else{
-            previousLine2 = decay(previousLine2);
-            drawLine2 = previousLine2;
-        }
-        if(line3 > previousLine3){
-            drawLine3 = line3;
-            previousLine3 = line3;
-        }else{
-            previousLine3 = decay(previousLine3);
-            drawLine3 = previousLine3;
-        }
-        if(line4 > previousLine4){
-            drawLine4 = line4;
-            previousLine4 = line4;
-        }else{
-            previousLine4 = decay(previousLine4);
-            drawLine4 = previousLine4;
-        }
-
 
         setOkToDraw(true);
     }
@@ -110,30 +110,53 @@ public class PatternPidde implements PatternInterface {
     @Override
     public void drawPattern() {
 
+        float linePos1 =(float)0.0625, linePos2 =(float)0.9375;
 
-        parent.background(0,0,150);
-        parent.strokeWeight(100);
-        parent.stroke(250,200,0);
+        parent.background(50, 0, 79);
+        parent.strokeWeight(125);
+        parent.stroke(0, 0, 0);
+        for(int i =0; i<drawLine.length;i++) {
 
-        parent.line(parent.width * (float) 0.8, parent.height - drawLine4, parent.width * (float) 0.8, parent.height);
-        parent.line(parent.width * (float) 0.2, 0 + drawLine4, parent.width * (float) 0.2, 0);
+            parent.line(parent.width * linePos1, parent.height - drawLine[i]-100, parent.width * linePos1, parent.height);
+            parent.line(parent.width * linePos2, 0 + drawLine[i]+100, parent.width * linePos2, 0);
+            linePos1 += 0.125;
+            linePos2 -= 0.125;
 
-        parent.line(parent.width * (float) 0.6, parent.height - drawLine3, parent.width * (float) 0.6, parent.height);
-        parent.line(parent.width * (float) 0.4, 0 + drawLine3, parent.width * (float) 0.4, 0);
+        }
 
-        parent.line((parent.width * (float) 0.4), parent.height - drawLine2, (parent.width * (float) 0.4), parent.height);
-        parent.line((parent.width * (float) 0.6), 0 + drawLine2, (parent.width * (float) 0.6), 0);
+        parent.strokeWeight(75);
+        linePos1 = (float)0.0625;
+        linePos2 =(float)0.9375;
+        for(int i =0; i<drawLine.length;i++){
+            float r=0,g=0,b=0;
+            if(i==0 || i==4){
+            r = 255;
+            }else if(i==1 || i==5){
+                r=255;
+                g=255;
+            }else if(i==2 || i==6){
+                g=255;
+            }else if(i==3 || i ==7){
+                b=255;
+            }
+            parent.stroke(r,g,b,lineAlpha(drawLine[i]));
 
-        parent.line(parent.width * (float) 0.2, parent.height - drawLine1, parent.width * (float) 0.2, parent.height);
-        parent.line(parent.width * (float) 0.8, 0 + drawLine1, parent.width * (float) 0.8, 0);
+            parent.line(parent.width * linePos1, parent.height - drawLine[i]-100, parent.width * linePos1, parent.height);
+            parent.line(parent.width * linePos2, 0 + drawLine[i]+100, parent.width * linePos2, 0);
+            linePos1 += 0.125;
+            linePos2 -= 0.125;
 
-        setLine1(0);
-        setLine2(0);
-        setLine3(0);
-        setLine4(0);
+        }
 
+    }
 
+    public int lineAlpha(int lineValue){
 
+        if(lineValue>255) {
+            return decay(255,10);
+        }else{
+            return decay(lineValue,10);
+        }
     }
 
     @Override
@@ -142,7 +165,7 @@ public class PatternPidde implements PatternInterface {
     }
 
 
-    public int decay(int drawLine){
+    public int decay(int drawLine, int lineDecay){
         if(drawLine > 0) {
             drawLine = drawLine - lineDecay;
         }
