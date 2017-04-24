@@ -1,62 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent">
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/drawer_layout"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <TextView
-        android:text="Choose a pattern"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="85dp"
         android:id="@+id/textView"
-        android:layout_marginTop="28dp"
-        android:layout_alignParentTop="true"
+        android:text="@string/welcome"
+        android:textAppearance="@android:style/TextAppearance.Large"
+        android:textAlignment="center"
+        android:layout_width="300dp"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:textSize="18sp" />
+        android:layout_row="1"
+        android:layout_column="0"
+        app:layout_constraintBottom_toTopOf="@+id/button_continue"
+        android:layout_marginBottom="280dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <Button
-        android:text="Pattern 2"
-        android:layout_width="wrap_content"
+        android:text="Continue"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:id="@+id/button_pattern2"
-        android:onClick="startPattern2"
-        android:layout_marginStart="19dp"
-        android:layout_alignBaseline="@+id/button_pattern1"
-        android:layout_alignBottom="@+id/button_pattern1"
-        android:layout_toEndOf="@+id/button_pattern3" />
+        android:id="@+id/button_continue"
+        android:layout_alignParentBottom="true"
+        android:layout_column="2"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="56dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        android:onClick="startPatternActivity" />
 
-    <Button
-        android:id="@+id/button_pattern3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pattern 3"
-        android:onClick="startPattern3"
-        android:layout_alignBaseline="@+id/button_pattern4"
-        android:layout_alignBottom="@+id/button_pattern4"
-        android:layout_alignStart="@+id/button_pattern1" />
-
-    <Button
-        android:text="Pattern 4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/button_pattern4"
-        android:onClick="startPattern4"
-        android:layout_marginTop="25dp"
-        android:layout_below="@+id/button_pattern2"
-        android:layout_alignStart="@+id/button_pattern2" />
-
-    <Button
-        android:text="Pattern 1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/button_pattern1"
-        android:onClick="startPattern1"
-        android:layout_marginRight="58dp"
-        android:layout_marginTop="26dp"
-        android:layout_marginStart="68dp"
-        android:layout_below="@+id/textView"
-        android:layout_alignParentStart="true" />
-
-
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>
