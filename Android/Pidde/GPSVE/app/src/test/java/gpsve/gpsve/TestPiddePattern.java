@@ -28,8 +28,7 @@ public class TestPiddePattern {
         assertTrue(testPidde.getLine3()!=0 && testPidde.getLine3() == 128);
         assertTrue(testPidde.getLine4()!=0 && testPidde.getLine4() == 192);
 
+
     }
-
-
 
 }

@@ -15,6 +15,11 @@ public class PatternPidde implements PatternInterface {
     float quadLenghtY,quadLenghtX,y2;
     float thinnerLine1=50;
     float thinnerLine2=50;
+    private Star[] stars1 = new Star[128];
+    private Star[] stars2 = new Star[128];
+    private Star[] stars3 = new Star[128];
+    private int delay =0;
+    private boolean starsStarted = false;
 
     private int line1, line2, line3, line4;
     private boolean okToDraw = true;
@@ -25,6 +30,12 @@ public class PatternPidde implements PatternInterface {
         currentLine = new int[8];
         previousLine = new int[8];
         drawLine = new int[8];
+
+        for(int i =0; i<stars1.length; i++){
+            stars1[i] = new Star();
+            stars2[i] = new Star();
+            stars3[i] = new Star();
+        }
 
         quadLenghtY=parent.height;
         quadLenghtX=parent.width;
@@ -50,7 +61,7 @@ public class PatternPidde implements PatternInterface {
 
     @Override
     public void updatePattern(byte[] fft, byte[] wave) {
-        setOkToDraw(false);
+
 //        fft = wave;
         for(int i = 0; i<currentLine.length; i++){
             currentLine[i] = 0;
@@ -96,21 +107,42 @@ public class PatternPidde implements PatternInterface {
                 drawLine[i] = previousLine[i];
             }
         }
-        setOkToDraw(true);
     }
 
     @Override
     public void drawPattern() {
+        setOkToDraw(false);
 
         float linePos1 =(float)0.0625, linePos2 =(float)0.9375;
-
-        parent.background(0,0,0);
-
-
-        galacticHighway(25);
+        parent.background(0);
 
 
-        parent.beginShape(PConstants.LINE);
+
+
+//        galacticHighway(25);
+
+        parent.pushMatrix();
+        parent.translate(parent.width/2, parent.height/2);
+        for(int i =0; i<stars1.length; i++){
+            stars1[i].update();
+            stars1[i].show();
+        }
+        if(delay>5) {
+            for (int i = 0; i < stars2.length; i++) {
+                stars2[i].update();
+                stars2[i].show();
+            }
+        }
+        if(delay>10){
+            for (int i = 0; i < stars2.length; i++) {
+                stars3[i].update();
+                stars3[i].show();
+            }
+        }
+        delay++;
+        parent.popMatrix();
+
+        parent.pushStyle();
         for(int i =0; i<drawLine.length;i++) {
 
             parent.strokeWeight(125);
@@ -121,8 +153,8 @@ public class PatternPidde implements PatternInterface {
             linePos2 -= 0.125;
 
         }
-        parent.endShape();
-        parent.beginShape(PConstants.LINE);
+
+        parent.popStyle();
         linePos1 = (float)0.0625;
         linePos2 =(float)0.9375;
 
@@ -159,10 +191,12 @@ public class PatternPidde implements PatternInterface {
 
         }
         parent.endShape();
+        setOkToDraw(true);
 
 
 
     }
+
 
     public int lineAlpha(int lineValue){
 
@@ -223,6 +257,54 @@ public class PatternPidde implements PatternInterface {
             }
         }
 
+
+    }
+
+    private class Star{
+        float x;
+        float y;
+        float z;
+        float pz;
+
+        public void Star(){
+            x = parent.random(-parent.width/2,parent.width/2);
+            y = parent.random(-parent.height/2, parent.height/2);
+            z = parent.random(parent.width/2);
+            pz = z;
+
+        }
+
+        public void update(){
+            System.out.println(z);
+            z = z-35;
+//
+
+            if(z<1){
+                z=parent.width/2;
+                x = parent.random(-parent.width/2, parent.width/2);
+                y = parent.random(-parent.height/2, parent.height/2);
+                pz = z;
+
+            }
+        }
+        public void show(){
+            parent.fill(255);
+            parent.noStroke();
+            float sx = parent.map(x / z, 0, 1, 0, parent.width/2);
+            float sy = parent.map(y / z, 0, 1, 0, parent.height/2);
+            float r = parent.map(z, 0, parent.width/2, 16, 0);
+            parent.ellipse(sx, sy, r, r);
+            float px = parent.map(x / pz, 0, 1, 0, parent.width/2);
+            float py = parent.map(y / pz, 0, 1, 0, parent.height/2);
+            pz = z;
+            parent.pushStyle();
+            parent.stroke(255);
+            parent.strokeWeight(5);
+            parent.line(px, py, sx, sy);
+            parent.popStyle();
+
+
+        }
 
     }
 
