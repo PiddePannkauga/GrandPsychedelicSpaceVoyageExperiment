@@ -21,6 +21,10 @@ public class PatternActivity extends AppCompatActivity {
         soundConverter = new SoundConverter();
         fragment = new PFragment();
         patternController = new PatternController(this, soundConverter);
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragment.setSketch(patternController);
+        fragmentManager.beginTransaction().replace(R.id.pattern_container, fragment).commit();
     }
 
     @Override
@@ -39,16 +43,10 @@ public class PatternActivity extends AppCompatActivity {
     protected void onResume(){
         super.onResume();
         System.out.println("onResume()");
-
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragment.setSketch(patternController);
-        fragmentManager.beginTransaction().replace(R.id.pattern_container, fragment).commit();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        System.out.println("menu");
-
         patternController.reset();
         switch (item.getItemId()) {
             case R.id.item_pattern1:
@@ -86,6 +84,7 @@ public class PatternActivity extends AppCompatActivity {
 
     protected void onRestart() {
         super.onRestart();
+        soundConverter.initiateVisualizer();
         System.out.println("onRestart()");
     }
 }
