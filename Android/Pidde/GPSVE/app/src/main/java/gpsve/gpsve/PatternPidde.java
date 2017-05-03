@@ -277,7 +277,7 @@ public class PatternPidde implements PatternInterface {
         }
 
         public void update(){
-            System.out.println(z);
+
             if(parent.height>parent.width){
                 speed = 30;
             }else{
@@ -293,17 +293,18 @@ public class PatternPidde implements PatternInterface {
             }
         }
         public void show(){
-            parent.fill(255);
+//            parent.fill(255);
             parent.noStroke();
             float sx = parent.map(x / z, 0, 1, 0, parent.width/2);
             float sy = parent.map(y / z, 0, 1, 0, parent.height/2);
             float r = parent.map(z, 0, parent.width/2, 16, 0);
+            parent.pushStyle();
+            parent.fill(parent.random(255));
             parent.ellipse(sx, sy, r, r);
             float px = parent.map(x / pz, 0, 1, 0, parent.width/2);
             float py = parent.map(y / pz, 0, 1, 0, parent.height/2);
             pz = z;
-            parent.pushStyle();
-            parent.stroke(255);
+            parent.stroke(parent.random(255));
             parent.strokeWeight(3);
             parent.line(px, py, sx, sy);
             parent.popStyle();

@@ -120,8 +120,6 @@ public class PatternNisse implements PatternInterface {
         okToDraw = true;
     }
 
-
-
     @Override
     public boolean okToDraw() {
         return okToDraw;
