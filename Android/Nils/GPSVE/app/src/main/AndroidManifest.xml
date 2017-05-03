@@ -22,8 +22,6 @@
             android:name=".PatternActivity"
             android:parentActivityName=".MainActivity">
         </activity>
-
-
     </application>
 
 </manifest>
