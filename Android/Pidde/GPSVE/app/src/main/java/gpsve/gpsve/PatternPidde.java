@@ -15,9 +15,9 @@ public class PatternPidde implements PatternInterface {
     float quadLenghtY,quadLenghtX,y2;
     float thinnerLine1=50;
     float thinnerLine2=50;
-    private Star[] stars1 = new Star[150];
-    private Star[] stars2 = new Star[150];
-    private Star[] stars3 = new Star[150];
+    private Star[] stars1 = new Star[250];
+    private Star[] stars2 = new Star[250];
+    private Star[] stars3 = new Star[250];
     private int delay =0;
     private boolean starsStarted = false;
 
@@ -171,16 +171,7 @@ public class PatternPidde implements PatternInterface {
                 b=233;
 
             }
-//            if(i==0 || i==4){
-//            r = 255;
-//            }else if(i==1 || i==5){
-//                r=255;
-//                g=255;
-//            }else if(i==2 || i==6){
-//                g=255;
-//            }else if(i==3 || i ==7){
-//                b=255;
-//            }
+
             parent.strokeWeight(75);
             parent.stroke(r,g,b,lineAlpha(drawLine[i]));
 
@@ -299,12 +290,12 @@ public class PatternPidde implements PatternInterface {
             float sy = parent.map(y / z, 0, 1, 0, parent.height/2);
             float r = parent.map(z, 0, parent.width/2, 16, 0);
             parent.pushStyle();
-            parent.fill(parent.random(255));
+            parent.fill(parent.random(255),parent.random(255),parent.random(255));
             parent.ellipse(sx, sy, r, r);
             float px = parent.map(x / pz, 0, 1, 0, parent.width/2);
             float py = parent.map(y / pz, 0, 1, 0, parent.height/2);
             pz = z;
-            parent.stroke(parent.random(255));
+            parent.stroke(parent.random(255),parent.random(255),parent.random(255));
             parent.strokeWeight(3);
             parent.line(px, py, sx, sy);
             parent.popStyle();

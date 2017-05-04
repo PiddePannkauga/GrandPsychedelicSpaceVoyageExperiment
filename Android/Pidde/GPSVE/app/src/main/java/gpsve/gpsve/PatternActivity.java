@@ -12,17 +12,20 @@ public class PatternActivity extends AppCompatActivity {
     private PatternController patternController;
     private SoundConverter soundConverter;
     private PFragment fragment;
+    private FragmentManager fragmentManager;
+    private int currentPattern;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         System.out.println("onCreate()");
         setContentView(R.layout.activity_pattern);
+
         soundConverter = new SoundConverter();
         fragment = new PFragment();
         patternController = new PatternController(this, soundConverter);
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager = getSupportFragmentManager();
         fragment.setSketch(patternController);
         fragmentManager.beginTransaction().replace(R.id.pattern_container, fragment).commit();
     }
@@ -50,15 +53,19 @@ public class PatternActivity extends AppCompatActivity {
         patternController.reset();
         switch (item.getItemId()) {
             case R.id.item_pattern1:
+                currentPattern = 1;
                 patternController.setPattern(new PatternPidde(patternController));
                 return true;
             case R.id.item_pattern2:
+                currentPattern = 2;
                 patternController.setPattern(new PatternNisse(patternController));
                 return true;
             case R.id.item_pattern3:
+                currentPattern = 3;
                 patternController.setPattern(new PatternCircle(patternController));
                 return true;
             case R.id.item_pattern4:
+                currentPattern = 4;
                 patternController.setPattern(new PatternPidde(patternController));
                 return true;
             default:
@@ -86,5 +93,28 @@ public class PatternActivity extends AppCompatActivity {
         super.onRestart();
         soundConverter.initiateVisualizer();
         System.out.println("onRestart()");
+    }
+
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putInt("pattern", currentPattern);
+        super.onSaveInstanceState(outState);
+    }
+
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        currentPattern = savedInstanceState.getInt("pattern");
+        switch (currentPattern) {
+            case 1:
+                patternController.setPattern(new PatternPidde(patternController));
+                break;
+            case 2:
+                patternController.setPattern(new PatternNisse(patternController));
+                break;
+            case 3:
+                patternController.setPattern(new PatternCircle(patternController));
+                break;
+            case 4:
+                patternController.setPattern(new PatternPidde(patternController));
+                break;
+        }
     }
 }
