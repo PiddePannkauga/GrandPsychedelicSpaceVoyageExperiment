@@ -37,7 +37,7 @@ public class PatternOskar implements PatternInterface {
         int [] bc = waveLengthToRGB(bckgrnd);
 
         parent.background(bc[0],bc[1],bc[2]);
-
+        parent.pushStyle();
         for (int i = 0; i < fft.length/4; i++) {
             //Förskjutning från mitten av spektrum
             double shift = (5*i)+300;
@@ -55,7 +55,9 @@ public class PatternOskar implements PatternInterface {
 
             Log.d(TAG, "drawPattern: "+xxx);
         }
+        parent.pushStyle();
         okToDraw = true;
+
     }
 
     public static int[] waveLengthToRGB(double Wavelength){

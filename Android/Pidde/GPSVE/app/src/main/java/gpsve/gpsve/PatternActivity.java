@@ -66,7 +66,7 @@ public class PatternActivity extends AppCompatActivity {
                 return true;
             case R.id.item_pattern4:
                 currentPattern = 4;
-                patternController.setPattern(new PatternPidde(patternController));
+                patternController.setPattern(new PatternOskar(patternController));
                 return true;
             default:
                 return false;
@@ -113,7 +113,7 @@ public class PatternActivity extends AppCompatActivity {
                 patternController.setPattern(new PatternCircle(patternController));
                 break;
             case 4:
-                patternController.setPattern(new PatternPidde(patternController));
+                patternController.setPattern(new PatternOskar(patternController));
                 break;
         }
     }

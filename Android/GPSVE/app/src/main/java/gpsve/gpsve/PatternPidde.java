@@ -1,6 +1,9 @@
 package gpsve.gpsve;
 
+import java.util.Random;
+
 import processing.core.PApplet;
+import processing.core.PConstants;
 
 /**
  * Created by Petter on 2017-04-06.
@@ -8,51 +11,61 @@ import processing.core.PApplet;
 
 public class PatternPidde implements PatternInterface {
     private PApplet parent;
+    private int[] currentLine, previousLine, drawLine;
+    float quadLenghtY,quadLenghtX,y2;
+    float thinnerLine1=50;
+    float thinnerLine2=50;
+    private Star[] stars1 = new Star[250];
+    private Star[] stars2 = new Star[250];
+    private Star[] stars3 = new Star[250];
+    private int delay =0;
+    private boolean starsStarted = false;
+
     private int line1, line2, line3, line4;
-    private int previousLine1=0,previousLine2=0,previousLine3=0,previousLine4=0;
-    private int drawLine1, drawLine2, drawLine3,drawLine4;
-    private int lineDecay = 5;
     private boolean okToDraw = true;
+    private Random rand = new Random();
 
     public PatternPidde(PApplet parent) {
         this.parent = parent;
+        currentLine = new int[8];
+        previousLine = new int[8];
+        drawLine = new int[8];
+
+        for(int i =0; i<stars1.length; i++){
+            stars1[i] = new Star();
+            stars2[i] = new Star();
+            stars3[i] = new Star();
+        }
+
+        quadLenghtY=parent.height;
+        quadLenghtX=parent.width;
+        y2 = parent.height;
+
     }
 
     public int getLine1() {
         return line1;
     }
 
-    public void setLine1(int line1) {
-        this.line1 = line1;
-    }
-
     public int getLine2() {
         return line2;
-    }
-
-    public void setLine2(int line2) {
-        this.line2 = line2;
     }
 
     public int getLine3() {
         return line3;
     }
 
-    public void setLine3(int line3) {
-        this.line3 = line3;
-    }
-
     public int getLine4() {
         return line4;
-    }
-
-    public void setLine4(int line4) {
-        this.line4 = line4;
     }
 
     @Override
     public void updatePattern(byte[] fft, byte[] wave) {
         setOkToDraw(false);
+//        fft = wave;
+        for(int i = 0; i<currentLine.length; i++){
+            currentLine[i] = 0;
+        }
 
         for(int i = 0; i<fft.length;i++) {
             if (fft[i] < 0) {
@@ -60,50 +73,40 @@ public class PatternPidde implements PatternInterface {
                 k *= -1;
                 fft[i] = (byte) k;
             }
-            if (fft[i] >= 0 && fft[i] < 32) {
-                setLine1(getLine1() + fft[i]);
+            if (fft[i] >= 0 && fft[i] < 16) {
+                currentLine[0] += fft[i];
             }
-            if (fft[i] >= 32 && fft[i] < 64) {
-                setLine2(getLine2() + fft[i]);
+            if (fft[i] >= 16 && fft[i] < 32) {
+                currentLine[1] += fft[i];
             }
-            if (fft[i] >= 64 && fft[i] < 96) {
-                setLine3(getLine3() + fft[i]);
+            if (fft[i] >= 32 && fft[i] < 48) {
+                currentLine[2] += fft[i];
             }
-            if (fft[i] >= 96) {
-                setLine4(getLine4() + fft[i]);
+            if (fft[i] >= 48 && fft[i] < 64 ) {
+                currentLine[3] += fft[i];
+            }
+            if (fft[i] >= 64 && fft[i] < 80 ) {
+                currentLine[4] += fft[i];
+            }
+            if (fft[i] >= 80 && fft[i] < 96 ) {
+                currentLine[5] += fft[i];
+            }
+            if (fft[i] >= 96 && fft[i] < 112 ) {
+                currentLine[6] += fft[i];
+            }
+            if (fft[i] >= 122 ) {
+                currentLine[7] += fft[i];
             }
         }
-
-        if(line1 > previousLine1){
-            drawLine1 = line1;
-            previousLine1 = line1;
-        }else{
-            previousLine1 = decay(previousLine1);
-            drawLine1 = previousLine1;
+        for(int i =0; i<currentLine.length; i++){
+            if(currentLine[i] > previousLine[i]){
+                drawLine[i] = currentLine[i];
+                previousLine[i] = currentLine[i];
+            }else{
+                previousLine[i] = decay(previousLine[i],5);
+                drawLine[i] = previousLine[i];
+            }
         }
-        if(line2 > previousLine2){
-            drawLine2 = line2;
-            previousLine2 = line2;
-        }else{
-            previousLine2 = decay(previousLine2);
-            drawLine2 = previousLine2;
-        }
-        if(line3 > previousLine3){
-            drawLine3 = line3;
-            previousLine3 = line3;
-        }else{
-            previousLine3 = decay(previousLine3);
-            drawLine3 = previousLine3;
-        }
-        if(line4 > previousLine4){
-            drawLine4 = line4;
-            previousLine4 = line4;
-        }else{
-            previousLine4 = decay(previousLine4);
-            drawLine4 = previousLine4;
-        }
-
-
         setOkToDraw(true);
     }
 
@@ -111,29 +114,91 @@ public class PatternPidde implements PatternInterface {
     public void drawPattern() {
 
 
-        parent.background(0,0,150);
-        parent.strokeWeight(100);
-        parent.stroke(250,200,0);
-
-        parent.line(parent.width * (float) 0.8, parent.height - drawLine4, parent.width * (float) 0.8, parent.height);
-        parent.line(parent.width * (float) 0.2, 0 + drawLine4, parent.width * (float) 0.2, 0);
-
-        parent.line(parent.width * (float) 0.6, parent.height - drawLine3, parent.width * (float) 0.6, parent.height);
-        parent.line(parent.width * (float) 0.4, 0 + drawLine3, parent.width * (float) 0.4, 0);
-
-        parent.line((parent.width * (float) 0.4), parent.height - drawLine2, (parent.width * (float) 0.4), parent.height);
-        parent.line((parent.width * (float) 0.6), 0 + drawLine2, (parent.width * (float) 0.6), 0);
-
-        parent.line(parent.width * (float) 0.2, parent.height - drawLine1, parent.width * (float) 0.2, parent.height);
-        parent.line(parent.width * (float) 0.8, 0 + drawLine1, parent.width * (float) 0.8, 0);
-
-        setLine1(0);
-        setLine2(0);
-        setLine3(0);
-        setLine4(0);
+        float linePos1 =(float)0.0625, linePos2 =(float)0.9375;
+        parent.background(0);
 
 
 
+
+//        galacticHighway(25);
+
+        parent.pushMatrix();
+        parent.translate(parent.width/2, parent.height/2);
+        for(int i =0; i<stars1.length; i++){
+            stars1[i].update();
+            stars1[i].show();
+        }
+        if(delay>5) {
+            for (int i = 0; i < stars2.length; i++) {
+                stars2[i].update();
+                stars2[i].show();
+            }
+        }
+        if(delay>10){
+            for (int i = 0; i < stars2.length; i++) {
+                stars3[i].update();
+                stars3[i].show();
+            }
+        }
+        delay++;
+        parent.popMatrix();
+
+        parent.pushStyle();
+        for(int i =0; i<drawLine.length;i++) {
+
+            parent.strokeWeight(100);
+            parent.stroke(22, 22, 22,lineAlpha(drawLine[i]));
+            parent.line(parent.width * linePos1, parent.height - drawLine[i]-50, parent.width * linePos1, parent.height);
+            parent.line(parent.width * linePos2, 0 + drawLine[i]+50, parent.width * linePos2, 0);
+            linePos1 += 0.125;
+            linePos2 -= 0.125;
+
+        }
+
+        parent.popStyle();
+        linePos1 = (float)0.0625;
+        linePos2 =(float)0.9375;
+        parent.pushStyle();
+        for(int i =0; i<drawLine.length;i++){
+            float r,g,b;
+            if(i%2==0){
+                r=255;
+                g=0;
+                b=223;
+            }else{
+                r=0;
+                g=255;
+                b=233;
+
+            }
+
+            parent.strokeWeight(75);
+            parent.stroke(r,g,b,lineAlpha(drawLine[i]));
+
+            parent.line(parent.width * linePos1, parent.height - drawLine[i]-50, parent.width * linePos1, parent.height);
+            parent.line(parent.width * linePos2, 0 + drawLine[i]+50, parent.width * linePos2, 0);
+            linePos1 += 0.125;
+            linePos2 -= 0.125;
+
+
+        }
+        parent.popStyle();
+
+
+
+
+    }
+
+
+    public int lineAlpha(int lineValue){
+
+        if(lineValue>255) {
+            return 255;
+        }else if(lineValue>100 && lineValue<200) {
+            return 255;
+        }else{
+            return decay(lineValue,25)+25;
+        }
     }
 
     @Override
@@ -142,7 +207,7 @@ public class PatternPidde implements PatternInterface {
     }
 
 
-    public int decay(int drawLine){
+    public int decay(int drawLine, int lineDecay){
         if(drawLine > 0) {
             drawLine = drawLine - lineDecay;
         }
@@ -157,8 +222,97 @@ public class PatternPidde implements PatternInterface {
         this.okToDraw = okToDraw;
     }
 
+    public void galacticHighway(float quadLenghtY){
 
 
+        parent.noStroke();
+        parent.beginShape(PConstants.QUAD);
+        parent.fill(78, 237, 252,150);
+        parent.quad(0,parent.height,parent.width/2,parent.height*(float)0.55,parent.width/2,parent.height*(float)0.55,parent.width,parent.height);
+        parent.endShape();
+        parent.beginShape(PConstants.QUAD);
+        parent.fill(244, 134, 66,200);
+        parent.quad(quadLenghtX/2-thinnerLine1,y2,parent.width/2,this.quadLenghtY,parent.width/2,this.quadLenghtY,quadLenghtX/2+thinnerLine2,y2);
+        parent.endShape(PConstants.CLOSE);
+
+        if(!(this.quadLenghtY<parent.height*(float)0.55)){
+            this.quadLenghtY -=quadLenghtY;
+        }
+        if(this.quadLenghtY<parent.height*(float)0.55){
+            y2-=quadLenghtY;
+            if(y2<parent.height*(float)0.55){
+                this.quadLenghtY=parent.height;
+                y2=this.quadLenghtY;
+                thinnerLine1 -=10;
+                thinnerLine2 -=10;
+            }else{
+                thinnerLine1=50;
+                thinnerLine2=50;
+            }
+        }
 
 
+    }
+
+    private class Star{
+        float x;
+        float y;
+        float z;
+        float pz;
+        float speed;
+        int colorChoose =1;
+        int colorChoose2 =1;
+
+        public void Star(){
+            x = parent.random(-parent.width/2,parent.width/2);
+            y = parent.random(-parent.height/2, parent.height/2);
+            z = parent.random(parent.width/2);
+            pz = z;
+
+        }
+
+        public void update(){
+
+            if(parent.height>parent.width){
+                speed = 30;
+            }else{
+                speed = 55;
+            }
+            z = z-speed;
+
+            if(z<1){
+                z=parent.width/2;
+                x = parent.random(-parent.width/2, parent.width/2);
+                y = parent.random(-parent.height/2, parent.height/2);
+                pz = z;
+            }
+        }
+        public void show(){
+
+//            parent.fill(255);
+            parent.noStroke();
+            float sx = parent.map(x / z, 0, 1, 0, parent.width/2);
+            float sy = parent.map(y / z, 0, 1, 0, parent.height/2);
+            float r = parent.map(z, 0, parent.width/2, 16, 0);
+            parent.pushStyle();
+            if(colorChoose == 1) {
+                parent.fill(255,0,223);
+                colorChoose = 2;
+            }else{
+                parent.fill(0,255,233);
+                colorChoose = 1;
+            }
+            parent.ellipse(sx, sy, r, r);
+            parent.popStyle();
+            float px = parent.map(x / pz, 0, 1, 0, parent.width/2);
+            float py = parent.map(y / pz, 0, 1, 0, parent.height/2);
+            pz = z;
+            parent.pushStyle();
+            parent.stroke(255);
+
+            parent.strokeWeight(2);
+            parent.line(px, py, sx, sy);
+            parent.popStyle();
+        }
+    }
 }

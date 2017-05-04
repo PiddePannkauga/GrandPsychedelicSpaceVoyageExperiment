@@ -82,7 +82,7 @@ public class PatternNisse implements PatternInterface {
         } else {
             constant = SPEED_SLOW;
         }
-
+        parent.pushStyle();
         parent.fill(r,15,15);
         parent.ellipse(x1, y1, fftAmp, fftAmp);
         parent.fill(15,g,15);
@@ -117,6 +117,7 @@ public class PatternNisse implements PatternInterface {
             angle = 0;
             radius = 0;
         }
+        parent.popStyle();
 
         okToDraw = true;
     }
