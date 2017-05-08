@@ -33,8 +33,6 @@ public class PatternCircle implements PatternInterface {
         okToDraw = true;
     }
 
-
-
     @Override
     public boolean okToDraw() {
         return okToDraw;

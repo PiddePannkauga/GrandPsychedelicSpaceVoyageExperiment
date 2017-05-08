@@ -54,7 +54,6 @@ public class PatternController extends PApplet {
         if(pattern.okToDraw()) {
             try {
                 pattern.updatePattern(fftBuffer.get(), waveBuffer.get());
-
                 pattern.drawPattern();
             } catch (InterruptedException e) {
             }

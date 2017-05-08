@@ -20,6 +20,7 @@ public class PatternNisse implements PatternInterface {
     }
 
     public void setup() {
+        parent.background(0);
         r = 0;
         g = 25;
         b = 50;
@@ -48,7 +49,7 @@ public class PatternNisse implements PatternInterface {
                 fftAmp = temp;
             }
         }
-        System.out.println("fftAmp = " + fftAmp);
+//        System.out.println("fftAmp = " + fftAmp);
     }
 
     public void calculateWaveAmp() {
@@ -59,7 +60,7 @@ public class PatternNisse implements PatternInterface {
                 waveAmp = wave[i];
             }
         }
-        System.out.println("waveAmp = " + waveAmp);
+//        System.out.println("waveAmp = " + waveAmp);
     }
 
     @Override
@@ -81,7 +82,7 @@ public class PatternNisse implements PatternInterface {
         } else {
             constant = SPEED_SLOW;
         }
-
+        parent.pushStyle();
         parent.fill(r,15,15);
         parent.ellipse(x1, y1, fftAmp, fftAmp);
         parent.fill(15,g,15);
@@ -116,11 +117,10 @@ public class PatternNisse implements PatternInterface {
             angle = 0;
             radius = 0;
         }
+        parent.popStyle();
 
         okToDraw = true;
     }
-
-
 
     @Override
     public boolean okToDraw() {
