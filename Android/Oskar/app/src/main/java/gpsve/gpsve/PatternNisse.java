@@ -2,8 +2,6 @@ package gpsve.gpsve;
 
 import processing.core.*;
 
-import static android.R.attr.width;
-
 /**
  * Created by Nils on 2017-03-28.
  */
@@ -22,6 +20,7 @@ public class PatternNisse implements PatternInterface {
     }
 
     public void setup() {
+        parent.background(0);
         r = 0;
         g = 25;
         b = 50;
@@ -50,7 +49,7 @@ public class PatternNisse implements PatternInterface {
                 fftAmp = temp;
             }
         }
-        System.out.println("fftAmp = " + fftAmp);
+//        System.out.println("fftAmp = " + fftAmp);
     }
 
     public void calculateWaveAmp() {
@@ -61,7 +60,7 @@ public class PatternNisse implements PatternInterface {
                 waveAmp = wave[i];
             }
         }
-        System.out.println("waveAmp = " + waveAmp);
+//        System.out.println("waveAmp = " + waveAmp);
     }
 
     @Override
@@ -83,7 +82,7 @@ public class PatternNisse implements PatternInterface {
         } else {
             constant = SPEED_SLOW;
         }
-
+        parent.pushStyle();
         parent.fill(r,15,15);
         parent.ellipse(x1, y1, fftAmp, fftAmp);
         parent.fill(15,g,15);
@@ -93,7 +92,7 @@ public class PatternNisse implements PatternInterface {
         parent.fill(r,50,b);
         parent.ellipse(x2, y2, fftAmp, fftAmp);
         parent.fill(50,g,b);
-        parent.ellipse(x3+width/2, y3+parent.height/2, 40, 40);
+        parent.ellipse(x3+parent.width/2, y3+parent.height/2, 40, 40);
 
         r = (r+2)%25+230;
         g = (g+2)%25+230;
@@ -102,21 +101,23 @@ public class PatternNisse implements PatternInterface {
         x1 = (x1+constant)%parent.width;
         y1 = (y1+constant)%parent.height;
         x2 = (x2-constant);
+        y2 = (y2-constant);
         if(x2<0)
             x2 = x2+parent.width;
-        y2 = (y2-constant);
         if(y2<0)
             y2 = y2+parent.height;
+
         angle += 0.05;
         radius += 0.5;
         x3 = radius * parent.cos(angle);
         y3 = radius * parent.sin(angle);
-        if(y3+parent.height/2 > parent.height*1.12) {
+        if(y3+parent.height/2 > parent.height) {
             x3 = 0;
             y3 = 0;
             angle = 0;
             radius = 0;
         }
+        parent.popStyle();
 
         okToDraw = true;
     }
