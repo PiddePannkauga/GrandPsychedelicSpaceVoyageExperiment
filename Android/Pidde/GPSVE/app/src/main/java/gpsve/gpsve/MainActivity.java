@@ -1,25 +1,26 @@
 package gpsve.gpsve;
 
 import android.Manifest;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.content.Intent;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+
 
 public class MainActivity extends AppCompatActivity {
     private Intent intent;
+    private AboutFragment frag;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         System.out.println("main.onCreate()");
         setContentView(R.layout.activity_main);
+
         ActivityCompat.requestPermissions(this,
                 new String[]{Manifest.permission.RECORD_AUDIO,Manifest.permission.MODIFY_AUDIO_SETTINGS}, 0);
 
@@ -31,14 +32,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showAbout(View view){
-        FragmentManager fragmentManager = getFragmentManager();
+        FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        setContentView(R.layout.aboutfragment);
-        getSupportFragmentManager().beginTransaction()
-                .add(new AboutFragment(), null ).addToBackStack(null).commit();
+        frag = new AboutFragment();
+        fragmentTransaction.replace(android.R.id.content,frag)
+                .addToBackStack("about").commit();
+
 
     }
-
 
     protected void onStart() {
         super.onStart();
@@ -70,14 +71,5 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("main.onRestart()");
     }
 
-    public static class AboutFragment extends Fragment {
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            // Inflate the layout for this fragment
-            return inflater.inflate(R.layout.aboutfragment, container, false);
-        }
 
-
-    }
 }

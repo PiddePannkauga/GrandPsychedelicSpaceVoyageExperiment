@@ -147,7 +147,7 @@ public class PatternPidde implements PatternInterface {
         for(int i =0; i<drawLine.length;i++) {
 
             parent.strokeWeight(100);
-            parent.stroke(22, 22, 22,lineAlpha(drawLine[i]));
+            parent.stroke(22, 22, 22);
             parent.line(parent.width * linePos1, parent.height - drawLine[i]-50, parent.width * linePos1, parent.height);
             parent.line(parent.width * linePos2, 0 + drawLine[i]+50, parent.width * linePos2, 0);
             linePos1 += 0.125;
