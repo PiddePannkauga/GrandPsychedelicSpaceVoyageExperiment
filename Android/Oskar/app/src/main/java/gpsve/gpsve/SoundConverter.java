@@ -16,6 +16,9 @@ public class SoundConverter{
         waveBytes = new byte[128];
         initiateVisualizer();
     }
+    public SoundConverter (int i) {
+
+    }
 
     public void initiateVisualizer(){
         // Create the Visualizer object and set audio session to 0 (listen to system audio)

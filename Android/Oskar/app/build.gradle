@@ -18,6 +18,7 @@ android {
         }
         debug {
             debuggable true
+            testCoverageEnabled true
         }
     }
     productFlavors {

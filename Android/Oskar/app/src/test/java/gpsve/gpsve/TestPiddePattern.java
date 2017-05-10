@@ -17,7 +17,7 @@ public class TestPiddePattern {
     private PatternPidde testPidde = new PatternPidde(new PApplet());
 
 
-
+    @SuppressWarnings("deprecation")
     @Test
     public void soundByteArrayTest(){
 
