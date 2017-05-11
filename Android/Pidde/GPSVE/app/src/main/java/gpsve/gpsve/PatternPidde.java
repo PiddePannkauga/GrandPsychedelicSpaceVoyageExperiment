@@ -59,6 +59,15 @@ public class PatternPidde implements PatternInterface {
         return line4;
     }
 
+    /**
+     * Getter used for testing
+     * @param i
+     * @return int in array currentLine at specified  pos
+     */
+    public int getCurrentLineAtPos(int i){
+        return currentLine[i];
+    }
+
     @Override
     public void updatePattern(byte[] fft, byte[] wave) {
         setOkToDraw(false);
@@ -94,7 +103,7 @@ public class PatternPidde implements PatternInterface {
             if (fft[i] >= 96 && fft[i] < 112 ) {
                 currentLine[6] += fft[i];
             }
-            if (fft[i] >= 122 ) {
+            if (fft[i] >= 112 ) {
                 currentLine[7] += fft[i];
             }
         }

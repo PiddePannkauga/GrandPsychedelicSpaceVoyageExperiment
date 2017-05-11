@@ -3,9 +3,12 @@ package gpsve.gpsve;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.PopupMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+
 import processing.android.PFragment;
 
 public class PatternActivity extends AppCompatActivity {
@@ -37,6 +40,42 @@ public class PatternActivity extends AppCompatActivity {
         return true;
     }
 
+    public void showPopup(View v) {
+    PopupMenu popup = new PopupMenu(this, v);
+    MenuInflater inflater = popup.getMenuInflater();
+    inflater.inflate(R.menu.menu_pattern,popup.getMenu());
+    popup.show();
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener(){
+
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                patternController.reset();
+                switch (item.getItemId()) {
+                    case R.id.item_pattern1:
+                        currentPattern = 1;
+                        patternController.setPattern(new PatternPidde(patternController));
+                        return true;
+                    case R.id.item_pattern2:
+                        currentPattern = 2;
+                        patternController.setPattern(new PatternNisse(patternController));
+                        return true;
+                    case R.id.item_pattern3:
+                        currentPattern = 3;
+                        patternController.setPattern(new PatternCircle(patternController));
+                        return true;
+                    case R.id.item_pattern4:
+                        currentPattern = 4;
+                        patternController.setPattern(new PatternOskar(patternController));
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+
+            });
+
+    }
+
     protected void onStart() {
         super.onStart();
         System.out.println("onStart()");
@@ -48,30 +87,6 @@ public class PatternActivity extends AppCompatActivity {
         System.out.println("onResume()");
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        patternController.reset();
-        switch (item.getItemId()) {
-            case R.id.item_pattern1:
-                currentPattern = 1;
-                patternController.setPattern(new PatternPidde(patternController));
-                return true;
-            case R.id.item_pattern2:
-                currentPattern = 2;
-                patternController.setPattern(new PatternNisse(patternController));
-                return true;
-            case R.id.item_pattern3:
-                currentPattern = 3;
-                patternController.setPattern(new PatternCircle(patternController));
-                return true;
-            case R.id.item_pattern4:
-                currentPattern = 4;
-                patternController.setPattern(new PatternOskar(patternController));
-                return true;
-            default:
-                return false;
-        }
-    }
 
     protected void onStop() {
         super.onStop();

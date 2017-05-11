@@ -41,19 +41,18 @@
         app:layout_constraintVertical_bias="0.593"
         android:onClick="startPatternActivity" />
 
-    <Button
+    <ImageButton
         android:id="@+id/aboutbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
         android:onClick="showAbout"
-        android:text="Om"
-        tools:layout_editor_absoluteX="272dp"
-        tools:layout_editor_absoluteY="488dp" />
-
-
-
-
-
+        app:srcCompat="@drawable/rymdskepp"
+        tools:layout_editor_absoluteX="119dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/button_continue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp" />
 
 
 </android.support.constraint.ConstraintLayout>

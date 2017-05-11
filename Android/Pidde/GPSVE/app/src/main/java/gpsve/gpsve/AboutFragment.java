@@ -8,13 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 /**
  * Created by Petter "Pidde" Månsson on 2017-05-09.
  */
 public class AboutFragment extends Fragment {
 
-    public static Button aboutButton;
+    public static ImageButton aboutButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -29,7 +30,7 @@ public class AboutFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
-        aboutButton = (Button)getActivity().findViewById(R.id.aboutbutton);
+        aboutButton = (ImageButton)getActivity().findViewById(R.id.aboutbutton);
 
 
         aboutButton.setEnabled(false);
