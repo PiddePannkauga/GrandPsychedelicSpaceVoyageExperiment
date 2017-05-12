@@ -1,5 +1,6 @@
-package gpsve.gpsve;
+package gpsve.gpsve.Controllers;
 
+import gpsve.gpsve.Interface.PatternInterface;
 import processing.core.PApplet;
 
 /**

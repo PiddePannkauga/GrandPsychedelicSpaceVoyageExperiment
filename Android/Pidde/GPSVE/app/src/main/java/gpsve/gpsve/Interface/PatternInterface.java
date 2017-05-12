@@ -1,4 +1,4 @@
-package gpsve.gpsve;
+package gpsve.gpsve.Interface;
 
 /**
  * Created by Petter on 2017-04-18.

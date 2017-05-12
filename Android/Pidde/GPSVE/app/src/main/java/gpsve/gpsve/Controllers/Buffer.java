@@ -1,4 +1,4 @@
-package gpsve.gpsve;
+package gpsve.gpsve.Controllers;
 
 import java.util.LinkedList;
 

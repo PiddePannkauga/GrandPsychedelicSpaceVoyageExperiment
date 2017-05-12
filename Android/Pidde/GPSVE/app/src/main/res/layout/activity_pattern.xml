@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context="gpsve.gpsve.PatternActivity">
+    tools:context="gpsve.gpsve.ActivitiesFragments.PatternActivity">
 
     <FrameLayout
         android:id="@+id/pattern_container"

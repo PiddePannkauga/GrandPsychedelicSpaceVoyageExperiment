@@ -1,5 +1,6 @@
-package gpsve.gpsve;
+package gpsve.gpsve.Patterns;
 
+import gpsve.gpsve.Interface.PatternInterface;
 import processing.core.*;
 
 /**

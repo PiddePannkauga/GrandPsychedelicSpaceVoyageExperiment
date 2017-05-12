@@ -1,7 +1,8 @@
-package gpsve.gpsve;
+package gpsve.gpsve.Patterns;
 
 import java.util.Random;
 
+import gpsve.gpsve.Interface.PatternInterface;
 import processing.core.PApplet;
 import processing.core.PConstants;
 
@@ -12,13 +13,11 @@ import processing.core.PConstants;
 public class PatternPidde implements PatternInterface {
     private PApplet parent;
     private int[] currentLine, previousLine, drawLine;
-    float quadLenghtY,quadLenghtX,y2;
-    float thinnerLine1=50;
-    float thinnerLine2=50;
+    private float lineThickness;
     private Star[] stars1 = new Star[250];
     private Star[] stars2 = new Star[250];
     private Star[] stars3 = new Star[250];
-    private int delay =0;
+    private int delay = 0;
     private boolean starsStarted = false;
 
     private int line1, line2, line3, line4;
@@ -31,16 +30,11 @@ public class PatternPidde implements PatternInterface {
         previousLine = new int[8];
         drawLine = new int[8];
 
-        for(int i =0; i<stars1.length; i++){
+        for (int i = 0; i < stars1.length; i++) {
             stars1[i] = new Star();
             stars2[i] = new Star();
             stars3[i] = new Star();
         }
-
-        quadLenghtY=parent.height;
-        quadLenghtX=parent.width;
-        y2 = parent.height;
-
     }
 
     public int getLine1() {
@@ -61,10 +55,11 @@ public class PatternPidde implements PatternInterface {
 
     /**
      * Getter used for testing
+     *
      * @param i
      * @return int in array currentLine at specified  pos
      */
-    public int getCurrentLineAtPos(int i){
+    public int getCurrentLineAtPos(int i) {
         return currentLine[i];
     }
 
@@ -72,11 +67,11 @@ public class PatternPidde implements PatternInterface {
     public void updatePattern(byte[] fft, byte[] wave) {
         setOkToDraw(false);
 //        fft = wave;
-        for(int i = 0; i<currentLine.length; i++){
+        for (int i = 0; i < currentLine.length; i++) {
             currentLine[i] = 0;
         }
 
-        for(int i = 0; i<fft.length;i++) {
+        for (int i = 0; i < fft.length; i++) {
             if (fft[i] < 0) {
                 int k = fft[i];
                 k *= -1;
@@ -91,28 +86,28 @@ public class PatternPidde implements PatternInterface {
             if (fft[i] >= 32 && fft[i] < 48) {
                 currentLine[2] += fft[i];
             }
-            if (fft[i] >= 48 && fft[i] < 64 ) {
+            if (fft[i] >= 48 && fft[i] < 64) {
                 currentLine[3] += fft[i];
             }
-            if (fft[i] >= 64 && fft[i] < 80 ) {
+            if (fft[i] >= 64 && fft[i] < 80) {
                 currentLine[4] += fft[i];
             }
-            if (fft[i] >= 80 && fft[i] < 96 ) {
+            if (fft[i] >= 80 && fft[i] < 96) {
                 currentLine[5] += fft[i];
             }
-            if (fft[i] >= 96 && fft[i] < 112 ) {
+            if (fft[i] >= 96 && fft[i] < 112) {
                 currentLine[6] += fft[i];
             }
-            if (fft[i] >= 112 ) {
+            if (fft[i] >= 112) {
                 currentLine[7] += fft[i];
             }
         }
-        for(int i =0; i<currentLine.length; i++){
-            if(currentLine[i] > previousLine[i]){
+        for (int i = 0; i < currentLine.length; i++) {
+            if (currentLine[i] > previousLine[i]) {
                 drawLine[i] = currentLine[i];
                 previousLine[i] = currentLine[i];
-            }else{
-                previousLine[i] = decay(previousLine[i],5);
+            } else {
+                previousLine[i] = decay(previousLine[i], 5);
                 drawLine[i] = previousLine[i];
             }
         }
@@ -122,28 +117,26 @@ public class PatternPidde implements PatternInterface {
     @Override
     public void drawPattern() {
 
-
-        float linePos1 =(float)0.0625, linePos2 =(float)0.9375;
+        lineThickness = (float) (parent.width * 0.075);
+        float linePos1 = (float) 0.0625, linePos2 = (float) 0.9375;
         parent.background(0);
-
-
 
 
 //        galacticHighway(25);
 
         parent.pushMatrix();
-        parent.translate(parent.width/2, parent.height/2);
-        for(int i =0; i<stars1.length; i++){
+        parent.translate(parent.width / 2, parent.height / 2);
+        for (int i = 0; i < stars1.length; i++) {
             stars1[i].update();
             stars1[i].show();
         }
-        if(delay>5) {
+        if (delay > 5) {
             for (int i = 0; i < stars2.length; i++) {
                 stars2[i].update();
                 stars2[i].show();
             }
         }
-        if(delay>10){
+        if (delay > 10) {
             for (int i = 0; i < stars2.length; i++) {
                 stars3[i].update();
                 stars3[i].show();
@@ -153,39 +146,39 @@ public class PatternPidde implements PatternInterface {
         parent.popMatrix();
 
         parent.pushStyle();
-        for(int i =0; i<drawLine.length;i++) {
+        for (int i = 0; i < drawLine.length; i++) {
 
-            parent.strokeWeight(100);
-            parent.stroke(22, 22, 22);
-            parent.line(parent.width * linePos1, parent.height - drawLine[i]-50, parent.width * linePos1, parent.height);
-            parent.line(parent.width * linePos2, 0 + drawLine[i]+50, parent.width * linePos2, 0);
+            parent.strokeWeight(lineThickness + 25);
+            parent.stroke(22, 22, 22,230);
+            parent.line(parent.width * linePos1, parent.height - drawLine[i] - 50, parent.width * linePos1, parent.height);
+            parent.line(parent.width * linePos2, 0 + drawLine[i] + 50, parent.width * linePos2, 0);
             linePos1 += 0.125;
             linePos2 -= 0.125;
 
         }
 
         parent.popStyle();
-        linePos1 = (float)0.0625;
-        linePos2 =(float)0.9375;
+        linePos1 = (float) 0.0625;
+        linePos2 = (float) 0.9375;
         parent.pushStyle();
-        for(int i =0; i<drawLine.length;i++){
-            float r,g,b;
-            if(i%2==0){
-                r=255;
-                g=0;
-                b=223;
-            }else{
-                r=0;
-                g=255;
-                b=233;
+        for (int i = 0; i < drawLine.length; i++) {
+            float r, g, b;
+            if (i % 2 == 0) {
+                r = 255;
+                g = 0;
+                b = 223;
+            } else {
+                r = 0;
+                g = 255;
+                b = 233;
 
             }
 
-            parent.strokeWeight(75);
-            parent.stroke(r,g,b,lineAlpha(drawLine[i]));
+            parent.strokeWeight(lineThickness);
+            parent.stroke(r, g, b, lineAlpha(currentLine[i], previousLine[i]));
 
-            parent.line(parent.width * linePos1, parent.height - drawLine[i]-50, parent.width * linePos1, parent.height);
-            parent.line(parent.width * linePos2, 0 + drawLine[i]+50, parent.width * linePos2, 0);
+            parent.line(parent.width * linePos1, parent.height - drawLine[i] - 50, parent.width * linePos1, parent.height);
+            parent.line(parent.width * linePos2, 0 + drawLine[i] + 50, parent.width * linePos2, 0);
             linePos1 += 0.125;
             linePos2 -= 0.125;
 
@@ -194,21 +187,20 @@ public class PatternPidde implements PatternInterface {
         parent.popStyle();
 
 
-
-
     }
 
 
-    public int lineAlpha(int lineValue){
+    public int lineAlpha(int lineValue, int previousline) {
 
-        if(lineValue>255) {
+        if (lineValue > previousline) {
             return 255;
-        }else if(lineValue>100 && lineValue<200) {
-            return 255;
+        } else if (lineValue > 0 && lineValue < 255) {
+            return decay(lineValue, 10) + 10;
         }else{
-            return decay(lineValue,25)+25;
+            return lineValue;
         }
     }
+
 
     @Override
     public boolean okToDraw() {
@@ -217,7 +209,7 @@ public class PatternPidde implements PatternInterface {
 
 
     public int decay(int drawLine, int lineDecay){
-        if(drawLine > 0) {
+        if(drawLine >= 0) {
             drawLine = drawLine - lineDecay;
         }
         if (drawLine <0) {
@@ -231,37 +223,6 @@ public class PatternPidde implements PatternInterface {
         this.okToDraw = okToDraw;
     }
 
-    public void galacticHighway(float quadLenghtY){
-
-
-        parent.noStroke();
-        parent.beginShape(PConstants.QUAD);
-        parent.fill(78, 237, 252,150);
-        parent.quad(0,parent.height,parent.width/2,parent.height*(float)0.55,parent.width/2,parent.height*(float)0.55,parent.width,parent.height);
-        parent.endShape();
-        parent.beginShape(PConstants.QUAD);
-        parent.fill(244, 134, 66,200);
-        parent.quad(quadLenghtX/2-thinnerLine1,y2,parent.width/2,this.quadLenghtY,parent.width/2,this.quadLenghtY,quadLenghtX/2+thinnerLine2,y2);
-        parent.endShape(PConstants.CLOSE);
-
-        if(!(this.quadLenghtY<parent.height*(float)0.55)){
-            this.quadLenghtY -=quadLenghtY;
-        }
-        if(this.quadLenghtY<parent.height*(float)0.55){
-            y2-=quadLenghtY;
-            if(y2<parent.height*(float)0.55){
-                this.quadLenghtY=parent.height;
-                y2=this.quadLenghtY;
-                thinnerLine1 -=10;
-                thinnerLine2 -=10;
-            }else{
-                thinnerLine1=50;
-                thinnerLine2=50;
-            }
-        }
-
-
-    }
 
     private class Star{
         float x;

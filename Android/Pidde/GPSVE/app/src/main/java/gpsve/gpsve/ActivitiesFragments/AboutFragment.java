@@ -1,4 +1,4 @@
-package gpsve.gpsve;
+package gpsve.gpsve.ActivitiesFragments;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+
+import gpsve.gpsve.R;
 
 /**
  * Created by Petter "Pidde" Månsson on 2017-05-09.

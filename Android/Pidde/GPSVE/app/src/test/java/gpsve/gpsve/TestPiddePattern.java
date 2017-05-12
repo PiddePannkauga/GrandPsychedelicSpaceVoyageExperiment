@@ -4,6 +4,7 @@ package gpsve.gpsve;
 
 import org.junit.Test;
 
+import gpsve.gpsve.Patterns.PatternPidde;
 import processing.core.PApplet;
 
 import static junit.framework.Assert.assertTrue;

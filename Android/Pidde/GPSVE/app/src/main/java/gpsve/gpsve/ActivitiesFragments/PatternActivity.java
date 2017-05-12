@@ -1,4 +1,4 @@
-package gpsve.gpsve;
+package gpsve.gpsve.ActivitiesFragments;
 
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +9,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+import gpsve.gpsve.Patterns.PatternCircle;
+import gpsve.gpsve.Controllers.PatternController;
+import gpsve.gpsve.Patterns.PatternNisse;
+import gpsve.gpsve.Patterns.PatternOskar;
+import gpsve.gpsve.Patterns.PatternPidde;
+import gpsve.gpsve.R;
+import gpsve.gpsve.Controllers.SoundConverter;
 import processing.android.PFragment;
 
 public class PatternActivity extends AppCompatActivity {

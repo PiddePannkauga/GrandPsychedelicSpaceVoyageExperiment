@@ -1,8 +1,8 @@
-package gpsve.gpsve;
+package gpsve.gpsve.Controllers;
 
 import android.app.Activity;
-import android.util.DisplayMetrics;
 
+import gpsve.gpsve.Interface.PatternInterface;
 import processing.core.PApplet;
 
 /**

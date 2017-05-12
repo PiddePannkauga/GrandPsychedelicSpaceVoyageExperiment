@@ -1,7 +1,8 @@
-package gpsve.gpsve;
+package gpsve.gpsve.Patterns;
 
 import android.graphics.Color;
 
+import gpsve.gpsve.Interface.PatternInterface;
 import processing.core.PApplet;
 
 /**
