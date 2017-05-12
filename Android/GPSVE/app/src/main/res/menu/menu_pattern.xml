@@ -6,7 +6,8 @@
         android:visible="true"
         android:enabled="true"
         android:checkableBehavior="single"
-        android:menuCategory="container">
+        android:menuCategory="container"
+        android:icon="@drawable/gpsve">
         <item android:title="Pattern 1"
             android:id="@+id/item_pattern1"
             android:visible="true"
