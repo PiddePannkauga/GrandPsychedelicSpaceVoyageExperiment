@@ -1,5 +1,6 @@
-package gpsve.gpsve;
+package gpsve.gpsve.Controllers;
 
+import gpsve.gpsve.Interface.PatternInterface;
 import processing.core.PApplet;
 import processing.core.PFont;
 
@@ -21,9 +22,11 @@ public class PatternChoose implements PatternInterface {
     public void updatePattern(byte[] fft, byte[] wave) {
         if (colorCount < 4) {
             parent.fill(purpColor[0], purpColor[1], purpColor[2]);
+            parent.stroke(purpColor[0], purpColor[1], purpColor[2]);
             colorCount++;
         } else if (colorCount < 8) {
             parent.fill(turqColor[0], turqColor[1], turqColor[2]);
+            parent.stroke(turqColor[0], turqColor[1], turqColor[2]);
             colorCount++;
         } else {
             colorCount = 0;
@@ -36,6 +39,11 @@ public class PatternChoose implements PatternInterface {
         parent.textSize(parent.width*(float)0.2);
         parent.textAlign(parent.CENTER, parent.CENTER);
         parent.text("Choose a\npattern", parent.width/2, parent.height/2);
+
+        parent.strokeWeight(20);
+        parent.line(75, 125, 75, 250);
+        parent.line(75, 125, 50, 175);
+        parent.line(75, 125, 100, 175);
     }
 
     @Override
