@@ -33,12 +33,14 @@
             android:visible="true"
             android:enabled="true"
             android:checkable="false" />
-        <item android:title="PatternEditor"
+        <item
             android:id="@+id/item_pattern5"
-            android:icon="@mipmap/ic_launcher"
-            android:visible="true"
+            android:checkable="false"
             android:enabled="true"
-            android:checkable="false" />
+            android:icon="@mipmap/ic_launcher"
+            android:onClick="startPatternEditorActivity"
+            android:title="PatternEditor"
+            android:visible="true" />
     </group>
 
 </menu>

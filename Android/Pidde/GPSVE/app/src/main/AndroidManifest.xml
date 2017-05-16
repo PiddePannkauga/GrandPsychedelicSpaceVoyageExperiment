@@ -24,6 +24,12 @@
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
             android:parentActivityName=".ActivitiesFragments.MainActivity">
         </activity>
+        <activity
+            android:name=".ActivitiesFragments.PatternEditorActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            android:parentActivityName=".ActivitiesFragments.PatternActivity">
+        </activity>
+
     </application>
 
 </manifest>

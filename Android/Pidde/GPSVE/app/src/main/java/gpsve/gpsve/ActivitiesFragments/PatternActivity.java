@@ -1,5 +1,6 @@
 package gpsve.gpsve.ActivitiesFragments;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ public class PatternActivity extends AppCompatActivity {
     private PFragment fragment;
     private FragmentManager fragmentManager;
     private int currentPattern;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,5 +153,11 @@ public class PatternActivity extends AppCompatActivity {
                 patternController.setPattern(new PatternOskar(patternController));
                 break;
         }
+    }
+
+    public void startPatternEditorActivity(MenuItem item) {
+        intent = new Intent(this, PatternEditorActivity.class);
+        soundConverter.disableVisualizer();
+        startActivity(intent);
     }
 }
