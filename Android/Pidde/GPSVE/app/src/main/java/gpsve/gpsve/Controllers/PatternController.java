@@ -3,6 +3,7 @@ package gpsve.gpsve.Controllers;
 import android.app.Activity;
 
 import gpsve.gpsve.Interface.PatternInterface;
+import gpsve.gpsve.Patterns.PatternChoose;
 import processing.core.PApplet;
 
 /**

@@ -18,11 +18,9 @@ public class PatternPidde implements PatternInterface {
     private Star[] stars2 = new Star[250];
     private Star[] stars3 = new Star[250];
     private int delay = 0;
-    private boolean starsStarted = false;
 
     private int line1, line2, line3, line4;
     private boolean okToDraw = true;
-    private Random rand = new Random();
 
     public PatternPidde(PApplet parent) {
         this.parent = parent;
