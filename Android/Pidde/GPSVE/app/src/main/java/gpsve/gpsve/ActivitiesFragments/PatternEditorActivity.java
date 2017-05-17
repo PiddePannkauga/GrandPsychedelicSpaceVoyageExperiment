@@ -2,13 +2,16 @@ package gpsve.gpsve.ActivitiesFragments;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.LayoutInflaterCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
 import android.text.Layout;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import java.util.ArrayList;
@@ -35,6 +38,7 @@ public class PatternEditorActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private PatternEditor patternEditor;
     private PopupMenu popup;
+    private Menu menu;
     private ArrayList<MenuItem> clearChecks = new ArrayList<>();
 
 
@@ -70,14 +74,10 @@ public class PatternEditorActivity extends AppCompatActivity {
         popup.show();
     }
 
-
     private void initPopup(){
         popup = new PopupMenu(this, findViewById(imageButton2));
         MenuInflater inflater = popup.getMenuInflater();
-        inflater.inflate(R.menu.menu_patterneditor,popup.getMenu());
-        final RadioGroup radioGrpBackground = (RadioGroup) popup.getMenu().findItem(R.id.groupeditorbackground);
-        final RadioGroup radioGrpForeground= (RadioGroup) popup.getMenu().findItem(R.id.groupeditorforeground);
-
+        inflater.inflate(R.menu.menu_patterneditor, popup.getMenu());
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener(){
 
             @Override
@@ -88,7 +88,7 @@ public class PatternEditorActivity extends AppCompatActivity {
 
                 switch (item.getItemId()) {
                     case R.id.background1check:
-                        patternEditor.setVisibiltyCircle(R.id.background1check,true);
+                        System.out.println(menu);
                         if (item.isChecked()){
                             item.setChecked(false);
                             clearChecks.remove(item);
@@ -100,7 +100,7 @@ public class PatternEditorActivity extends AppCompatActivity {
                         }
                         return false;
                     case R.id.background2check:
-                        patternEditor.setVisibiltyCircle(R.id.background2check,true);
+
                         if (item.isChecked()){
                             item.setChecked(false);
                             clearChecks.remove(item);
@@ -111,7 +111,7 @@ public class PatternEditorActivity extends AppCompatActivity {
                         }
                         return false;
                     case R.id.background3check:
-                        patternEditor.setVisibiltyCircle(R.id.background3check,true);
+
                         if (item.isChecked()){
                             item.setChecked(false);
                             clearChecks.remove(item);
@@ -122,7 +122,7 @@ public class PatternEditorActivity extends AppCompatActivity {
                         }
                         return false;
                     case R.id.circleCheck:
-                        patternEditor.setVisibiltyCircle(R.id.circleCheck,true);
+
                         if (item.isChecked()){
                             item.setChecked(false);
                             clearChecks.remove(item);
@@ -133,7 +133,7 @@ public class PatternEditorActivity extends AppCompatActivity {
                         }
                         return false;
                     case R.id.lineCheck:
-                        patternEditor.setVisibiltyCircle(R.id.lineCheck,true);
+
                         if (item.isChecked()){
                             item.setChecked(false);
                             clearChecks.remove(item);
@@ -144,7 +144,6 @@ public class PatternEditorActivity extends AppCompatActivity {
                         }
                         return false;
                     case R.id.squareCheck:
-                        patternEditor.setVisibiltyCircle(R.id.squareCheck,true);
                         if (item.isChecked()){
                             item.setChecked(false);
                             clearChecks.remove(item);
@@ -156,12 +155,12 @@ public class PatternEditorActivity extends AppCompatActivity {
                         return false;
 
                     case R.id.clearButton:
-                        radioGrpBackground.clearCheck();
-                        radioGrpForeground.clearCheck();
-//                        for(int i = 0; i<clearChecks.size(); i++){
-//                            clearChecks.get(i).setChecked(false);
-//                            System.out.println(clearChecks.get(i));
-//                        }
+                        int size = popup.getMenu().size();
+                        for(int i = 0; i<size; i++){
+                            popup.getMenu().getItem(i).setChecked(false);
+                        }
+                        popup.getMenu().findItem(R.id.menu_none).setChecked(true);
+                        popup.getMenu().findItem(R.id.menu_none2).setChecked(true);
                         return false;
                     default:
                         return false;
@@ -169,4 +168,5 @@ public class PatternEditorActivity extends AppCompatActivity {
             }
         });
     }
+
 }
