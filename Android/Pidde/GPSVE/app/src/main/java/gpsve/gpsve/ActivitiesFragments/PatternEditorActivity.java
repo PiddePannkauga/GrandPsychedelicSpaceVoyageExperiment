@@ -27,7 +27,7 @@ import processing.android.PFragment;
 import static gpsve.gpsve.R.id.imageButton2;
 
 /**
- * Created by Petter on 2017-05-16.
+ * Created by Petter Månsson on 2017-05-16.
  */
 
 public class PatternEditorActivity extends AppCompatActivity {
@@ -38,7 +38,6 @@ public class PatternEditorActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private PatternEditor patternEditor;
     private PopupMenu popup;
-    private Menu menu;
     private ArrayList<MenuItem> clearChecks = new ArrayList<>();
 
 
@@ -88,7 +87,6 @@ public class PatternEditorActivity extends AppCompatActivity {
 
                 switch (item.getItemId()) {
                     case R.id.background1check:
-                        System.out.println(menu);
                         if (item.isChecked()){
                             item.setChecked(false);
                             clearChecks.remove(item);

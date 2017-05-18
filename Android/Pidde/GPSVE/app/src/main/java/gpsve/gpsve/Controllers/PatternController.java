@@ -7,7 +7,7 @@ import gpsve.gpsve.Patterns.PatternChoose;
 import processing.core.PApplet;
 
 /**
- * Created by bajs on 2017-03-22.
+ * Created by Petter Månsson on 2017-03-22.
  */
 
 public class PatternController extends PApplet {

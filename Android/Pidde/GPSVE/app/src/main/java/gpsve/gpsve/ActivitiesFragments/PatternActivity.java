@@ -43,13 +43,6 @@ public class PatternActivity extends AppCompatActivity {
         fragmentManager.beginTransaction().replace(R.id.pattern_container, fragment).commit();
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.menu_pattern, menu);
-//        return true;
-//    }
-
     public void showPopup(View v) {
     PopupMenu popup = new PopupMenu(this, v);
     MenuInflater inflater = popup.getMenuInflater();
@@ -89,14 +82,6 @@ public class PatternActivity extends AppCompatActivity {
             });
 
     }
-
-//    public boolean patternEditorPoPup(View v){
-//        PopupMenu popup1 = new PopupMenu(this, v);
-//        MenuInflater inflater = popup1.getMenuInflater();
-//        inflater.inflate(R.menu.menu_patterneditor,popup1.getMenu());
-//        popup1.show();
-//        return true;
-//    }
 
     protected void onStart() {
         super.onStart();

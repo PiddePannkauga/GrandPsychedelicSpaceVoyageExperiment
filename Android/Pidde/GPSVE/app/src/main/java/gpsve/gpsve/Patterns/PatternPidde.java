@@ -7,7 +7,8 @@ import processing.core.PApplet;
 import processing.core.PConstants;
 
 /**
- * Created by Petter on 2017-04-06.
+ * Created by Petter Månsson on 2017-04-06.
+ * A pattern created for music visualization
  */
 
 public class PatternPidde implements PatternInterface {
@@ -189,13 +190,15 @@ public class PatternPidde implements PatternInterface {
 
 
     public int lineAlpha(int lineValue, int previousline) {
-
-        if (lineValue > previousline) {
+        if (lineValue>255){
             return 255;
-        } else if (lineValue > 0 && lineValue < 255) {
-            return decay(lineValue, 10) + 10;
+        }
+        else if (lineValue > previousline) {
+            return decay(lineValue,10)+100;
+        } else if (previousline > 0 && previousline < 255) {
+            return decay(previousline, 10)+100;
         }else{
-            return lineValue;
+            return lineValue+50;
         }
     }
 
