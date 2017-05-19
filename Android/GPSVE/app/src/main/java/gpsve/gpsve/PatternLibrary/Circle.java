@@ -26,7 +26,7 @@ public class Circle implements PatternLibraryInterface {
 
         for(int i = 0; i < fft.length; i++){
             if(fft[i] > 0) {
-                size += fft[i]*(float)0.05;
+                size += fft[i];
             }
         }
 
@@ -39,9 +39,12 @@ public class Circle implements PatternLibraryInterface {
 
     public void show(){
         if(visible) {
-            parent.noStroke();
+            parent.pushStyle();
+            parent.stroke(0);
+            parent.strokeWeight(20);
             parent.fill(255, 255, 0);
             parent.ellipse(parent.width / 2, parent.height / 2, size, size);
+            parent.popStyle();
         }
     }
 

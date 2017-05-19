@@ -7,7 +7,8 @@ import processing.core.PApplet;
 import processing.core.PConstants;
 
 /**
- * Created by Petter on 2017-04-06.
+ * Created by Petter Månsson on 2017-04-06.
+ * A pattern created for music visualization
  */
 
 public class PatternPidde implements PatternInterface {
@@ -18,11 +19,9 @@ public class PatternPidde implements PatternInterface {
     private Star[] stars2 = new Star[250];
     private Star[] stars3 = new Star[250];
     private int delay = 0;
-    private boolean starsStarted = false;
 
     private int line1, line2, line3, line4;
     private boolean okToDraw = true;
-    private Random rand = new Random();
 
     public PatternPidde(PApplet parent) {
         this.parent = parent;
@@ -137,7 +136,7 @@ public class PatternPidde implements PatternInterface {
             }
         }
         if (delay > 10) {
-            for (int i = 0; i < stars2.length; i++) {
+            for (int i = 0; i < stars3.length; i++) {
                 stars3[i].update();
                 stars3[i].show();
             }
@@ -191,13 +190,15 @@ public class PatternPidde implements PatternInterface {
 
 
     public int lineAlpha(int lineValue, int previousline) {
-
-        if (lineValue > previousline) {
+        if (lineValue>255){
             return 255;
-        } else if (lineValue > 0 && lineValue < 255) {
-            return decay(lineValue, 10) + 10;
+        }
+        else if (lineValue > previousline) {
+            return decay(lineValue,10)+100;
+        } else if (previousline > 0 && previousline < 255) {
+            return decay(previousline, 10)+100;
         }else{
-            return lineValue;
+            return lineValue+50;
         }
     }
 

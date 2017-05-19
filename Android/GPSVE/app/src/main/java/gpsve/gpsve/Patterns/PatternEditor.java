@@ -35,23 +35,27 @@ public class PatternEditor implements PatternInterface {
 
     @Override
     public void updatePattern(byte[] fft, byte[] wave) {
-        bg1.update(fft, wave);
-        bg2.update(fft, wave);
-        bg3.update(fft, wave);
-        circle.update(fft, wave);
-        line.update(fft, wave);
-        square.update(fft, wave);
+        bg1.update(fft.clone(), wave.clone());
+        bg2.update(fft.clone(), wave.clone());
+        bg3.update(fft.clone(), wave.clone());
+        circle.update(fft.clone(), wave.clone());
+        line.update(fft.clone(), wave.clone());
+        square.update(fft.clone(), wave.clone());
     }
 
     @Override
     public void drawPattern() {
-        bg2.show();
-        bg1.show();
+        okToDraw = false;
 
+        bg2.show();
+
+        bg1.show();
         bg3.show();
         circle.show();
         line.show();
         square.show();
+
+        okToDraw = true;
     }
 
     @Override

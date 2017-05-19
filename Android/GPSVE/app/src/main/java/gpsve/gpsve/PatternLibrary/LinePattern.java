@@ -97,15 +97,12 @@ public class LinePattern implements PatternLibraryInterface{
         if(visible){
             lineThickness = (float) (parent.width * 0.075);
             float linePos1 = (float) 0.0625, linePos2 = (float) 0.9375;
-
-        for(int i = 0;  i<line.length; i++){
-            line[i].show(linePos1,linePos2,drawLine[i],currentLine[i],previousLine[i],lineThickness);
-            linePos1 += 0.125;
-            linePos2 -= 0.125;
+            for(int i = 0;  i<line.length; i++){
+                line[i].show(linePos1,linePos2,drawLine[i],currentLine[i],previousLine[i],lineThickness);
+                linePos1 += 0.125;
+                linePos2 -= 0.125;
+            }
         }
-
-        }
-
     }
 
     @Override
