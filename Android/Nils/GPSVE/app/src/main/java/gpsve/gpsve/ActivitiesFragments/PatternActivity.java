@@ -1,5 +1,6 @@
 package gpsve.gpsve.ActivitiesFragments;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.view.View;
 
 import gpsve.gpsve.Patterns.PatternCircle;
 import gpsve.gpsve.Controllers.PatternController;
+import gpsve.gpsve.Patterns.PatternEditor;
 import gpsve.gpsve.Patterns.PatternNisse;
 import gpsve.gpsve.Patterns.PatternOskar;
 import gpsve.gpsve.Patterns.PatternPidde;
@@ -24,6 +26,7 @@ public class PatternActivity extends AppCompatActivity {
     private PFragment fragment;
     private FragmentManager fragmentManager;
     private int currentPattern;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +43,12 @@ public class PatternActivity extends AppCompatActivity {
         fragmentManager.beginTransaction().replace(R.id.pattern_container, fragment).commit();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_pattern, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.menu.menu_pattern, menu);
+//        return true;
+//    }
 
     public void showPopup(View v) {
     PopupMenu popup = new PopupMenu(this, v);
@@ -74,6 +77,10 @@ public class PatternActivity extends AppCompatActivity {
                         currentPattern = 4;
                         patternController.setPattern(new PatternOskar(patternController));
                         return true;
+                    case R.id.item_pattern5:
+                        currentPattern = 5;
+                        patternController.setPattern(new PatternEditor(patternController));
+                        return true;
                     default:
                         return false;
                 }
@@ -82,6 +89,14 @@ public class PatternActivity extends AppCompatActivity {
             });
 
     }
+
+//    public boolean patternEditorPoPup(View v){
+//        PopupMenu popup1 = new PopupMenu(this, v);
+//        MenuInflater inflater = popup1.getMenuInflater();
+//        inflater.inflate(R.menu.menu_patterneditor,popup1.getMenu());
+//        popup1.show();
+//        return true;
+//    }
 
     protected void onStart() {
         super.onStart();
@@ -138,5 +153,11 @@ public class PatternActivity extends AppCompatActivity {
                 patternController.setPattern(new PatternOskar(patternController));
                 break;
         }
+    }
+
+    public void startPatternEditorActivity(MenuItem item) {
+        intent = new Intent(this, PatternEditorActivity.class);
+        soundConverter.disableVisualizer();
+        startActivity(intent);
     }
 }

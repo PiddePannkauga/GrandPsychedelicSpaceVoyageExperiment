@@ -91,7 +91,7 @@ public class PatternNisse implements PatternInterface {
 
     public void drawGrid() {
         if(parent.mousePressed){
-            speed += 0.2;
+            speed += 0.3;
         } else {
             speed += 0.15;
         }
@@ -200,7 +200,7 @@ public class PatternNisse implements PatternInterface {
     @Override
     public void drawPattern() {
         okToDraw = false;
-        parent.background(0,3);
+        parent.background(0,5);
 
         drawLines();
         drawGrid();
