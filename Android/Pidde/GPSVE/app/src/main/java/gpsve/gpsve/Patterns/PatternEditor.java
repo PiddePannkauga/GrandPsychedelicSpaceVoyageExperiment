@@ -7,6 +7,7 @@ import gpsve.gpsve.PatternLibrary.BackgroundLazer;
 import gpsve.gpsve.PatternLibrary.BackgroundAlien;
 import gpsve.gpsve.PatternLibrary.Circle;
 import gpsve.gpsve.PatternLibrary.Line;
+import gpsve.gpsve.PatternLibrary.LinePattern;
 import gpsve.gpsve.PatternLibrary.Square;
 import gpsve.gpsve.R;
 import processing.core.PApplet;
@@ -30,7 +31,7 @@ public class PatternEditor implements PatternInterface {
         bg2 = new BackgroundLazer(this.parent);
         bg3 = new BackgroundAlien(this.parent);
         circle = new Circle(this.parent);
-        line = new Line(this.parent);
+        line = new LinePattern(this.parent);
         square = new Square(this.parent);
 
 
@@ -40,6 +41,7 @@ public class PatternEditor implements PatternInterface {
     @Override
     public void updatePattern(byte[] fft, byte[] wave) {
         bg1.update(fft,wave);
+        line.update(fft,wave);
         circle.update(fft, wave);
     }
 
