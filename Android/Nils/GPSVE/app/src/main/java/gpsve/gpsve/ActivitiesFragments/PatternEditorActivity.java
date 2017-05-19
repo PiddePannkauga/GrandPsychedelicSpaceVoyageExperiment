@@ -84,89 +84,60 @@ public class PatternEditorActivity extends AppCompatActivity {
                 item.setShowAsAction(MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
                 item.setActionView(new View(getBaseContext()));
                 patternController.reset();
+                patternEditor.setVisible(item.getItemId());
+
+                if(item.isChecked()){
+                    item.setChecked(false);
+                }else{
+                    item.setChecked(true);
+                }
 
                 switch (item.getItemId()) {
-                    case R.id.background1check:
-                        if (item.isChecked()){
-                            item.setChecked(false);
-                            clearChecks.remove(item);
-                            patternEditor.setVisible(R.id.background1check,true);
-                        }
-                        else{
-                            item.setChecked(true);
-                            clearChecks.add(item);
-                            patternEditor.setVisible(R.id.background1check,true);
-
-                        }
-                        return false;
-                    case R.id.background2check:
-                        patternEditor.setVisible(R.id.background2check,true);
-                        if (item.isChecked()){
-                            item.setChecked(false);
-                            clearChecks.remove(item);
-                        }
-                        else{
-                            item.setChecked(true);
-                            clearChecks.add(item);
-                        }
-                        return false;
-                    case R.id.background3check:
-                        patternEditor.setVisible(R.id.background3check,true);
-                        if (item.isChecked()){
-                            item.setChecked(false);
-                            clearChecks.remove(item);
-                        }
-                        else{
-                            item.setChecked(true);
-                            clearChecks.add(item);
-                        }
-                        return false;
-                    case R.id.circleCheck:
-                        patternEditor.setVisible(R.id.circleCheck,true);
-                        if (item.isChecked()){
-                            item.setChecked(false);
-                            clearChecks.remove(item);
-                        }
-                        else{
-                            item.setChecked(true);
-                            clearChecks.add(item);
-                        }
-                        return false;
-                    case R.id.lineCheck:
-                        patternEditor.setVisible(R.id.lineCheck,true);
-                        if (item.isChecked()){
-                            item.setChecked(false);
-                            clearChecks.remove(item);
-                        }
-                        else{
-                            item.setChecked(true);
-                            clearChecks.add(item);
-                        }
-                        return false;
-                    case R.id.squareCheck:
-                        patternEditor.setVisible(R.id.squareCheck, true);
-                        if (item.isChecked()){
-                            item.setChecked(false);
-                            clearChecks.remove(item);
-                        }
-                        else{
-                            item.setChecked(true);
-                            clearChecks.add(item);
-                        }
-                        return false;
-
                     case R.id.clearButton:
-                        radioGrpBackground.clearCheck();
-                        radioGrpForeground.clearCheck();
-//                        for(int i = 0; i<clearChecks.size(); i++){
-//                            clearChecks.get(i).setChecked(false);
-//                            System.out.println(clearChecks.get(i));
-//                        }
+                        int size = popup.getMenu().size();
+                        for(int i = 0; i<size; i++){
+                            popup.getMenu().getItem(i).setChecked(false);
+                        }
+                        popup.getMenu().findItem(R.id.menu_none).setChecked(true);
+                        popup.getMenu().findItem(R.id.menu_none2).setChecked(true);
+                        patternController.reset();
                         return false;
                     default:
                         return false;
                 }
             }
         });
+    }
+
+    public void onSaveInstanceState(Bundle outState) {
+        int item1 = R.id.menu_none, item2 = R.id.menu_none2, size = popup.getMenu().size();
+        boolean savedFirst = false;
+        for(int i = 0; i<size; i++){
+            if(popup.getMenu().getItem(i).isChecked()) {
+                if(!savedFirst) {
+                    item1 = popup.getMenu().getItem(i).getItemId();
+                    outState.putInt("item1", item1);
+                    System.out.println("item1 " + item1);
+                    savedFirst = true;
+                } else {
+                    item2 = popup.getMenu().getItem(i).getItemId();
+                    outState.putInt("item2", item2);
+                    System.out.println("item2 " + item2);
+                }
+            }
+        }
+        super.onSaveInstanceState(outState);
+    }
+
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        int item1, item2;
+        item1 = savedInstanceState.getInt("item1");
+        item2 = savedInstanceState.getInt("item2");
+
+        patternEditor.setVisible(item1);
+        popup.getMenu().findItem(item1).setChecked(true);
+
+        patternEditor.setVisible(item2);
+        popup.getMenu().findItem(item2).setChecked(true);
     }
 }

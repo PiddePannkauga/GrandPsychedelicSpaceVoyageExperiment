@@ -26,8 +26,12 @@ public class Circle implements PatternLibraryInterface {
 
         for(int i = 0; i < fft.length; i++){
             if(fft[i] > 0) {
-                size += fft[i];
+                size += fft[i]*(float)0.05;
             }
+        }
+
+        if(size > Math.min(parent.width, parent.height)) {
+            size = Math.min(parent.width, parent.height);
         }
 
         size = ellipseDecay(size);
@@ -49,11 +53,8 @@ public class Circle implements PatternLibraryInterface {
     public float ellipseDecay(float newEllipse) {
         if (newEllipse <= ellipseDecay) {
             newEllipse = ellipseDecay * (float)0.98;
-//            if (ellipseColor[i] > 100) {
-//                ellipseColor[i] -= 5;
-//            }
         } else {
-//                ellipseColor[i] = 175;
+
         }
         ellipseDecay = newEllipse;
 

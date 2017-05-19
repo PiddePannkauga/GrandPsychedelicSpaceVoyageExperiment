@@ -7,6 +7,7 @@ import gpsve.gpsve.PatternLibrary.BackgroundLazer;
 import gpsve.gpsve.PatternLibrary.BackgroundAlien;
 import gpsve.gpsve.PatternLibrary.Circle;
 import gpsve.gpsve.PatternLibrary.Line;
+import gpsve.gpsve.PatternLibrary.LinePattern;
 import gpsve.gpsve.PatternLibrary.Square;
 import gpsve.gpsve.R;
 import processing.core.PApplet;
@@ -18,7 +19,6 @@ import processing.core.PApplet;
 public class PatternEditor implements PatternInterface {
     private PApplet parent;
     private byte[] wave, fft;
-    private float circleSize=0;
     private boolean okToDraw = true;
 
     private PatternLibraryInterface bg1, bg2, bg3, circle, line, square;
@@ -29,24 +29,25 @@ public class PatternEditor implements PatternInterface {
         bg2 = new BackgroundLazer(this.parent);
         bg3 = new BackgroundAlien(this.parent);
         circle = new Circle(this.parent);
-        line = new Line(this.parent);
+        line = new LinePattern(this.parent);
         square = new Square(this.parent);
-
     }
 
     @Override
     public void updatePattern(byte[] fft, byte[] wave) {
+        bg1.update(fft, wave);
+        bg2.update(fft, wave);
+        bg3.update(fft, wave);
         circle.update(fft, wave);
+        line.update(fft, wave);
+        square.update(fft, wave);
     }
 
     @Override
     public void drawPattern() {
-
-//        for(PatternLibraryInterface pattern : patternList) {
-//            pattern.show();
-//        }
-        bg1.show();
         bg2.show();
+        bg1.show();
+
         bg3.show();
         circle.show();
         line.show();
@@ -58,7 +59,7 @@ public class PatternEditor implements PatternInterface {
         return okToDraw;
     }
 
-    public void setVisible(int menuitem, boolean visible) {
+    public void setVisible(int menuitem) {
         switch (menuitem) {
             case R.id.background1check:
                 bg1.setVisible(true);
@@ -73,8 +74,7 @@ public class PatternEditor implements PatternInterface {
             case R.id.background3check:
                 bg1.setVisible(false);
                 bg2.setVisible(false);
-                bg3.setVisible(visible);
-                System.out.println("bgPurp");
+                bg3.setVisible(true);
                 break;
             case R.id.circleCheck:
                 circle.setVisible(true);
@@ -90,6 +90,14 @@ public class PatternEditor implements PatternInterface {
                 circle.setVisible(false);
                 line.setVisible(false);
                 square.setVisible(true);
+                break;
+            case R.id.clearButton:
+                bg1.setVisible(false);
+                bg2.setVisible(false);
+                bg3.setVisible(false);
+                circle.setVisible(false);
+                line.setVisible(false);
+                square.setVisible(false);
                 break;
         }
     }

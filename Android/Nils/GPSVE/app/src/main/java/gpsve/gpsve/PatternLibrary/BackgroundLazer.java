@@ -29,6 +29,8 @@ public class BackgroundLazer implements PatternLibraryInterface {
         if (visible) {
             parent.background(0, 10);
             drawGrid();
+        } else {
+            parent.background(0);
         }
     }
 

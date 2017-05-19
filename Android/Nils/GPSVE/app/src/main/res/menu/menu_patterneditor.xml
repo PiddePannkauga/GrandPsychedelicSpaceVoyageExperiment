@@ -6,12 +6,15 @@
         android:id="@+id/groupeditorbackground"
         android:checkableBehavior="single"
         android:enabled="true"
-        android:icon="@drawable/gpsve"
         android:menuCategory="container"
         android:visible="true">
         <item
+            android:id="@+id/menu_none"
+            android:checked="true"
+            android:title=""
+            android:visible="false" />
+        <item
             android:id="@+id/background1check"
-
             android:enabled="true"
             android:icon="@mipmap/ic_launcher"
             android:title="Background Stars"
@@ -34,19 +37,21 @@
         android:id="@+id/groupeditorforeground"
         android:checkableBehavior="single"
         android:enabled="true"
-        android:icon="@drawable/gpsve"
         android:menuCategory="container"
         android:visible="true">
         <item
+            android:id="@+id/menu_none2"
+            android:checked="true"
+            android:title=""
+            android:visible="false" />
+        <item
             android:id="@+id/circleCheck"
-
             android:enabled="true"
             android:icon="@mipmap/ic_launcher"
             android:title="Circle"
             android:visible="true" />
         <item
             android:id="@+id/lineCheck"
-
             android:enabled="true"
             android:icon="@mipmap/ic_launcher"
             android:title="Line"
