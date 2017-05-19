@@ -45,6 +45,7 @@ public class PatternController extends PApplet {
     }
 
     public void setup() {
+        background(0);
 
     }
 

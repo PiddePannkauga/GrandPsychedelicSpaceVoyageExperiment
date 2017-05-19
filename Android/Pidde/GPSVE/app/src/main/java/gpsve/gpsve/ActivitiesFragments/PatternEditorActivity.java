@@ -1,5 +1,6 @@
 package gpsve.gpsve.ActivitiesFragments;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.LayoutInflaterCompat;
@@ -57,17 +58,24 @@ public class PatternEditorActivity extends AppCompatActivity {
         initPopup();
 
     }
-
+    @Override
     protected void onPause(){
         super.onPause();
         soundConverter.disableVisualizer();
     }
+
 
     protected void onRestart() {
         super.onRestart();
         soundConverter.initiateVisualizer();
         System.out.println("onRestart()");
     }
+
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putInt("pattern", 5);
+        super.onSaveInstanceState(outState);
+    }
+
 
     public void showEditorPopup(View v) {
         popup.show();
@@ -84,73 +92,34 @@ public class PatternEditorActivity extends AppCompatActivity {
                 item.setShowAsAction(MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
                 item.setActionView(new View(getBaseContext()));
                 patternController.reset();
-
+                patternEditor.setVisible(item.getItemId());
+                if(item.isChecked()){
+                    item.setChecked(false);
+                }else{
+                    item.setChecked(true);
+                }
                 switch (item.getItemId()) {
-                    case R.id.background1check:
-                        if (item.isChecked()){
-                            item.setChecked(false);
-                            clearChecks.remove(item);
-                        }
-                        else{
-                            item.setChecked(true);
-                            clearChecks.add(item);
 
-                        }
-                        return false;
-                    case R.id.background2check:
-
-                        if (item.isChecked()){
-                            item.setChecked(false);
-                            clearChecks.remove(item);
-                        }
-                        else{
-                            item.setChecked(true);
-                            clearChecks.add(item);
-                        }
-                        return false;
-                    case R.id.background3check:
-
-                        if (item.isChecked()){
-                            item.setChecked(false);
-                            clearChecks.remove(item);
-                        }
-                        else{
-                            item.setChecked(true);
-                            clearChecks.add(item);
-                        }
-                        return false;
-                    case R.id.circleCheck:
-
-                        if (item.isChecked()){
-                            item.setChecked(false);
-                            clearChecks.remove(item);
-                        }
-                        else{
-                            item.setChecked(true);
-                            clearChecks.add(item);
-                        }
-                        return false;
-                    case R.id.lineCheck:
-
-                        if (item.isChecked()){
-                            item.setChecked(false);
-                            clearChecks.remove(item);
-                        }
-                        else{
-                            item.setChecked(true);
-                            clearChecks.add(item);
-                        }
-                        return false;
-                    case R.id.squareCheck:
-                        if (item.isChecked()){
-                            item.setChecked(false);
-                            clearChecks.remove(item);
-                        }
-                        else{
-                            item.setChecked(true);
-                            clearChecks.add(item);
-                        }
-                        return false;
+//                    case R.id.background1check:
+//                       patternEditor.setVisible(R.id.background1check);
+//                        return false;
+//                    case R.id.background2check:
+//                        patternEditor.setVisible(R.id.background1check);
+//                        return false;
+//                    case R.id.background3check:
+//
+//
+//                        return false;
+//                    case R.id.circleCheck:
+//
+//                        return false;
+//                    case R.id.lineCheck:
+//
+//
+//                        return false;
+//                    case R.id.squareCheck:
+//
+//                        return false;
 
                     case R.id.clearButton:
                         int size = popup.getMenu().size();
@@ -159,6 +128,7 @@ public class PatternEditorActivity extends AppCompatActivity {
                         }
                         popup.getMenu().findItem(R.id.menu_none).setChecked(true);
                         popup.getMenu().findItem(R.id.menu_none2).setChecked(true);
+                        patternController.reset();
                         return false;
                     default:
                         return false;

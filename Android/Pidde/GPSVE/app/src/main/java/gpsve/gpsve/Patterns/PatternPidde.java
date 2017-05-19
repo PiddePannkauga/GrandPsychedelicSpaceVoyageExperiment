@@ -136,7 +136,7 @@ public class PatternPidde implements PatternInterface {
             }
         }
         if (delay > 10) {
-            for (int i = 0; i < stars2.length; i++) {
+            for (int i = 0; i < stars3.length; i++) {
                 stars3[i].update();
                 stars3[i].show();
             }
