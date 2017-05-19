@@ -3,7 +3,7 @@ package gpsve.gpsve.Controllers;
 import android.media.audiofx.Visualizer;
 
 /**
- * Created by Petter Månsson on 2017-04-03.
+ * Created by Petter on 2017-04-03.
  */
 
 public class SoundConverter{

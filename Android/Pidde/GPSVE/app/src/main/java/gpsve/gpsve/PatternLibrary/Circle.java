@@ -30,14 +30,21 @@ public class Circle implements PatternLibraryInterface {
             }
         }
 
+        if(size > Math.min(parent.width, parent.height)) {
+            size = Math.min(parent.width, parent.height);
+        }
+
         size = ellipseDecay(size);
     }
 
     public void show(){
         if(visible) {
-            parent.noStroke();
+            parent.pushStyle();
+            parent.stroke(0);
+            parent.strokeWeight(20);
             parent.fill(255, 255, 0);
             parent.ellipse(parent.width / 2, parent.height / 2, size, size);
+            parent.popStyle();
         }
     }
 
@@ -49,11 +56,8 @@ public class Circle implements PatternLibraryInterface {
     public float ellipseDecay(float newEllipse) {
         if (newEllipse <= ellipseDecay) {
             newEllipse = ellipseDecay * (float)0.98;
-//            if (ellipseColor[i] > 100) {
-//                ellipseColor[i] -= 5;
-//            }
         } else {
-//                ellipseColor[i] = 175;
+
         }
         ellipseDecay = newEllipse;
 

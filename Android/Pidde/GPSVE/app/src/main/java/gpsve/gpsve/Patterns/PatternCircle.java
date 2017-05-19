@@ -6,7 +6,7 @@ import gpsve.gpsve.Interface.PatternInterface;
 import processing.core.PApplet;
 
 /**
- * Created by Petter Månsson on 2017-04-18.
+ * Created by bajs on 2017-04-18.
  */
 
 public class PatternCircle implements PatternInterface {

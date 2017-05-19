@@ -3,7 +3,7 @@ package gpsve.gpsve.Controllers;
 import java.util.LinkedList;
 
 /**
- * Created by Petter Månsson on 2017-04-20.
+ * Created by Petter on 2017-04-20.
  */
 
 public class Buffer {

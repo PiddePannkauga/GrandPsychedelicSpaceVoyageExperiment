@@ -19,9 +19,7 @@ import processing.core.PApplet;
 public class PatternEditor implements PatternInterface {
     private PApplet parent;
     private byte[] wave, fft;
-    private float circleSize=0;
     private boolean okToDraw = true;
-
 
     private PatternLibraryInterface bg1, bg2, bg3, circle, line, square;
 
@@ -33,30 +31,31 @@ public class PatternEditor implements PatternInterface {
         circle = new Circle(this.parent);
         line = new LinePattern(this.parent);
         square = new Square(this.parent);
-
-
-
     }
 
     @Override
     public void updatePattern(byte[] fft, byte[] wave) {
-        bg1.update(fft,wave);
-        line.update(fft,wave);
-        circle.update(fft, wave);
+        bg1.update(fft.clone(), wave.clone());
+        bg2.update(fft.clone(), wave.clone());
+        bg3.update(fft.clone(), wave.clone());
+        circle.update(fft.clone(), wave.clone());
+        line.update(fft.clone(), wave.clone());
+        square.update(fft.clone(), wave.clone());
     }
 
     @Override
     public void drawPattern() {
+        okToDraw = false;
 
-//        for(PatternLibraryInterface pattern : patternList) {
-//            pattern.show();
-//        }
-        bg1.show();
         bg2.show();
+
+        bg1.show();
         bg3.show();
         circle.show();
         line.show();
         square.show();
+
+        okToDraw = true;
     }
 
     @Override
@@ -80,7 +79,6 @@ public class PatternEditor implements PatternInterface {
                 bg1.setVisible(false);
                 bg2.setVisible(false);
                 bg3.setVisible(true);
-                System.out.println("bgPurp");
                 break;
             case R.id.circleCheck:
                 circle.setVisible(true);
@@ -104,9 +102,7 @@ public class PatternEditor implements PatternInterface {
                 circle.setVisible(false);
                 line.setVisible(false);
                 square.setVisible(false);
-
                 break;
-
         }
     }
 }

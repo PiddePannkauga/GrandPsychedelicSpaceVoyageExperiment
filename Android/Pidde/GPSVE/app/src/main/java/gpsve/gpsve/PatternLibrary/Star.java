@@ -28,9 +28,9 @@ public class Star{
     public void update(){
 
         if(parent.height>parent.width){
-            speed = 28;
+            speed = 30;
         }else{
-            speed = 50;
+            speed = 55;
         }
         z = z-speed;
 

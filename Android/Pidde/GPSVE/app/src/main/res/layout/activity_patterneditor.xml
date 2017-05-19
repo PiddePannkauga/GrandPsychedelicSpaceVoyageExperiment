@@ -19,5 +19,4 @@
         android:onClick="showEditorPopup"
         app:srcCompat="@mipmap/gpsvelauncher" />
 
-
 </RelativeLayout>

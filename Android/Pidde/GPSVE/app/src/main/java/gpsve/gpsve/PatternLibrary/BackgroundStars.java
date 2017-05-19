@@ -37,13 +37,6 @@ public class BackgroundStars implements PatternLibraryInterface {
     public void update(byte[] fft, byte[] wave) {
         this.fft = fft;
         this.wave = wave;
-        for(int i = 0; i<stars1.length; i++){
-            stars1[i].update();
-            stars2[i].update();
-            stars3[i].update();
-        }
-
-
     }
 
     @Override
@@ -61,6 +54,7 @@ public class BackgroundStars implements PatternLibraryInterface {
                     stars2[i].update();
                     stars2[i].show();
                 }
+
             }
             if (delay > 10) {
                 for (int i = 0; i < stars3.length; i++) {
@@ -68,6 +62,7 @@ public class BackgroundStars implements PatternLibraryInterface {
                     stars3[i].show();
                 }
             }
+            delay++;
             parent.popMatrix();
         }
     }

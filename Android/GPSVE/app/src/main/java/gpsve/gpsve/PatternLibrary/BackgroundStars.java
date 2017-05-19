@@ -54,6 +54,7 @@ public class BackgroundStars implements PatternLibraryInterface {
                     stars2[i].update();
                     stars2[i].show();
                 }
+
             }
             if (delay > 10) {
                 for (int i = 0; i < stars3.length; i++) {
@@ -61,6 +62,7 @@ public class BackgroundStars implements PatternLibraryInterface {
                     stars3[i].show();
                 }
             }
+            delay++;
             parent.popMatrix();
         }
     }
