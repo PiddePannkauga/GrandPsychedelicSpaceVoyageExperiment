@@ -3,6 +3,7 @@ package gpsve.gpsve.Controllers;
 import android.app.Activity;
 
 import gpsve.gpsve.Interface.PatternInterface;
+import gpsve.gpsve.Patterns.PatternChoose;
 import processing.core.PApplet;
 
 /**
@@ -44,7 +45,7 @@ public class PatternController extends PApplet {
     }
 
     public void setup() {
-
+        background(0);
     }
 
     public void draw() {
