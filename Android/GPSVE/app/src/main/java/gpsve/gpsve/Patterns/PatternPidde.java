@@ -21,8 +21,8 @@ public class PatternPidde implements PatternInterface {
     private boolean okToDraw = true;
 
     /**
-     * Constructor for instanitating PatternPidde
-     * @param parent PApplet from sketch which pattrn will be drawn upon.
+     * Constructor for instantiating PatternPidde
+     * @param parent PApplet from sketch which pattern will be drawn upon.
      */
     public PatternPidde(PApplet parent) {
         this.parent = parent;
@@ -84,7 +84,6 @@ public class PatternPidde implements PatternInterface {
     @Override
     public void updatePattern(byte[] fft, byte[] wave) {
         setOkToDraw(false);
-//        fft = wave;
         for (int i = 0; i < currentLine.length; i++) {
             currentLine[i] = 0;
         }
@@ -213,7 +212,7 @@ public class PatternPidde implements PatternInterface {
      * @param previousline
      * @return
      */
-    public int lineAlpha(int lineValue, int previousline) {
+    private int lineAlpha(int lineValue, int previousline) {
         if (lineValue>255){
             return 255;
         }
@@ -238,7 +237,7 @@ public class PatternPidde implements PatternInterface {
     /**
      * Calculates how fast a line should be diminished if currentLine isn't bigger then previousLine
      */
-    public int decay(int drawLine, int lineDecay){
+    private int decay(int drawLine, int lineDecay){
         if(drawLine >= 0) {
             drawLine = drawLine - lineDecay;
         }
@@ -295,7 +294,6 @@ public class PatternPidde implements PatternInterface {
         }
         public void show(){
 
-//            parent.fill(255);
             parent.noStroke();
             float sx = parent.map(x / z, 0, 1, 0, parent.width/2);
             float sy = parent.map(y / z, 0, 1, 0, parent.height/2);

@@ -9,7 +9,7 @@ import processing.core.PApplet;
 
 
 /**
- * Created by Oskar on 2017-04-24.
+ * Created by Oskar Lloyd on 2017-04-24.
  */
 
 public class PatternOskar implements PatternInterface {
@@ -18,7 +18,6 @@ public class PatternOskar implements PatternInterface {
     private boolean okToDraw = true;
     static private double Gamma = 0.95;
     static private double IntensityMax = 255;
-    private static final String TAG = "hej";
 
     /**
      * Constructor for instantiating PatternOskar
@@ -27,9 +26,6 @@ public class PatternOskar implements PatternInterface {
     public PatternOskar(PApplet parent) {
         this.parent = parent;
     }
-
-
-
 
     @Override
     /**
@@ -42,12 +38,10 @@ public class PatternOskar implements PatternInterface {
         this.wave = wave;
         fftlarge = fft;
         wavelarge = wave;
-        //Multiplicerar värdena i arrayen för finare färger
         for (int i = 0; i< fft.length; i++) {
             fftlarge[i] = (byte) (fft[i] *60);
             wavelarge[i] = (byte) (wave[i] *60);
         }
-
     }
 
     @Override
@@ -55,26 +49,19 @@ public class PatternOskar implements PatternInterface {
      * Draws pattern, called by Patterncontroller
      */
     public void drawPattern() {
-        //Så att controllern inte uppdaterar för snabbt
         okToDraw = false;
 
-        //Omvandlar vågform till RGB och sätter bakgrund
-        double bckgrnd = ((fft[15]+128)*(74/51))+380;
-        int [] bc = waveLengthToRGB(bckgrnd);
+        double background = ((fft[15]+128)*(74/51))+380;
+        int [] bc = waveLengthToRGB(background);
         parent.background(bc[0],bc[1],bc[2]);
 
-        //Sparar inställningar
         parent.pushStyle();
 
-        //Ritar rektanglar
         for (int i = 0; i < fft.length/4; i++) {
-            //Förskjutning från mitten av spektrum
             double shift = (5*i)+300;
 
-            //Våglängden + förskjutning
             double wavelength = fftlarge[i] + shift;
 
-            //Omvandlar till RGB
             int[] wave = waveLengthToRGB(wavelength);
 
             //Om våglängden är i synliga spektrumet ritas rektangel med uppdaterade färger, annars använder den föregående färger
@@ -87,19 +74,14 @@ public class PatternOskar implements PatternInterface {
                 parent.rect((parent.width)-((i+1)*(parent.width/128))-parent.width/2, 0,parent.width/128,parent.height);
 
             } else {
-
                 parent.rect(i*(parent.width/128), 0, parent.width/128, parent.height);
                 parent.rect((parent.width)-((i+1)*(parent.width/128)), 0, parent.width/128, parent.height);
                 parent.rect(i*(parent.width/128)+parent.width/2,0,parent.width/128,parent.height);
                 parent.rect((parent.width)-((i+1)*(parent.width/128))-parent.width/2, 0,parent.width/128,parent.height);
-
             }
-            Log.d(TAG, "drawPattern: "+wavelength);
         }
-        //Återställer inställningar
         parent.pushStyle();
         okToDraw = true;
-
     }
 
     /**
@@ -107,7 +89,6 @@ public class PatternOskar implements PatternInterface {
      * @param Wavelength
      * @return byte[]
      */
-    //Lånad av user151323 på stackoverflow
     public static int[] waveLengthToRGB(double Wavelength){
         double factor;
         double Red,Green,Blue;
@@ -142,8 +123,6 @@ public class PatternOskar implements PatternInterface {
             Blue = 0.0;
         }
 
-        // Let the intensity fall off near the vision limits
-
         if((Wavelength >= 380) && (Wavelength<420)){
             factor = 0.3 + 0.4*(Wavelength - 380) / (420 - 380);
         }else if((Wavelength >= 420) && (Wavelength<701)){
@@ -154,10 +133,8 @@ public class PatternOskar implements PatternInterface {
             factor = 0.0;
         }
 
-
         int[] rgb = new int[3];
 
-        // Don't want 0^x = 1 for x <> 0
         rgb[0] = Red==0.0 ? 0 : (int) Math.round(IntensityMax * Math.pow(Red * factor, Gamma));
         rgb[1] = Green==0.0 ? 0 : (int) Math.round(IntensityMax * Math.pow(Green * factor, Gamma));
         rgb[2] = Blue==0.0 ? 0 : (int) Math.round(IntensityMax * Math.pow(Blue * factor, Gamma));

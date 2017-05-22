@@ -11,7 +11,6 @@ public class BackgroundLazer implements PatternLibraryInterface {
     private PApplet parent;
     private byte[] fft, wave;
     private boolean visible = false;
-
     private float speed;
 
     public BackgroundLazer(PApplet parent) {
@@ -39,7 +38,7 @@ public class BackgroundLazer implements PatternLibraryInterface {
         this.visible = visible;
     }
 
-    public void drawGrid() {
+    private void drawGrid() {
         if(parent.mousePressed){
             speed += 0.3;
         } else {
@@ -98,12 +97,12 @@ public class BackgroundLazer implements PatternLibraryInterface {
         parent.popMatrix();
     }
 
-    public float sin(float size, float speed) {
+    private float sin(float size, float speed) {
         float pos = size * parent.sin(speed);// + parent.width/2;
         return pos;
     }
 
-    public float cos(float size, float speed) {
+    private float cos(float size, float speed) {
         float pos = size * parent.cos(speed);// + parent.width/2;
         return pos;
     }

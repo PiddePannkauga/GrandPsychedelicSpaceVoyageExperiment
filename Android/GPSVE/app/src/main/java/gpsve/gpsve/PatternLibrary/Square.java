@@ -25,11 +25,17 @@ public class Square implements PatternLibraryInterface {
     @Override
     public void show() {
         if (visible) {
-            parent.fill(255, 0, 200);
-            parent.rect(parent.width*(float)0.4, parent.height*(float)0.4, 100, 100);
+            parent.translate(parent.width/2, parent.height/2);
+            parent.fill(0, 255, 0);
+            parent.rect(0, 0, wave[100], wave[100]);
+            parent.fill(255, 150, 0);
+            parent.rect(0, 0, -wave[100], wave[100]);
+            parent.fill(255,0,0);
+            parent.rect(0, 0, wave[100], -wave[100]);
+            parent.fill(0, 150, 255);
+            parent.rect(0, 0, -wave[100], -wave[100]);
         }
     }
-
 
     @Override
     public void setVisible(boolean visible) {

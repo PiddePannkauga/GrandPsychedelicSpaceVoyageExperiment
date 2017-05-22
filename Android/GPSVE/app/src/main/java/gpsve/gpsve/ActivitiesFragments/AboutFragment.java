@@ -13,7 +13,8 @@ import android.widget.ImageButton;
 import gpsve.gpsve.R;
 
 /**
- * Created by Petter "Pidde" Månsson on 2017-05-09.
+ * Created by Petter Månsson on 2017-05-09.
+ * Fragment that is used to show the backstory.
  */
 public class AboutFragment extends Fragment {
 
@@ -24,8 +25,6 @@ public class AboutFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.aboutfragment, container, false);
         view.setBackgroundColor(Color.WHITE);
-
-
         return view;
     }
 
@@ -33,17 +32,12 @@ public class AboutFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
         aboutButton = (ImageButton)getActivity().findViewById(R.id.aboutbutton);
-
-
         aboutButton.setEnabled(false);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-
         aboutButton.setEnabled(true);
-
-
     }
 }

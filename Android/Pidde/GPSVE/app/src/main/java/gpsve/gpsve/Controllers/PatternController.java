@@ -64,7 +64,7 @@ public class PatternController extends PApplet {
         waveBuffer.put(soundConverter.getWaveBytes());
         if(pattern.okToDraw()) {
             try {
-                pattern.updatePattern(fftBuffer.get(), waveBuffer.get());
+                pattern.updatePattern(fftBuffer.get().clone(), waveBuffer.get().clone());
                 pattern.drawPattern();
             } catch (InterruptedException e) {
             }

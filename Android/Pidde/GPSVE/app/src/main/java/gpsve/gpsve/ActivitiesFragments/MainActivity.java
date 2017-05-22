@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
             });
-
     }
 
     /**
@@ -60,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
 
         fragmentTransaction.replace(android.R.id.content,frag,"about")
                 .addToBackStack("about").setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit();
-
 
     }
 
@@ -93,6 +91,4 @@ public class MainActivity extends AppCompatActivity {
         super.onRestart();
         System.out.println("main.onRestart()");
     }
-
-
 }

@@ -4,7 +4,7 @@ import gpsve.gpsve.Interface.PatternLibraryInterface;
 import processing.core.PApplet;
 
 /**
- * Created by Petter Månsson on 2017-05-16.
+ * Created by Petter Månsson and Nils Lindkvist on 2017-05-16.
  */
 
 public class Circle implements PatternLibraryInterface {
@@ -53,11 +53,9 @@ public class Circle implements PatternLibraryInterface {
         this.visible = visible;
     }
 
-    public float ellipseDecay(float newEllipse) {
+    private float ellipseDecay(float newEllipse) {
         if (newEllipse <= ellipseDecay) {
             newEllipse = ellipseDecay * (float)0.98;
-        } else {
-
         }
         ellipseDecay = newEllipse;
 

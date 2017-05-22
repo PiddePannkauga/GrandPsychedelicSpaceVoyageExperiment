@@ -9,7 +9,7 @@ import processing.core.PApplet;
 
 public class LinePattern implements PatternLibraryInterface{
     private boolean visible;
-    private int[] currentLine = new int[128], previousLine= new int[128], drawLine= new int[128];
+    private int[] currentLine = new int[128], previousLine = new int[128], drawLine = new int[128];
     private float lineThickness;
     private Line[] line = new Line[8];
     private PApplet parent;
@@ -26,13 +26,10 @@ public class LinePattern implements PatternLibraryInterface{
                 colorChoose=1;
             }
         }
-
     }
-
 
     @Override
     public void update(byte[] fft, byte[] wave) {
-
         for (int i = 0; i < currentLine.length; i++) {
             currentLine[i] = 0;
         }
@@ -69,19 +66,18 @@ public class LinePattern implements PatternLibraryInterface{
             }
         }
 
-            for (int i = 0; i < currentLine.length; i++) {
-                if (currentLine[i] > previousLine[i]) {
-                    drawLine[i] = currentLine[i];
-                    previousLine[i] = currentLine[i];
-                } else {
-                    previousLine[i] = decay(previousLine[i], 5);
-                    drawLine[i] = previousLine[i];
-                }
+        for (int i = 0; i < currentLine.length; i++) {
+            if (currentLine[i] > previousLine[i]) {
+                drawLine[i] = currentLine[i];
+                previousLine[i] = currentLine[i];
+            } else {
+                previousLine[i] = decay(previousLine[i], 5);
+                drawLine[i] = previousLine[i];
             }
-
+        }
     }
 
-    public int decay(int drawLine, int lineDecay){
+    private int decay(int drawLine, int lineDecay){
         if(drawLine >= 0) {
             drawLine = drawLine - lineDecay;
         }
@@ -90,7 +86,6 @@ public class LinePattern implements PatternLibraryInterface{
         }
         return drawLine;
     }
-
 
     @Override
     public void show() {
@@ -108,6 +103,5 @@ public class LinePattern implements PatternLibraryInterface{
     @Override
     public void setVisible(boolean visible) {
         this.visible = visible;
-
     }
 }

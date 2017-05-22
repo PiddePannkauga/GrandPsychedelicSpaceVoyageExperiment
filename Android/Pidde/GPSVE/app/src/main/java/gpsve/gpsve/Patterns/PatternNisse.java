@@ -20,14 +20,17 @@ public class PatternNisse implements PatternInterface {
         setup();
     }
 
-    public void setup() {
+    private void setup() {
         parent.background(0);
         for(int i = 0; i < ellipseColor.length; i++) {
             ellipseColor[i] = 175;
         }
     }
 
-    public void calculateFftAmp() {
+    /**
+     * Calculates the total sum of all elements in the fft-array (negative values are flipped to positive).
+     */
+    private void calculateFftAmp() {
         fftAmp = 15;
         int temp = 0;
 
@@ -43,10 +46,12 @@ public class PatternNisse implements PatternInterface {
                 fftAmp = temp;
             }
         }
-//        System.out.println("fftAmp = " + fftAmp);
     }
 
-    public void calculateWaveAmp() {
+    /**
+     * Calculates the total sum of all elements in the wave-array
+     */
+    private void calculateWaveAmp() {
         waveAmp = 15;
 
         for(int i = 0; i < wave.length; i++) {
@@ -54,10 +59,12 @@ public class PatternNisse implements PatternInterface {
                 waveAmp = wave[i];
             }
         }
-//        System.out.println("waveAmp = " + waveAmp);
     }
 
-    public void calculateFftEllipse() {
+    /**
+     *  Calculates the size for the six ellipses in the pattern using the fft-array
+     */
+    private void calculateFftEllipse() {
         for(int i = 0; i < ellipse.length; i++) {
             ellipse[i] = Math.min(parent.width, parent.height)*(float)0.05;
         }
@@ -71,7 +78,12 @@ public class PatternNisse implements PatternInterface {
         }
     }
 
-    public float[] ellipseDecay(float[] newEllipse) {
+    /**
+     * Controls the "twitchiness" of the ellipses so that drastic decreases in size doesn't appear
+     * @param newEllipse
+     * @return new array with values for the ellipses
+     */
+    private float[] ellipseDecay(float[] newEllipse) {
         for(int i = 0; i < newEllipse.length; i++) {
             if (newEllipse[i] <= ellipseDecay[i]) {
                 newEllipse[i] = ellipseDecay[i] * (float)0.98;
@@ -80,7 +92,6 @@ public class PatternNisse implements PatternInterface {
                 }
             } else {
                 ellipseColor[i] = 175;
-//                System.out.println("Ej DeCaY");
             }
         }
 
@@ -89,7 +100,10 @@ public class PatternNisse implements PatternInterface {
         return newEllipse;
     }
 
-    public void drawGrid() {
+    /**
+     * Draws the background grid
+     */
+    private void drawGrid() {
         if(parent.mousePressed){
             speed += 0.3;
         } else {
@@ -148,7 +162,10 @@ public class PatternNisse implements PatternInterface {
         parent.popMatrix();
     }
 
-    public void drawLines() {
+    /**
+     * Draws the lines between the ellipses
+     */
+    private void drawLines() {
         parent.pushMatrix();
         parent.translate(parent.width/2, parent.height/2);
 
@@ -165,7 +182,7 @@ public class PatternNisse implements PatternInterface {
         parent.popMatrix();
     }
 
-    public void drawCircles() {
+    private void drawCircles() {
         parent.pushMatrix();
         parent.translate(parent.width/2, parent.height/2);
 
@@ -186,6 +203,11 @@ public class PatternNisse implements PatternInterface {
         parent.popMatrix();
     }
 
+    /**
+     *
+     * @param fft the fft-values
+     * @param wave the waveform-values
+     */
     @Override
     public void updatePattern(byte[] fft, byte[] wave) {
         this.fft = fft;
@@ -197,6 +219,9 @@ public class PatternNisse implements PatternInterface {
         ellipse = ellipseDecay(ellipse);
     }
 
+    /**
+     * Draws the pattern
+     */
     @Override
     public void drawPattern() {
         okToDraw = false;
@@ -209,17 +234,22 @@ public class PatternNisse implements PatternInterface {
         okToDraw = true;
     }
 
+    /**
+     * Returns true if the pattern is ready to be drawn by the controller, and false if
+     * the pattern is still updating
+     * @return boolean okToDraw
+     */
     @Override
     public boolean okToDraw() {
         return okToDraw;
     }
 
-    public float sin(float size, float speed) {
+    private float sin(float size, float speed) {
         float pos = size * parent.sin(speed);// + parent.width/2;
         return pos;
     }
 
-    public float cos(float size, float speed) {
+    private float cos(float size, float speed) {
         float pos = size * parent.cos(speed);// + parent.width/2;
         return pos;
     }

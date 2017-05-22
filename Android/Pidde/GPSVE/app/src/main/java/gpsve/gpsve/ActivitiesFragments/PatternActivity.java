@@ -56,7 +56,6 @@ public class PatternActivity extends AppCompatActivity {
     inflater.inflate(R.menu.menu_pattern,popup.getMenu());
     popup.show();
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener(){
-
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 patternController.reset();
@@ -89,9 +88,7 @@ public class PatternActivity extends AppCompatActivity {
                         return false;
                 }
             }
-
             });
-
     }
 
     protected void onStart() {

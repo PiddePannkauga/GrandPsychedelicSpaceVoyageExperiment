@@ -11,14 +11,12 @@ import processing.core.PApplet;
 
 public class PatternCircle implements PatternInterface {
     private PApplet parent;
-    private Color color;
     private boolean okToDraw = true;
     private byte[] wave, fft;
 
 
     public PatternCircle(PApplet parent){
-        this.parent=parent;
-
+        this.parent = parent;
     }
 
     @Override
@@ -39,7 +37,7 @@ public class PatternCircle implements PatternInterface {
         return okToDraw;
     }
 
-    public void drawCircle(float ellipseSize){
+    private void drawCircle(float ellipseSize){
         parent.background(255,35);
         parent.noStroke();
         parent.fill(parent.color(ellipseSize));

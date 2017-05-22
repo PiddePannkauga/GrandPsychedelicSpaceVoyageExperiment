@@ -25,11 +25,9 @@ public class SoundConverter{
      * Method contains code to setup android.media.audiofx.Visualizer;
      */
     public void initiateVisualizer(){
-        // Create the Visualizer object and set audio session to 0 (listen to system audio)
         vis = new Visualizer(0);
         vis.setCaptureSize(Visualizer.getCaptureSizeRange()[0]);
 
-        // Pass through Visualizer data to VisualizerView
         Visualizer.OnDataCaptureListener captureListener = new Visualizer.OnDataCaptureListener() {
             @Override
             public void onWaveFormDataCapture(Visualizer visualizer, byte[] bytes, int samplingRate) {
@@ -43,7 +41,6 @@ public class SoundConverter{
         };
 
         vis.setDataCaptureListener(captureListener, Visualizer.getMaxCaptureRate(), true, true);
-        // Enabled Visualizer and disable when we're done with the stream
         vis.setEnabled(true);
     }
 

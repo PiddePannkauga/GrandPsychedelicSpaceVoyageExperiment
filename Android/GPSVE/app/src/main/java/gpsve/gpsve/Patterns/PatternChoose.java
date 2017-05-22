@@ -2,7 +2,6 @@ package gpsve.gpsve.Patterns;
 
 import gpsve.gpsve.Interface.PatternInterface;
 import processing.core.PApplet;
-import processing.core.PFont;
 
 /**
  * Created by Nils Lindkvist on 2017-04-24.
@@ -10,8 +9,8 @@ import processing.core.PFont;
 
 public class PatternChoose implements PatternInterface {
     private PApplet parent;
-    private final int[] purpColor = new int[]{255, 0, 225};
-    private final int[] turqColor = new int[]{0, 255, 235};
+    private final int[] purpleColor = new int[]{255, 0, 225};
+    private final int[] turqoiseColor = new int[]{0, 255, 235};
     private int colorCount = 0;
 
     public PatternChoose(PApplet parent) {
@@ -21,12 +20,12 @@ public class PatternChoose implements PatternInterface {
     @Override
     public void updatePattern(byte[] fft, byte[] wave) {
         if (colorCount < 4) {
-            parent.fill(purpColor[0], purpColor[1], purpColor[2]);
-            parent.stroke(purpColor[0], purpColor[1], purpColor[2]);
+            parent.fill(purpleColor[0], purpleColor[1], purpleColor[2]);
+            parent.stroke(purpleColor[0], purpleColor[1], purpleColor[2]);
             colorCount++;
         } else if (colorCount < 8) {
-            parent.fill(turqColor[0], turqColor[1], turqColor[2]);
-            parent.stroke(turqColor[0], turqColor[1], turqColor[2]);
+            parent.fill(turqoiseColor[0], turqoiseColor[1], turqoiseColor[2]);
+            parent.stroke(turqoiseColor[0], turqoiseColor[1], turqoiseColor[2]);
             colorCount++;
         } else {
             colorCount = 0;

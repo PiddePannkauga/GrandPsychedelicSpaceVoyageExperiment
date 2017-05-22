@@ -25,8 +25,6 @@ public class AboutFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.aboutfragment, container, false);
         view.setBackgroundColor(Color.WHITE);
-
-
         return view;
     }
 
@@ -34,17 +32,12 @@ public class AboutFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
         aboutButton = (ImageButton)getActivity().findViewById(R.id.aboutbutton);
-
-
         aboutButton.setEnabled(false);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-
         aboutButton.setEnabled(true);
-
-
     }
 }

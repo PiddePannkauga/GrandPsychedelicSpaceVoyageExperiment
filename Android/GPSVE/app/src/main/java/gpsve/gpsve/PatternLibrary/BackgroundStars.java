@@ -11,13 +11,6 @@ public class BackgroundStars implements PatternLibraryInterface {
     private PApplet parent;
     private byte[] fft, wave;
     private boolean visible = false;
-    private float x;
-    private float y;
-    private float z;
-    private float pz;
-    private float speed;
-    private int colorChoose =1;
-    private int colorChoose2 =1;
     private int delay=0;
     private Star[] stars1 = new Star[250];
     private Star[] stars2 = new Star[250];
@@ -30,7 +23,6 @@ public class BackgroundStars implements PatternLibraryInterface {
             stars2[i] = new Star(this.parent);
             stars3[i] = new Star(this.parent);
         }
-
     }
 
     @Override
@@ -45,17 +37,19 @@ public class BackgroundStars implements PatternLibraryInterface {
             parent.background(0);
             parent.pushMatrix();
             parent.translate(parent.width / 2, parent.height / 2);
+
             for (int i = 0; i < stars1.length; i++) {
                 stars1[i].update();
                 stars1[i].show();
             }
+
             if (delay > 5) {
                 for (int i = 0; i < stars2.length; i++) {
                     stars2[i].update();
                     stars2[i].show();
                 }
-
             }
+
             if (delay > 10) {
                 for (int i = 0; i < stars3.length; i++) {
                     stars3[i].update();
@@ -66,7 +60,6 @@ public class BackgroundStars implements PatternLibraryInterface {
             parent.popMatrix();
         }
     }
-
 
     @Override
     public void setVisible(boolean visible) {

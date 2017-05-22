@@ -16,10 +16,8 @@ public class PatternMirre implements PatternInterface {
     private byte[] wave, fft;
     private float rectWidth, rectHeight;
 
-
     public PatternMirre(PApplet parent){
         this.parent=parent;
-
     }
 
     /**
@@ -37,7 +35,7 @@ public class PatternMirre implements PatternInterface {
      *  Scales the pattern
      * @param rectSize rectSize scales the pattern depending on vertical/horizontal
      */
-    public void orientation(float rectSize){
+    private void orientation(float rectSize){
         if(parent.height>parent.width) {
             rectWidth = rectSize * 4;
             rectHeight = rectSize * 6;
@@ -52,19 +50,19 @@ public class PatternMirre implements PatternInterface {
      */
     public void drawPattern() {
         okToDraw = false;
-        drawCircle();
+        drawPatternMirre();
         okToDraw = true;
     }
 
+
+    public boolean okToDraw() {
+        return okToDraw;
+    }
     /**
      * Draws the rectangles and circle, fills with color, size and position
      * @return
      */
-    public boolean okToDraw() {
-        return okToDraw;
-    }
-
-    public void drawCircle(){
+    private void drawPatternMirre(){
         parent.background(0);
 
         parent.delay(60);
@@ -80,7 +78,5 @@ public class PatternMirre implements PatternInterface {
         parent.rect(parent.width /2, parent.height /2, -rectWidth, -rectHeight);
         parent.fill(parent.color(0,0,255));
         parent.ellipse(parent.width * (float) 0.5, parent.height * (float) 0.5, wave[100]* 2, wave[100]* 2);
-
-
     }
 }
