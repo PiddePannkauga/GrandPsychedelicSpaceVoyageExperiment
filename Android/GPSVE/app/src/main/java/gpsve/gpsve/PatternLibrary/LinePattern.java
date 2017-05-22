@@ -4,7 +4,7 @@ import gpsve.gpsve.Interface.PatternLibraryInterface;
 import processing.core.PApplet;
 
 /**
- * Created by Petter on 2017-05-19.
+ * Created by Petter Månsson on 2017-05-19.
  */
 
 public class LinePattern implements PatternLibraryInterface{

@@ -13,18 +13,17 @@ import android.view.View;
 import gpsve.gpsve.Patterns.PatternCircle;
 import gpsve.gpsve.Controllers.PatternController;
 import gpsve.gpsve.Patterns.PatternEditor;
+import gpsve.gpsve.Patterns.PatternMirre;
 import gpsve.gpsve.Patterns.PatternNisse;
 import gpsve.gpsve.Patterns.PatternOskar;
 import gpsve.gpsve.Patterns.PatternPidde;
 import gpsve.gpsve.R;
 import gpsve.gpsve.Controllers.SoundConverter;
 import processing.android.PFragment;
-
 /**
  * @author Petter Månsson and Nils Lindkvist created on 2017-05-17
  * Activity used to draw a pattern on a sketch.
  */
-
 public class PatternActivity extends AppCompatActivity {
     private PatternController patternController;
     private SoundConverter soundConverter;
@@ -47,7 +46,6 @@ public class PatternActivity extends AppCompatActivity {
         fragment.setSketch(patternController);
         fragmentManager.beginTransaction().replace(R.id.pattern_container, fragment).commit();
     }
-
     /**
      * Method to be called to show a Popup which is used to change the pattern shown.
      * @param v
@@ -81,6 +79,10 @@ public class PatternActivity extends AppCompatActivity {
                         return true;
                     case R.id.item_pattern5:
                         currentPattern = 5;
+                        patternController.setPattern(new PatternMirre(patternController));
+                        return true;
+                    case R.id.item_pattern6:
+                        currentPattern = 6;
                         patternController.setPattern(new PatternEditor(patternController));
                         return true;
                     default:
@@ -146,9 +148,12 @@ public class PatternActivity extends AppCompatActivity {
             case 4:
                 patternController.setPattern(new PatternOskar(patternController));
                 break;
+            case 5:
+                patternController.setPattern(new PatternMirre(patternController));
+                break;
         }
     }
-
+    
     /**
      * Method to be called when a button is pressed to change activity shown.
      * @param item

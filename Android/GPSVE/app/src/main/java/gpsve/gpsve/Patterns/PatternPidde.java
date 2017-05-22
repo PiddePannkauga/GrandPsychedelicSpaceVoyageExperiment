@@ -1,10 +1,7 @@
 package gpsve.gpsve.Patterns;
 
-import java.util.Random;
-
 import gpsve.gpsve.Interface.PatternInterface;
 import processing.core.PApplet;
-import processing.core.PConstants;
 
 /**
  * Created by Petter Månsson on 2017-04-06.
@@ -23,6 +20,10 @@ public class PatternPidde implements PatternInterface {
     private int line1, line2, line3, line4;
     private boolean okToDraw = true;
 
+    /**
+     * Constructor for instanitating PatternPidde
+     * @param parent PApplet from sketch which pattrn will be drawn upon.
+     */
     public PatternPidde(PApplet parent) {
         this.parent = parent;
         currentLine = new int[8];
@@ -36,18 +37,31 @@ public class PatternPidde implements PatternInterface {
         }
     }
 
+    /**
+     * For use in UnitTesting
+     * @return
+     */
     public int getLine1() {
         return line1;
     }
-
+    /**
+     * For use in UnitTesting
+     * @return
+     */
     public int getLine2() {
         return line2;
     }
-
+    /**
+     * For use in UnitTesting
+     * @return
+     */
     public int getLine3() {
         return line3;
     }
-
+    /**
+     * For use in UnitTesting
+     * @return
+     */
     public int getLine4() {
         return line4;
     }
@@ -62,6 +76,11 @@ public class PatternPidde implements PatternInterface {
         return currentLine[i];
     }
 
+    /**
+     * Part of PatternInterface. Call to this methods update the patterns size and position.
+     * @param fft
+     * @param wave
+     */
     @Override
     public void updatePattern(byte[] fft, byte[] wave) {
         setOkToDraw(false);
@@ -113,15 +132,15 @@ public class PatternPidde implements PatternInterface {
         setOkToDraw(true);
     }
 
+    /**
+     * Part of PatternInterface, calls to this method draws the pattern upon the sketch which the pattern is connected to.
+     */
     @Override
     public void drawPattern() {
 
         lineThickness = (float) (parent.width * 0.075);
         float linePos1 = (float) 0.0625, linePos2 = (float) 0.9375;
         parent.background(0);
-
-
-//        galacticHighway(25);
 
         parent.pushMatrix();
         parent.translate(parent.width / 2, parent.height / 2);
@@ -188,7 +207,12 @@ public class PatternPidde implements PatternInterface {
 
     }
 
-
+    /**
+     * Decides the alpha color of all the lines.
+     * @param lineValue
+     * @param previousline
+     * @return
+     */
     public int lineAlpha(int lineValue, int previousline) {
         if (lineValue>255){
             return 255;
@@ -202,13 +226,18 @@ public class PatternPidde implements PatternInterface {
         }
     }
 
-
+    /**
+     * Controls the flow if the pattern is ready to be drawn or not.
+     * @return boolean
+     */
     @Override
     public boolean okToDraw() {
         return okToDraw;
     }
 
-
+    /**
+     * Calculates how fast a line should be diminished if currentLine isn't bigger then previousLine
+     */
     public int decay(int drawLine, int lineDecay){
         if(drawLine >= 0) {
             drawLine = drawLine - lineDecay;
@@ -219,12 +248,18 @@ public class PatternPidde implements PatternInterface {
         return drawLine;
     }
 
-
+    /**
+     * Setter to decide if the pattern is ready to be drawn or not.
+     * @param okToDraw
+     */
     public void setOkToDraw(boolean okToDraw) {
         this.okToDraw = okToDraw;
     }
 
-
+    /**
+     * @author Petter Månsson 2017-04-29
+     * Class used to draw stars on the background
+     */
     private class Star{
         float x;
         float y;

@@ -8,13 +8,13 @@
         android:checkableBehavior="single"
         android:menuCategory="container"
         android:icon="@drawable/gpsve">
-        <item android:title="StarStorm Overdrive"
+        <item android:title="Pattern 1"
             android:id="@+id/item_pattern1"
             android:visible="true"
             android:enabled="true"
             android:checkable="false"
             android:icon="@mipmap/ic_launcher" />
-        <item android:title="Lazer Moonz"
+        <item android:title="Pattern 2"
             android:id="@+id/item_pattern2"
             android:enabled="true"
             android:checkable="false"
@@ -25,29 +25,21 @@
             android:checkable="false"
             android:enabled="true"
             android:icon="@mipmap/ic_launcher"
-            android:title="WannaBe Yin &amp; Yang"
+            android:title="Pattern 3"
             android:visible="true" />
-        <item android:title="Psychedelic HyperSpace"
+        <item android:title="Pattern 4"
             android:id="@+id/item_pattern4"
             android:icon="@mipmap/ic_launcher"
             android:visible="true"
             android:enabled="true"
-            android:checkable="false"
-            android:layout_height="match_parent" />
-        <item android:title="Happy Space Moon"
-            android:id="@+id/item_pattern5"
-            android:icon="@mipmap/ic_launcher"
-            android:visible="true"
-            android:enabled="true"
-            android:checkable="false"
-            android:layout_height="match_parent" />
+            android:checkable="false" />
         <item
-            android:id="@+id/item_pattern6"
+            android:id="@+id/item_pattern5"
             android:checkable="false"
             android:enabled="true"
             android:icon="@mipmap/ic_launcher"
             android:onClick="startPatternEditorActivity"
-            android:title="SpacePatternEditor"
+            android:title="PatternEditor"
             android:visible="true" />
     </group>
 
