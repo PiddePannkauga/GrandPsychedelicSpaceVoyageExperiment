@@ -4,7 +4,7 @@ import gpsve.gpsve.Interface.PatternInterface;
 import processing.core.*;
 
 /**
- * Created by Nils on 2017-03-28.
+ * Created by Nils Lindkvist on 2017-03-28.
  */
 
 public class PatternNisse implements PatternInterface {

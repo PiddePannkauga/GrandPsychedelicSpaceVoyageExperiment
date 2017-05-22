@@ -1,7 +1,8 @@
 package gpsve.gpsve.Interface;
 
 /**
- * Created by Nils on 2017-05-16.
+ * Created by Nils Lindkvist on 2017-05-16.
+ * Interface to be used when creating patterns for the PatternEditor.
  */
 
 public interface PatternLibraryInterface {

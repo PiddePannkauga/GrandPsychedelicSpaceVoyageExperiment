@@ -5,7 +5,7 @@ import processing.core.PApplet;
 import processing.core.PFont;
 
 /**
- * Created by Nils on 2017-04-24.
+ * Created by Nils Lindkvist on 2017-04-24.
  */
 
 public class PatternChoose implements PatternInterface {

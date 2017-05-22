@@ -24,7 +24,8 @@ import processing.android.PFragment;
 import static gpsve.gpsve.R.id.imageButton2;
 
 /**
- * Created by Petter on 2017-05-16.
+ * Created by Petter Månsson and Nils Lindkvist on 2017-05-16.
+ * Activity used to draw the PatternEditor on a sketch.
  */
 
 public class PatternEditorActivity extends AppCompatActivity {
@@ -65,11 +66,18 @@ public class PatternEditorActivity extends AppCompatActivity {
         System.out.println("onRestart()");
     }
 
+    /**
+     * Method used to be called to show a popup menu.
+     * This popup menu is used to manipulate the pattern shown.
+     * @param v
+     */
     public void showEditorPopup(View v) {
         popup.show();
     }
 
-
+    /**
+     * Method for initiating the popup menu and inflating it from .XML file.
+     */
     private void initPopup(){
         popup = new PopupMenu(this, findViewById(imageButton2));
         MenuInflater inflater = popup.getMenuInflater();

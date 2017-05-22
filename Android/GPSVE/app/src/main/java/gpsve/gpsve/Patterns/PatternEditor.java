@@ -13,7 +13,7 @@ import gpsve.gpsve.R;
 import processing.core.PApplet;
 
 /**
- * Created by Petter on 2017-05-16.
+ * Created by PetterMånsson and Nils Lindkvist on 2017-05-16.
  */
 
 public class PatternEditor implements PatternInterface {

@@ -4,7 +4,7 @@ import gpsve.gpsve.Interface.PatternLibraryInterface;
 import processing.core.PApplet;
 
 /**
- * Created by Nils on 2017-05-17.
+ * Created by Nils Lindkvist on 2017-05-17.
  */
 
 public class BackgroundLazer implements PatternLibraryInterface {
