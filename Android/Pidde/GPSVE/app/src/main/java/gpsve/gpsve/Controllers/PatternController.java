@@ -7,7 +7,8 @@ import gpsve.gpsve.Patterns.PatternChoose;
 import processing.core.PApplet;
 
 /**
- * Created by bajs on 2017-03-22.
+ * Created by Petter Månsson and Nils Lindkvist on 2017-03-22.
+ * Class for controlling the flow between different application layers.
  */
 
 public class PatternController extends PApplet {
@@ -16,52 +17,63 @@ public class PatternController extends PApplet {
     private Activity activity;
     private Buffer waveBuffer, fftBuffer;
 
+    /**
+     * Constructor which sets parent activity and which SouncConverter reference the app should use.
+     * @param activity
+     * @param soundConverter
+     */
     public PatternController(Activity activity, SoundConverter soundConverter){
         this.activity = activity;
         this.soundConverter = soundConverter;
         waveBuffer = new Buffer();
         fftBuffer = new Buffer();
         pattern = new PatternChoose(this);
-//        initiateDM();
     }
 
+    /**
+     * Method called to set current showing pattern.
+     * @param pattern
+     */
     public void setPattern(PatternInterface pattern) {
         this.pattern = pattern;
     }
-
-//    public void initiateDM() {
-//        DisplayMetrics dm = new DisplayMetrics();
-//        activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
-//        int width = dm.widthPixels;
-//        int height = dm.heightPixels;
-//    }
 
     public static void main(String[] args) {
         PApplet.main(new String[]{"PatternController"});
     }
 
+    /**
+     * Processing method to initiate the canvas on which to draw.
+     */
     public void settings() {
         size(width,height);
     }
 
+    /**
+     * Processing method to setup the canvas.
+     */
     public void setup() {
         background(0);
     }
 
+    /**
+     * Processing method which is called over and over to draw and update the canvas.
+     */
     public void draw() {
         fftBuffer.put(soundConverter.getFftBytes());
         waveBuffer.put(soundConverter.getWaveBytes());
-//        System.out.println(fftBuffer.size());
         if(pattern.okToDraw()) {
             try {
                 pattern.updatePattern(fftBuffer.get(), waveBuffer.get());
                 pattern.drawPattern();
             } catch (InterruptedException e) {
             }
-//            System.out.println(fftBuffer.size());
         }
     }
 
+    /**
+     * Method to call to reset the canvas between patterns.
+     */
     public void reset() {
         background(0);
         noStroke();
