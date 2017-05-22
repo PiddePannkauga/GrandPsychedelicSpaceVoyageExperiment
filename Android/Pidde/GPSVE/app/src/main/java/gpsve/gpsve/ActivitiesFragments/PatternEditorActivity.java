@@ -36,8 +36,6 @@ public class PatternEditorActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private PatternEditor patternEditor;
     private PopupMenu popup;
-    private ArrayList<MenuItem> clearChecks = new ArrayList<>();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,8 +80,6 @@ public class PatternEditorActivity extends AppCompatActivity {
         popup = new PopupMenu(this, findViewById(imageButton2));
         MenuInflater inflater = popup.getMenuInflater();
         inflater.inflate(R.menu.menu_patterneditor,popup.getMenu());
-        final RadioGroup radioGrpBackground = (RadioGroup) popup.getMenu().findItem(R.id.groupeditorbackground);
-        final RadioGroup radioGrpForeground= (RadioGroup) popup.getMenu().findItem(R.id.groupeditorforeground);
 
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener(){
 
@@ -103,6 +99,7 @@ public class PatternEditorActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.clearButton:
                         int size = popup.getMenu().size();
+
                         for(int i = 0; i<size; i++){
                             popup.getMenu().getItem(i).setChecked(false);
                         }
@@ -120,6 +117,7 @@ public class PatternEditorActivity extends AppCompatActivity {
     public void onSaveInstanceState(Bundle outState) {
         int item1 = R.id.menu_none, item2 = R.id.menu_none2, size = popup.getMenu().size();
         boolean savedFirst = false;
+
         for(int i = 0; i<size; i++){
             if(popup.getMenu().getItem(i).isChecked()) {
                 if(!savedFirst) {
