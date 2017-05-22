@@ -13,7 +13,8 @@ import android.widget.ImageButton;
 import gpsve.gpsve.R;
 
 /**
- * Created by Petter "Pidde" Månsson on 2017-05-09.
+ * Created by Petter Månsson on 2017-05-09.
+ * Fragment that is used to show the backstory.
  */
 public class AboutFragment extends Fragment {
 
