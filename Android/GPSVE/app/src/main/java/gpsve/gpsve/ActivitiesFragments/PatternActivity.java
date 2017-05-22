@@ -13,6 +13,7 @@ import android.view.View;
 import gpsve.gpsve.Patterns.PatternCircle;
 import gpsve.gpsve.Controllers.PatternController;
 import gpsve.gpsve.Patterns.PatternEditor;
+import gpsve.gpsve.Patterns.PatternMirre;
 import gpsve.gpsve.Patterns.PatternNisse;
 import gpsve.gpsve.Patterns.PatternOskar;
 import gpsve.gpsve.Patterns.PatternPidde;
@@ -79,6 +80,10 @@ public class PatternActivity extends AppCompatActivity {
                         return true;
                     case R.id.item_pattern5:
                         currentPattern = 5;
+                        patternController.setPattern(new PatternMirre(patternController));
+                        return true;
+                    case R.id.item_pattern6:
+                        currentPattern = 6;
                         patternController.setPattern(new PatternEditor(patternController));
                         return true;
                     default:
@@ -151,6 +156,9 @@ public class PatternActivity extends AppCompatActivity {
                 break;
             case 4:
                 patternController.setPattern(new PatternOskar(patternController));
+                break;
+            case 5:
+                patternController.setPattern(new PatternMirre(patternController));
                 break;
         }
     }
