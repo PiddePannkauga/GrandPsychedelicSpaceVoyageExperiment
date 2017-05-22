@@ -20,7 +20,10 @@ import gpsve.gpsve.Patterns.PatternPidde;
 import gpsve.gpsve.R;
 import gpsve.gpsve.Controllers.SoundConverter;
 import processing.android.PFragment;
-
+/**
+ * @author Petter Månsson and Nils Lindkvist created on 2017-05-17
+ * Activity used to draw a pattern on a sketch.
+ */
 public class PatternActivity extends AppCompatActivity {
     private PatternController patternController;
     private SoundConverter soundConverter;
@@ -43,14 +46,10 @@ public class PatternActivity extends AppCompatActivity {
         fragment.setSketch(patternController);
         fragmentManager.beginTransaction().replace(R.id.pattern_container, fragment).commit();
     }
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.menu_pattern, menu);
-//        return true;
-//    }
-
+    /**
+     * Method to be called to show a Popup which is used to change the pattern shown.
+     * @param v
+     */
     public void showPopup(View v) {
     PopupMenu popup = new PopupMenu(this, v);
     MenuInflater inflater = popup.getMenuInflater();
@@ -94,14 +93,6 @@ public class PatternActivity extends AppCompatActivity {
             });
 
     }
-
-//    public boolean patternEditorPoPup(View v){
-//        PopupMenu popup1 = new PopupMenu(this, v);
-//        MenuInflater inflater = popup1.getMenuInflater();
-//        inflater.inflate(R.menu.menu_patterneditor,popup1.getMenu());
-//        popup1.show();
-//        return true;
-//    }
 
     protected void onStart() {
         super.onStart();
@@ -162,7 +153,11 @@ public class PatternActivity extends AppCompatActivity {
                 break;
         }
     }
-
+    
+    /**
+     * Method to be called when a button is pressed to change activity shown.
+     * @param item
+     */
     public void startPatternEditorActivity(MenuItem item) {
         intent = new Intent(this, PatternEditorActivity.class);
         soundConverter.disableVisualizer();
