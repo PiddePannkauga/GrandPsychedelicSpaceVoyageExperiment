@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:id="@+id/group"
+        android:visible="true"
+        android:enabled="true"
+        android:checkableBehavior="single"
+        android:menuCategory="container"
+        android:icon="@drawable/gpsve">
+        <item android:title="Pattern 1"
+            android:id="@+id/item_pattern1"
+            android:visible="true"
+            android:enabled="true"
+            android:checkable="false"
+            android:icon="@mipmap/ic_launcher" />
+        <item android:title="Pattern 2"
+            android:id="@+id/item_pattern2"
+            android:enabled="true"
+            android:checkable="false"
+            android:visible="true"
+            android:icon="@mipmap/ic_launcher" />
+        <item android:title="Pattern 3"
+            android:id="@+id/item_pattern3"
+            android:visible="true"
+            android:enabled="true"
+            android:checkable="false"
+            android:icon="@mipmap/ic_launcher" />
+        <item android:title="Pattern 4"
+            android:id="@+id/item_pattern4"
+            android:icon="@mipmap/ic_launcher"
+            android:visible="true"
+            android:enabled="true"
+            android:checkable="false" />
+    </group>
+</menu>

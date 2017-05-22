@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">GPSVE</string>
+    <string name="welcome">Welcome to the\nGrand Psychedelic Space Voyage Experiment!</string>
+
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="about">
+        "I utkanten av universum vandrar det en myt om en legendarisk rymdknarksmugglarligan Grand Psychedelic Space Voyage Experiment.
+I ligan ingår 4 medlemmar, Nisseboi även kallad Kapten Hashpipa som aldrig ses utan sin mahoganyhashpipa i mungipan.
+Andre styrman Mirreboi, en pälsbeklädd varelse vars hår är samlat i dreadlocks .
+Mekanikern Pidde och O5-KI  även kallad oski, en utdaterad polisrobot som Pidde har omprogrammerat genom att byta ut all olja mot cannabis olja.
+Tillsammans manövrerar de sin rymdbrajket av modell 420 genom den transdimensionella galaxtjackvägen.
+
+För att kunna färdas genom den transdimensionella galaxtjackvägen måste brajketen uppnå högfart.
+Pidde och O5-KI förser tillsammans brajketen med den kraft som krävs. Kraften utvinns genom att ett konstant flöde av THC pumpas in i en brajket omvandlings neutron generator även förkortat till B.O.N.G.
+
+GPSVE har aldrig blivit tagna av den Imperiala rymdfederationen tack vare sina hemliga smuggelrutter.
+
+Din berättelse börjar här. Du finner dig själv med en kopia av den databas som innehåller koordinater över ligans rutter. Dock är databasen krypterad med en metod som kallas visualizeringkrypton.
+För att knäcka koden och få tag på koordinaterna så skall viss musik spelas till ett visst mönster.
+
+Kan du vara den som lyckas låsa upp databasen och ta vid där myten slutar? "
+    </string>
+
 </resources>
