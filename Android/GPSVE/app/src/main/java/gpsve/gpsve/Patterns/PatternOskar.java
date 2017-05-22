@@ -20,13 +20,22 @@ public class PatternOskar implements PatternInterface {
     static private double IntensityMax = 255;
     private static final String TAG = "hej";
 
+    /**
+     * Constructor for instantiating PatternOskar
+     * @param parent PApplet from sketch which pattern will be drawn upon.
+     */
     public PatternOskar(PApplet parent) {
         this.parent = parent;
     }
 
+
+
+
     @Override
     /**
      * Updates waveform values, called by PatternController
+     * @param fft
+     * @param wave
      */
     public void updatePattern(byte[] fft, byte[] wave) {
         this.fft = fft;
@@ -95,6 +104,8 @@ public class PatternOskar implements PatternInterface {
 
     /**
      * Transform waveform data to RGB
+     * @param Wavelength
+     * @return byte[]
      */
     //Lånad av user151323 på stackoverflow
     public static int[] waveLengthToRGB(double Wavelength){
@@ -156,7 +167,8 @@ public class PatternOskar implements PatternInterface {
 
     @Override
     /**
-     * Anropas av PatternController för att avgöra om en ny frame kan ritas
+     * Controls the flow if the pattern is ready to be drawn or not.
+     * @return boolean
      */
     public boolean okToDraw() {
         return okToDraw;
