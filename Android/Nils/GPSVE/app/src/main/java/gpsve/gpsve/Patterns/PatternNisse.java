@@ -4,7 +4,7 @@ import gpsve.gpsve.Interface.PatternInterface;
 import processing.core.*;
 
 /**
- * Created by Nils on 2017-03-28.
+ * Created by Nils Lindkvist on 2017-03-28.
  */
 
 public class PatternNisse implements PatternInterface {
@@ -27,6 +27,9 @@ public class PatternNisse implements PatternInterface {
         }
     }
 
+    /**
+     * Calculates the total sum of all elements in the fft-array (negative values are flipped to positive).
+     */
     public void calculateFftAmp() {
         fftAmp = 15;
         int temp = 0;
@@ -43,9 +46,11 @@ public class PatternNisse implements PatternInterface {
                 fftAmp = temp;
             }
         }
-//        System.out.println("fftAmp = " + fftAmp);
     }
 
+    /**
+     * Calculates the total sum of all elements in the wave-array
+     */
     public void calculateWaveAmp() {
         waveAmp = 15;
 
@@ -54,9 +59,11 @@ public class PatternNisse implements PatternInterface {
                 waveAmp = wave[i];
             }
         }
-//        System.out.println("waveAmp = " + waveAmp);
     }
 
+    /**
+     * Calculates the size for the six ellipses in the pattern using the fft-array
+     */
     public void calculateFftEllipse() {
         for(int i = 0; i < ellipse.length; i++) {
             ellipse[i] = Math.min(parent.width, parent.height)*(float)0.05;
@@ -71,6 +78,11 @@ public class PatternNisse implements PatternInterface {
         }
     }
 
+    /**
+     * Controls the "twitchiness" of the ellipses so that drastic decreases in size doesn't appear
+     * @param newEllipse
+     * @return new array with values for the ellipses
+     */
     public float[] ellipseDecay(float[] newEllipse) {
         for(int i = 0; i < newEllipse.length; i++) {
             if (newEllipse[i] <= ellipseDecay[i]) {
@@ -80,7 +92,6 @@ public class PatternNisse implements PatternInterface {
                 }
             } else {
                 ellipseColor[i] = 175;
-//                System.out.println("Ej DeCaY");
             }
         }
 
@@ -89,6 +100,9 @@ public class PatternNisse implements PatternInterface {
         return newEllipse;
     }
 
+    /**
+     * Draws the background grid
+     */
     public void drawGrid() {
         if(parent.mousePressed){
             speed += 0.3;
@@ -148,6 +162,9 @@ public class PatternNisse implements PatternInterface {
         parent.popMatrix();
     }
 
+    /**
+     * Draws the lines between the ellipses
+     */
     public void drawLines() {
         parent.pushMatrix();
         parent.translate(parent.width/2, parent.height/2);
@@ -186,6 +203,11 @@ public class PatternNisse implements PatternInterface {
         parent.popMatrix();
     }
 
+    /**
+     *
+     * @param fft the fft-values
+     * @param wave the waveform-values
+     */
     @Override
     public void updatePattern(byte[] fft, byte[] wave) {
         this.fft = fft;
@@ -197,6 +219,9 @@ public class PatternNisse implements PatternInterface {
         ellipse = ellipseDecay(ellipse);
     }
 
+    /**
+     * Draws the pattern
+     */
     @Override
     public void drawPattern() {
         okToDraw = false;
@@ -209,18 +234,23 @@ public class PatternNisse implements PatternInterface {
         okToDraw = true;
     }
 
+    /**
+     * Returns true if the pattern is ready to be drawn by the controller, and false if
+     * the pattern is still updating
+     * @return boolean okToDraw
+     */
     @Override
     public boolean okToDraw() {
         return okToDraw;
     }
 
     public float sin(float size, float speed) {
-        float pos = size * parent.sin(speed);// + parent.width/2;
+        float pos = size * parent.sin(speed);
         return pos;
     }
 
     public float cos(float size, float speed) {
-        float pos = size * parent.cos(speed);// + parent.width/2;
+        float pos = size * parent.cos(speed);
         return pos;
     }
 }
