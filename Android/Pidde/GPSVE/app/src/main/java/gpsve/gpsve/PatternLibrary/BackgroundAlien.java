@@ -4,7 +4,7 @@ import gpsve.gpsve.Interface.PatternLibraryInterface;
 import processing.core.PApplet;
 
 /**
- * Created by Nils on 2017-05-16.
+ * Created by Nils Lindkvist on 2017-05-16.
  */
 
 public class BackgroundAlien implements PatternLibraryInterface {

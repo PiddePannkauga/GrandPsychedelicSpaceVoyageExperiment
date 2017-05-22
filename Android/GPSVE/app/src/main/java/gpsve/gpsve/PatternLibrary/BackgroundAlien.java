@@ -77,7 +77,9 @@ public class BackgroundAlien implements PatternLibraryInterface {
         }
     }
 
-    //Metod för att omvandla vågform till RGB, lånad av user151323 på stackoverflow
+    /**
+     * Transform waveform data to RGB
+     */
     public static int[] waveLengthToRGB(double Wavelength){
         double factor;
         double Red,Green,Blue;

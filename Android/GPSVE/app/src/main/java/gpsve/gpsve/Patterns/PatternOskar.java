@@ -14,9 +14,9 @@ import processing.core.PApplet;
 
 public class PatternOskar implements PatternInterface {
     private PApplet parent;
-    private byte[] fft, wave;
+    private byte[] fft, wave, fftlarge, wavelarge;
     private boolean okToDraw = true;
-    static private double Gamma = 0.80;
+    static private double Gamma = 0.95;
     static private double IntensityMax = 255;
     private static final String TAG = "hej";
 
@@ -25,42 +25,78 @@ public class PatternOskar implements PatternInterface {
     }
 
     @Override
+    /**
+     * Updates waveform values, called by PatternController
+     */
     public void updatePattern(byte[] fft, byte[] wave) {
         this.fft = fft;
         this.wave = wave;
+        fftlarge = fft;
+        wavelarge = wave;
+        //Multiplicerar värdena i arrayen för finare färger
+        for (int i = 0; i< fft.length; i++) {
+            fftlarge[i] = (byte) (fft[i] *60);
+            wavelarge[i] = (byte) (wave[i] *60);
+        }
+
     }
 
     @Override
+    /**
+     * Draws pattern, called by Patterncontroller
+     */
     public void drawPattern() {
+        //Så att controllern inte uppdaterar för snabbt
         okToDraw = false;
 
+        //Omvandlar vågform till RGB och sätter bakgrund
         double bckgrnd = ((fft[15]+128)*(74/51))+380;
         int [] bc = waveLengthToRGB(bckgrnd);
-
         parent.background(bc[0],bc[1],bc[2]);
+
+        //Sparar inställningar
         parent.pushStyle();
+
+        //Ritar rektanglar
         for (int i = 0; i < fft.length/4; i++) {
             //Förskjutning från mitten av spektrum
             double shift = (5*i)+300;
+
             //Våglängden + förskjutning
-            double xxx = ((fft[i]+128)*(74/51))+shift;
-            //RGB
-            int[] wave = waveLengthToRGB(xxx);
+            double wavelength = fftlarge[i] + shift;
 
-            parent.stroke(wave[0],wave[1],wave[2]);
-            parent.fill(wave[0], wave[1], wave[2]);
-            parent.rect(i*(parent.width/128), 0, parent.width/128, parent.height);
-            parent.rect((parent.width)-((i+1)*(parent.width/128)), 0, parent.width/128, parent.height);
-            parent.rect(i*(parent.width/128)+parent.width/2,0,parent.width/128,parent.height);
-            parent.rect((parent.width)-((i+1)*(parent.width/128))-parent.width/2, 0,parent.width/128,parent.height);
+            //Omvandlar till RGB
+            int[] wave = waveLengthToRGB(wavelength);
 
-            Log.d(TAG, "drawPattern: "+xxx);
+            //Om våglängden är i synliga spektrumet ritas rektangel med uppdaterade färger, annars använder den föregående färger
+            if (wavelength < 750 && wavelength > 450) {
+                parent.stroke(wave[0],wave[1],wave[2]);
+                parent.fill(wave[0], wave[1], wave[2]);
+                parent.rect(i*(parent.width/128), 0, parent.width/128, parent.height);
+                parent.rect((parent.width)-((i+1)*(parent.width/128)), 0, parent.width/128, parent.height);
+                parent.rect(i*(parent.width/128)+parent.width/2,0,parent.width/128,parent.height);
+                parent.rect((parent.width)-((i+1)*(parent.width/128))-parent.width/2, 0,parent.width/128,parent.height);
+
+            } else {
+
+                parent.rect(i*(parent.width/128), 0, parent.width/128, parent.height);
+                parent.rect((parent.width)-((i+1)*(parent.width/128)), 0, parent.width/128, parent.height);
+                parent.rect(i*(parent.width/128)+parent.width/2,0,parent.width/128,parent.height);
+                parent.rect((parent.width)-((i+1)*(parent.width/128))-parent.width/2, 0,parent.width/128,parent.height);
+
+            }
+            Log.d(TAG, "drawPattern: "+wavelength);
         }
+        //Återställer inställningar
         parent.pushStyle();
         okToDraw = true;
 
     }
 
+    /**
+     * Transform waveform data to RGB
+     */
+    //Lånad av user151323 på stackoverflow
     public static int[] waveLengthToRGB(double Wavelength){
         double factor;
         double Red,Green,Blue;
@@ -93,19 +129,19 @@ public class PatternOskar implements PatternInterface {
             Red = 0.0;
             Green = 0.0;
             Blue = 0.0;
-        };
+        }
 
         // Let the intensity fall off near the vision limits
 
         if((Wavelength >= 380) && (Wavelength<420)){
-            factor = 0.3 + 0.7*(Wavelength - 380) / (420 - 380);
+            factor = 0.3 + 0.4*(Wavelength - 380) / (420 - 380);
         }else if((Wavelength >= 420) && (Wavelength<701)){
             factor = 1.0;
         }else if((Wavelength >= 701) && (Wavelength<781)){
-            factor = 0.3 + 0.7*(780 - Wavelength) / (780 - 700);
+            factor = 0.3 + 0.4*(780 - Wavelength) / (780 - 700);
         }else{
             factor = 0.0;
-        };
+        }
 
 
         int[] rgb = new int[3];
@@ -119,6 +155,9 @@ public class PatternOskar implements PatternInterface {
     }
 
     @Override
+    /**
+     * Anropas av PatternController för att avgöra om en ny frame kan ritas
+     */
     public boolean okToDraw() {
         return okToDraw;
     }

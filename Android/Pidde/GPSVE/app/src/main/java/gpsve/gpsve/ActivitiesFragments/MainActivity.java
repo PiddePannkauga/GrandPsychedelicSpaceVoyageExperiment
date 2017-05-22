@@ -14,6 +14,10 @@ import gpsve.gpsve.ActivitiesFragments.AboutFragment;
 import gpsve.gpsve.ActivitiesFragments.PatternActivity;
 import gpsve.gpsve.R;
 
+/**
+ * @author Nils Lindkvist and Petter Månsson 2017-04-01
+ * First screen that is shown when app is started.
+ */
 
 public class MainActivity extends AppCompatActivity {
     private Intent intent;
@@ -37,11 +41,19 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Method for calling when a button is pressed to shown new activity.
+     * @param view
+     */
     public void startPatternActivity(View view) {
         intent = new Intent(this, PatternActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Method for calling when a button is pressed to show a new Fragment with the backstory text.
+     * @param view
+     */
     public void showAbout(View view){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
