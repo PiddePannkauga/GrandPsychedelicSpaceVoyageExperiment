@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:id="@+id/groupeditorbackground"
+        android:checkableBehavior="single"
+        android:enabled="true"
+        android:menuCategory="container"
+        android:visible="true">
+        <item
+            android:id="@+id/menu_none"
+            android:checked="true"
+            android:title=""
+            android:visible="false" />
+        <item
+            android:id="@+id/background1check"
+            android:enabled="true"
+            android:icon="@mipmap/ic_launcher"
+            android:title="Background Stars"
+            android:visible="true" />
+        <item
+            android:id="@+id/background2check"
+
+            android:enabled="true"
+            android:icon="@mipmap/ic_launcher"
+            android:title="Background Lazergrid"
+            android:visible="true"/>
+        <item android:id="@+id/background3check"
+
+            android:enabled="true"
+            android:icon="@mipmap/ic_launcher"
+            android:title="Background Alien Invasion"
+            android:visible="true"/>
+    </group>
+    <group
+        android:id="@+id/groupeditorforeground"
+        android:checkableBehavior="single"
+        android:enabled="true"
+        android:menuCategory="container"
+        android:visible="true">
+        <item
+            android:id="@+id/menu_none2"
+            android:checked="true"
+            android:title=""
+            android:visible="false" />
+        <item
+            android:id="@+id/circleCheck"
+            android:enabled="true"
+            android:icon="@mipmap/ic_launcher"
+            android:title="Circle"
+            android:visible="true" />
+        <item
+            android:id="@+id/lineCheck"
+            android:enabled="true"
+            android:icon="@mipmap/ic_launcher"
+            android:title="Line"
+            android:visible="true" />
+        <item
+            android:id="@+id/squareCheck"
+
+            android:enabled="true"
+            android:icon="@mipmap/ic_launcher"
+            android:title="Square"
+            android:visible="true" />
+    </group>
+    <group />
+    <item
+        android:id="@+id/clearButton"
+        android:checkable="false"
+        android:checked="false"
+        android:icon="@mipmap/ic_launcher"
+        android:title="Clear" />
+
+</menu>
