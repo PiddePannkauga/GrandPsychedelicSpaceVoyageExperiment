@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:id="@+id/group"
+        android:visible="true"
+        android:enabled="true"
+        android:checkableBehavior="single"
+        android:menuCategory="container"
+        android:icon="@drawable/gpsve">
+        <item android:title="StarStorm Overdrive"
+            android:id="@+id/item_pattern1"
+            android:visible="true"
+            android:enabled="true"
+            android:checkable="false"
+            android:icon="@mipmap/ic_launcher" />
+        <item android:title="Lazer Moonz"
+            android:id="@+id/item_pattern2"
+            android:enabled="true"
+            android:checkable="false"
+            android:visible="true"
+            android:icon="@mipmap/ic_launcher" />
+        <item
+            android:id="@+id/item_pattern3"
+            android:checkable="false"
+            android:enabled="true"
+            android:icon="@mipmap/ic_launcher"
+            android:title="WannaBe Yin &amp; Yang"
+            android:visible="true" />
+        <item android:title="Psychedelic HyperSpace"
+            android:id="@+id/item_pattern4"
+            android:icon="@mipmap/ic_launcher"
+            android:visible="true"
+            android:enabled="true"
+            android:checkable="false"
+            android:layout_height="match_parent" />
+        <item android:title="Happy Space Moon"
+            android:id="@+id/item_pattern5"
+            android:icon="@mipmap/ic_launcher"
+            android:visible="true"
+            android:enabled="true"
+            android:checkable="false"
+            android:layout_height="match_parent" />
+        <item
+            android:id="@+id/item_pattern6"
+            android:checkable="false"
+            android:enabled="true"
+            android:icon="@mipmap/ic_launcher"
+            android:onClick="startPatternEditorActivity"
+            android:title="SpacePatternEditor"
+            android:visible="true" />
+    </group>
+
+</menu>
